@@ -51,6 +51,7 @@ namespace WPFProjectAssignment
             grid.ColumnDefinitions.Add(new ColumnDefinition());
             
             //Hello
+            //Hello
 
             productPanel = new StackPanel
             {
