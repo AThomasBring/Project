@@ -17,7 +17,7 @@ namespace WPFProjectAssignment
 {
     public partial class MainWindow : Window
     {
-        //Hello
+        
         private StackPanel productPanel;
 
         public MainWindow()
@@ -48,12 +48,9 @@ namespace WPFProjectAssignment
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition());
             
-            //Hello
-            //Hello
-            //Hello
+            
 
             productPanel = new StackPanel
             {
@@ -75,7 +72,7 @@ namespace WPFProjectAssignment
                 Margin = new Thickness(5)
             };
             
-            //hello
+            
             
             return label;
         }
