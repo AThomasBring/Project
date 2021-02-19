@@ -49,6 +49,8 @@ namespace WPFProjectAssignment
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition());
+            
+            //Hello
 
             productPanel = new StackPanel
             {
