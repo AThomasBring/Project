@@ -52,6 +52,7 @@ namespace WPFProjectAssignment
             
             //Hello
             //Hello
+            //Hello
 
             productPanel = new StackPanel
             {
