@@ -17,6 +17,7 @@ namespace WPFProjectAssignment
 {
     public partial class MainWindow : Window
     {
+        //Hello
         private StackPanel productPanel;
 
         public MainWindow()
