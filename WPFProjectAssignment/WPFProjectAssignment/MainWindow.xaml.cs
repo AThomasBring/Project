@@ -50,7 +50,11 @@ namespace WPFProjectAssignment
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition());
             
-            
+            Label potionsLabel = "Potions Store";
+            grid.Children.Add(potionsLabel);
+            Grid.SetColumn(potionsLabel, 0);
+            Grid.SetRow(potionsLabel, 0);
+            Grid.SetColumnSpan(potionsLabel, 2);
 
             productPanel = new StackPanel
             {
