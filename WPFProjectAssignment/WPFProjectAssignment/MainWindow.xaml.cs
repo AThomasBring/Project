@@ -74,6 +74,9 @@ namespace WPFProjectAssignment
                 HorizontalContentAlignment = HorizontalAlignment.Right,
                 Margin = new Thickness(5)
             };
+            
+            //hello
+            
             return label;
         }
     }
