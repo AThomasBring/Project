@@ -66,7 +66,7 @@ namespace WPFProjectAssignment
             Grid.SetRow(productPanel, 1);
 
         }
-        public static Label CreateLable(string header)
+        public static Label CreateLabel(string header)
         {
             Label label = new Label
             {
