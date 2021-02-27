@@ -33,7 +33,7 @@
             </e>
           </e>
         </e>
-        <e p="TextFile1.txt" t="Include" />
+        <e p="TextFile1.csv" t="Include" />
         <e p="WPFProjectAssignment.csproj" t="IncludeRecursive" />
       </e>
       <e p="WPFProjectAssignment.sln" t="IncludeFlat" />

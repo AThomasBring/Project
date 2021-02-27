@@ -29,9 +29,9 @@ namespace WPFProjectAssignment
         private void Start()
         {
             // Window options
-            Title = "Butik";
-            Width = 800;
-            SizeToContent = SizeToContent.Height;
+            Title = "Potion Shop";
+            Width = 1000;
+            Height = 618;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             // Scrolling
@@ -40,45 +40,48 @@ namespace WPFProjectAssignment
             Content = root;
 
             // Main grid
-            Grid grid = new Grid();
-            root.Content = grid;
-            grid.Margin = new Thickness(5);
-            grid.ShowGridLines = true;
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            Grid firstgrid = new Grid();
+            firstgrid.ShowGridLines = true;
+            root.Content = firstgrid;
+            firstgrid.Margin = new Thickness(5);
             
-            Label potionsLabel = "Potions Store";
-            grid.Children.Add(potionsLabel);
-            Grid.SetColumn(potionsLabel, 0);
-            Grid.SetRow(potionsLabel, 0);
-            Grid.SetColumnSpan(potionsLabel, 2);
+            firstgrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            firstgrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(6, GridUnitType.Star) });
+            
+            // Second Grid
+            Grid secondGrid = new Grid();
+            secondGrid.ShowGridLines = true;
+            secondGrid.Margin = new Thickness(5);
 
-            productPanel = new StackPanel
-            {
-                Orientation = Orientation.Vertical,
-                Background = Brushes.LightBlue,
-                Margin = new Thickness(5)
-            };
-            grid.Children.Add(productPanel);
-            Grid.SetColumn(productPanel, 0);
-            Grid.SetRow(productPanel, 1);
+            // Left side for item list and shopping cart, right side for item description
+            secondGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            secondGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
+            
+            // Third Grid
+            Grid thirdGrid = new Grid();
+            thirdGrid.ShowGridLines = true;
+            thirdGrid.Margin = new Thickness(5);
+            
+            // Fourth Grid
+            Grid fourthGrid = new Grid();
+            fourthGrid.ShowGridLines = true;
+            fourthGrid.Margin = new Thickness(5);
 
-        }
-        public static Label CreateLabel(string header)
-        {
-            Label label = new Label
-            {
-                Content = header,
-                HorizontalContentAlignment = HorizontalAlignment.Right,
-                Margin = new Thickness(5)
-            };
+            // Left side for item list and shopping cart, right side for item description
+            thirdGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Star) });
+            thirdGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            
+            // add second grid to into second row of first grid
+            firstgrid.Children.Add(secondGrid);
+            Grid.SetColumn(thirdGrid, 0);
+            Grid.SetRow(secondGrid, 1);
+            
+            // add third grid to into first column of second grid
+            secondGrid.Children.Add(thirdGrid);
+            Grid.SetColumn(thirdGrid, 0);
+            Grid.SetRow(thirdGrid, 1);
             
             
-            
-            return label;
         }
     }
 }
