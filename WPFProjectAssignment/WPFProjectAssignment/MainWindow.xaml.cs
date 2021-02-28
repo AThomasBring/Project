@@ -28,6 +28,7 @@ namespace WPFProjectAssignment
 
         private void Start()
         {
+            
             // Window options
             Title = "Potion Shop";
             Width = 1000;
@@ -104,6 +105,102 @@ namespace WPFProjectAssignment
             Grid.SetRow(fifthGrid, 0);
             
             
+        }
+        //Har bara kopierat denna från Kitchensink programmet
+        private Grid CreateLayoutPanel()
+        {
+            // The main layout is a grid with two columns and four rows.
+            // All rows are sized to their content ("auto") except the second row, which takes up all the remaining space.
+            Grid grid = new Grid();
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new RowDefinition());
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+
+            // A text heading.
+            TextBlock heading = new TextBlock
+            {
+                Text = "Products",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontFamily = new FontFamily("Constantia"),
+                FontSize = 20,
+                TextAlignment = TextAlignment.Center
+            };
+            grid.Children.Add(heading);
+            Grid.SetColumn(heading, 0);
+            Grid.SetRow(heading, 0);
+            Grid.SetColumnSpan(heading, 2);
+
+            // The list box allowing us to select a product.
+            // Fills the left half of the second row.
+            //Add code here to read products in from CSV file.
+            ListBox productBox = new ListBox { Margin = new Thickness(5) };
+            listBox.Items.Add("Product1");
+            listBox.Items.Add("Product2");
+            listBox.Items.Add("Product3");
+            listBox.SelectedIndex = 0;
+            grid.Children.Add(productBox);
+            Grid.SetColumn(productBox, 0);
+            Grid.SetRow(productBox, 1);
+
+            // The information panel describing a specific potion.
+            // Fills the right half of the second row.
+            StackPanel infoPanel = new StackPanel
+            {
+                Orientation = Orientation.Vertical,
+                Margin = new Thickness(5)
+            };
+            grid.Children.Add(infoPanel);
+            Grid.SetColumn(infoPanel, 1);
+            Grid.SetRow(infoPanel, 1);
+
+            // The text heading inside the information panel.
+            TextBlock infoHeading = new TextBlock
+            {
+                Text = "Potion1",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontFamily = new FontFamily("Constantia"),
+                FontSize = 16,
+                TextAlignment = TextAlignment.Center
+            };
+            infoPanel.Children.Add(infoHeading);
+
+            // The image inside the information panel.
+            Image infoImage = CreateImage("Potion1");
+            infoImage.Stretch = Stretch.Uniform;
+            infoPanel.Children.Add(infoImage);
+
+            // The descriptive text inside the information panel.
+            TextBlock infoText = new TextBlock
+            {
+                //Add code to read CSV file of descriptions
+                Text = "Här ska vi läsa in texten om varje product från CSV fil",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontFamily = new FontFamily("Constantia"),
+                FontSize = 12
+            };
+            infoPanel.Children.Add(infoText);
+
+            // A button that stretches across both columns.
+            Button addToCartButton = new Button
+            {
+                Content = "Add to cart",
+                Margin = new Thickness(5),
+                Padding = new Thickness(5),
+                FontSize = 16
+            };
+            grid.Children.Add(addToCartButton);
+            Grid.SetColumn(addToCartButton, 0);
+            Grid.SetRow(addToCartButton, 2);
+            Grid.SetColumnSpan(addToCartButton, 2);
+
+
+            return grid;
         }
     }
 }
