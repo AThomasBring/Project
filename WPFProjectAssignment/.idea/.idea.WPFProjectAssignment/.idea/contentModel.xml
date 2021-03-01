@@ -30,9 +30,11 @@
               <e p="App.g.cs" t="Include" />
               <e p="MainWindow.g.cs" t="Include" />
               <e p="WPFProjectAssignment.AssemblyInfo.cs" t="Include" />
+              <e p="WPFProjectAssignment_Content.g.cs" t="Include" />
             </e>
           </e>
         </e>
+        <e p="Products.csv" t="Include" />
         <e p="TextFile1.csv" t="Include" />
         <e p="WPFProjectAssignment.csproj" t="IncludeRecursive" />
       </e>

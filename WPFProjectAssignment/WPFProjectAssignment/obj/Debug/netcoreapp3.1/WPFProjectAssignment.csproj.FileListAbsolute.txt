@@ -55,3 +55,5 @@ C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignmen
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\obj\Debug\netcoreapp3.1\WPFProjectAssignment.AssemblyInfo.cs
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\obj\Debug\netcoreapp3.1\WPFProjectAssignment.csproj.CoreCompileInputs.cache
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\obj\Debug\netcoreapp3.1\WPFProjectAssignment.genruntimeconfig.cache
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\bin\Debug\netcoreapp3.1\Products.csv
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\obj\Debug\netcoreapp3.1\WPFProjectAssignment_Content.g.cs
