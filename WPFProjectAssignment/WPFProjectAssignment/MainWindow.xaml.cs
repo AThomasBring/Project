@@ -102,61 +102,26 @@ namespace WPFProjectAssignment
             root.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
             Content = root;
 
-            //Todo skapa metod för skapandet av grids
             // Main grid (For dividing header with rest of layout
-            Grid firstgrid = new Grid();
-            firstgrid.ShowGridLines = true;
+            Grid firstgrid = CreateGrid(rows: new []{1, 6}, columns: null);
             root.Content = firstgrid;
-            firstgrid.Margin = new Thickness(5);
-            
-            firstgrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            firstgrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(6, GridUnitType.Star) });
-            
             // Second Grid, Left side for item list and shopping cart, right side for item description
-            Grid secondGrid = new Grid();
-            secondGrid.ShowGridLines = true;
-            secondGrid.Margin = new Thickness(5);
+            var secondGrid = CreateGrid(rows: null, columns: new []{1, 2});
 
-            secondGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            secondGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
-            
             // Third Grid, Top row for list of available products, Bottom row for shopping cart
-            Grid thirdGrid = new Grid();
-            thirdGrid.ShowGridLines = true;
-            thirdGrid.Margin = new Thickness(5);
+            var thirdGrid = CreateGrid(rows: new []{2, 1}, columns: null);
 
-            thirdGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Star) });
-            thirdGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            
             // Fourth Grid, Left column for items in shopping cart, right for checkout
-            Grid fourthGrid = new Grid();
-            fourthGrid.ShowGridLines = true;
-            fourthGrid.Margin = new Thickness(5);
+            var fourthGrid = CreateGrid(rows: null, columns: new []{2, 1});
 
-            fourthGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
-            fourthGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            
             // Fifth Grid, Left column for items in shopping cart, right for checkout
-            Grid fifthGrid = new Grid();
-            fifthGrid.ShowGridLines = true;
-            fifthGrid.Margin = new Thickness(5);
+            var fifthGrid = CreateGrid(rows: new []{1, 2}, columns: null);
 
-            fifthGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            fifthGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Star) });
-            
-            Grid descriptionGrid = new Grid();
-            descriptionGrid.ShowGridLines = true;
-            descriptionGrid.Margin = new Thickness(5);
+            var descriptionGrid = CreateGrid(rows: new []{6, 1}, columns: new []{1, 1});;
 
-            
-            descriptionGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(6, GridUnitType.Star) });
-            descriptionGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            descriptionGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            descriptionGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            
             //Adding grids to the grids
-            
             // add second grid to into second row of first grid
+            
             firstgrid.Children.Add(secondGrid);
             Grid.SetColumn(secondGrid, 0);
             Grid.SetRow(secondGrid, 1);
@@ -275,8 +240,33 @@ namespace WPFProjectAssignment
             Grid.SetColumnSpan(addToCartButton, 2);
             
         }
-        
-        
+
+        private static Grid CreateGrid(int[] rows, int[] columns)
+        {
+            Grid grid = new Grid();
+            grid.ShowGridLines = true;
+            grid.Margin = new Thickness(5);
+
+            if (rows != null)
+            {
+                foreach (var height in rows)
+                {
+                    grid.RowDefinitions.Add(new RowDefinition {Height = new GridLength(height, GridUnitType.Star)});
+                }
+            }
+
+            if (columns != null)
+            {
+                foreach (var width in columns)
+                {
+                    grid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(width, GridUnitType.Star)});
+                }
+            }
+
+            return grid;
+        }
+
+
         private Image CreateImage(string filePath)
         {
             ImageSource source = new BitmapImage(new Uri(filePath, UriKind.Relative));
