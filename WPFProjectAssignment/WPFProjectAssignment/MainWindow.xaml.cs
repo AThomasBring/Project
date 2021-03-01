@@ -104,6 +104,9 @@ namespace WPFProjectAssignment
             Grid.SetColumn(fifthGrid, 1);
             Grid.SetRow(fifthGrid, 0);
             
+            secondGrid.Children.Add(CreateLayoutPanel());
+            Grid.SetColumn(CreateLayoutPanel(), 1);
+            Grid.SetRow(CreateLayoutPanel(), 0);
             
         }
         //Har bara kopierat denna från Kitchensink programmet
@@ -138,10 +141,10 @@ namespace WPFProjectAssignment
             // Fills the left half of the second row.
             //Add code here to read products in from CSV file.
             ListBox productBox = new ListBox { Margin = new Thickness(5) };
-            listBox.Items.Add("Product1");
-            listBox.Items.Add("Product2");
-            listBox.Items.Add("Product3");
-            listBox.SelectedIndex = 0;
+            productBox.Items.Add("Product1");
+            productBox.Items.Add("Product2");
+            productBox.Items.Add("Product3");
+            productBox.SelectedIndex = 0;
             grid.Children.Add(productBox);
             Grid.SetColumn(productBox, 0);
             Grid.SetRow(productBox, 1);
