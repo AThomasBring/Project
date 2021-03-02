@@ -126,6 +126,8 @@ namespace WPFProjectAssignment
 
             descriptionGrid = CreateGrid(rows: new []{6, 1}, columns: new []{1, 1});;
 
+            var buttonGrid = CreateGrid(rows: new[] {6, 1}, columns: new[] {1, 1});
+
             //Adding grids to the grids
             // add second grid to into second row of first grid
             
@@ -152,6 +154,10 @@ namespace WPFProjectAssignment
             fourthGrid.Children.Add(fifthGrid);
             Grid.SetColumn(fifthGrid, 1);
             Grid.SetRow(fifthGrid, 0);
+
+            secondGrid.Children.Add(buttonGrid);
+            Grid.SetColumn(buttonGrid, 1);
+            Grid.SetRow(buttonGrid, 1);
 
             // A text heading.
             TextBlock heading = new TextBlock
@@ -183,22 +189,13 @@ namespace WPFProjectAssignment
                 productBox.Items.Add(new ListBoxItem() { Content = product.Name, Tag = product });
             }
             
-            productBox.SelectedIndex = 0;
+            productBox.SelectedIndex = -1;
             thirdGrid.Children.Add(productBox);
             Grid.SetColumn(productBox, 0);
             Grid.SetRow(productBox, 0);
             productBox.SelectionChanged += ProductBoxOnSelectionChanged;
-            
 
-            // The information panel describing a specific potion.
-            // Fills the right half of the second row.
-            //UpdateDescription();
-
-
-            // The descriptive text inside the information panel.
-
-
-            // A button that stretches across both columns.
+            // Add to Cart button
             Button addToCartButton = new Button
             {
                 Content = "Add to cart",
@@ -206,10 +203,10 @@ namespace WPFProjectAssignment
                 Padding = new Thickness(5),
                 FontSize = 16,
             };
-            descriptionGrid.Children.Add(addToCartButton);
+            buttonGrid.Children.Add(addToCartButton);
             Grid.SetColumn(addToCartButton, 1);
-            Grid.SetRow(addToCartButton, 2);
-            Grid.SetColumnSpan(addToCartButton, 2);
+            Grid.SetRow(addToCartButton, 1);
+            //Grid.SetColumnSpan(addToCartButton, 2);
             addToCartButton.Click += AddToCartButtonOnClick;
             
         }
