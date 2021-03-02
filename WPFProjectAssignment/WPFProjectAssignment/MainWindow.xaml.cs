@@ -140,13 +140,11 @@ namespace WPFProjectAssignment
             fourthGrid.Children.Add(fifthGrid);
             Grid.SetColumn(fifthGrid, 1);
             Grid.SetRow(fifthGrid, 0);
-            
-  
-            
+
             // A text heading.
             TextBlock heading = new TextBlock
             {
-                Text = "Products",
+                Text = "Potion Shop",
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(5),
                 FontFamily = new FontFamily("Constantia"),
@@ -191,7 +189,7 @@ namespace WPFProjectAssignment
             // The text heading inside the information panel.
             TextBlock infoHeading = new TextBlock
             {
-                Text = "Potion1",
+                Text = "Potion",
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(5),
                 FontFamily = new FontFamily("Constantia"),
@@ -201,15 +199,16 @@ namespace WPFProjectAssignment
             infoPanel.Children.Add(infoHeading);
 
             // The image inside the information panel.
-            Image infoImage = CreateImage("Potion1");
+            Image infoImage = CreateImage("/Images/agingPotion.jpg");
             infoImage.Stretch = Stretch.Uniform;
-            infoPanel.Children.Add(infoImage);
+            descriptionGrid.Children.Add(infoImage);
+            Grid.SetColumn(infoImage,1);
 
             // The descriptive text inside the information panel.
             TextBlock infoText = new TextBlock
             {
                 //Add code to read CSV file of descriptions
-                Text = "Här ska vi läsa in texten om varje product från CSV fil",
+                Text = "Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. ",
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(5),
                 FontFamily = new FontFamily("Constantia"),
@@ -229,7 +228,13 @@ namespace WPFProjectAssignment
             Grid.SetColumn(addToCartButton, 1);
             Grid.SetRow(addToCartButton, 2);
             Grid.SetColumnSpan(addToCartButton, 2);
+            addToCartButton.Click += AddToCartButtonOnClick;
             
+        }
+
+        private void AddToCartButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Not yet implemented.");
         }
 
         private static Grid CreateGrid(int[] rows, int[] columns)

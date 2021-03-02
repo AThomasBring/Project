@@ -8,5 +8,6 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("products.csv")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/agingpotion.jpg")]
 
 
