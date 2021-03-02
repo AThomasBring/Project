@@ -9,5 +9,8 @@
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("products.csv")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/agingpotion.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/babblingbeverage.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/elixiroflife.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/draughtoflivingdeath.jpg")]
 
 

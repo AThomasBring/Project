@@ -15,6 +15,22 @@
     <Content Include="Images\agingPotion.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Remove="Images\babblingBeverage.jpg" />
+    <Content Include="Images\babblingBeverage.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Remove="Images\elixirOfLife.jpg" />
+    <Content Include="Images\elixirOfLife.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Images\amortentia.jpg" />
+    <None Remove="Images\draughtOfLivingDeath.jpg" />
+    <Content Include="Images\draughtOfLivingDeath.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

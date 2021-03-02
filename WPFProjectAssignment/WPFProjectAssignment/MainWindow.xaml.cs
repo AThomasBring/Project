@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace WPFProjectAssignment
         public string Name;
         public string Description;
         public int Price;
+        public Image Image;
     }
 
     public partial class MainWindow : Window
@@ -39,6 +41,12 @@ namespace WPFProjectAssignment
 
         // We store the saved shopping cart in a CSV file outside the project directory, because then it will not be overwritten everytime we start the program.
         //public const string CartFilePath = @"C:\Windows\Temp\Cart.csv";
+
+        private ListBox productBox = new ListBox();
+        private TextBlock infoText = new TextBlock();
+        private Image infoImage = new Image();
+        private Grid descriptionGrid = new Grid();
+        private StackPanel infoPanel = new StackPanel();
 
         public MainWindow()
         {
@@ -71,7 +79,8 @@ namespace WPFProjectAssignment
                         Code = parts[0],
                         Name = parts[1],
                         Description = parts[2],
-                        Price = int.Parse(parts[3])
+                        Price = int.Parse(parts[3]),
+                        Image = CreateImage("Images/"+parts[4])
                     };
                     products.Add(p);
                 }
@@ -84,6 +93,9 @@ namespace WPFProjectAssignment
             // The method returns an array rather than a list (because the products are fixed after the program has started), so we need to convert it before returning.
             return products.ToArray();
         }
+        
+        
+        public Product SelectedProduct { get; set; }
 
         private void Start()
         {
@@ -112,7 +124,7 @@ namespace WPFProjectAssignment
             // Fifth Grid, Left column for items in shopping cart, right for checkout
             var fifthGrid = CreateGrid(rows: new []{1, 2}, columns: null);
 
-            var descriptionGrid = CreateGrid(rows: new []{6, 1}, columns: new []{1, 1});;
+            descriptionGrid = CreateGrid(rows: new []{6, 1}, columns: new []{1, 1});;
 
             //Adding grids to the grids
             // add second grid to into second row of first grid
@@ -161,23 +173,50 @@ namespace WPFProjectAssignment
             //Add code here to read products in from CSV file.
 
             
-            ListBox productBox = new ListBox
+            productBox = new ListBox
             {
                 Margin = new Thickness(5)
             };
 
             foreach (var product in Products)
             {
-                productBox.Items.Add(product.Name);
+                productBox.Items.Add(new ListBoxItem() { Content = product.Name, Tag = product });
             }
+            
             productBox.SelectedIndex = 0;
             thirdGrid.Children.Add(productBox);
             Grid.SetColumn(productBox, 0);
             Grid.SetRow(productBox, 0);
+            productBox.SelectionChanged += ProductBoxOnSelectionChanged;
             
+
             // The information panel describing a specific potion.
             // Fills the right half of the second row.
-            StackPanel infoPanel = new StackPanel
+            //UpdateDescription();
+
+
+            // The descriptive text inside the information panel.
+
+
+            // A button that stretches across both columns.
+            Button addToCartButton = new Button
+            {
+                Content = "Add to cart",
+                Margin = new Thickness(5),
+                Padding = new Thickness(5),
+                FontSize = 16,
+            };
+            descriptionGrid.Children.Add(addToCartButton);
+            Grid.SetColumn(addToCartButton, 1);
+            Grid.SetRow(addToCartButton, 2);
+            Grid.SetColumnSpan(addToCartButton, 2);
+            addToCartButton.Click += AddToCartButtonOnClick;
+            
+        }
+
+        private void UpdateDescription(Product product)
+        {
+            infoPanel = new StackPanel
             {
                 Orientation = Orientation.Vertical,
                 Margin = new Thickness(5)
@@ -189,7 +228,7 @@ namespace WPFProjectAssignment
             // The text heading inside the information panel.
             TextBlock infoHeading = new TextBlock
             {
-                Text = "Potion",
+                Text = product.Name,
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(5),
                 FontFamily = new FontFamily("Constantia"),
@@ -197,44 +236,37 @@ namespace WPFProjectAssignment
                 TextAlignment = TextAlignment.Center
             };
             infoPanel.Children.Add(infoHeading);
-
-            // The image inside the information panel.
-            Image infoImage = CreateImage("/Images/agingPotion.jpg");
-            infoImage.Stretch = Stretch.Uniform;
-            descriptionGrid.Children.Add(infoImage);
-            Grid.SetColumn(infoImage,1);
-
-            // The descriptive text inside the information panel.
-            TextBlock infoText = new TextBlock
+            
+            infoText = new TextBlock
             {
                 //Add code to read CSV file of descriptions
-                Text = "Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. Här ska vi läsa in texten om varje product från CSV fil. ",
+                Text = product.Description,
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(5),
                 FontFamily = new FontFamily("Constantia"),
                 FontSize = 12
             };
             infoPanel.Children.Add(infoText);
-
-            // A button that stretches across both columns.
-            Button addToCartButton = new Button
-            {
-                Content = "Add to cart",
-                Margin = new Thickness(5),
-                Padding = new Thickness(5),
-                FontSize = 16
-            };
-            descriptionGrid.Children.Add(addToCartButton);
-            Grid.SetColumn(addToCartButton, 1);
-            Grid.SetRow(addToCartButton, 2);
-            Grid.SetColumnSpan(addToCartButton, 2);
-            addToCartButton.Click += AddToCartButtonOnClick;
-            
         }
+
+        private void ProductBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Först, Lagra det valda objektet i SelectedProduct
+            SelectedProduct = (Product)((ListBoxItem)productBox.SelectedItem).Tag;
+            
+            //Sedan uppdatera text och grafik
+            descriptionGrid.Children.Clear();
+            UpdateDescription(SelectedProduct);
+            infoImage = SelectedProduct.Image;
+            infoImage.Stretch = Stretch.Uniform;
+            descriptionGrid.Children.Add(infoImage);
+            Grid.SetColumn(infoImage,1);
+        }
+
 
         private void AddToCartButtonOnClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Not yet implemented.");
+            MessageBox.Show("Adding " +SelectedProduct.Name +"to Cart (Not implemented)");
         }
 
         private static Grid CreateGrid(int[] rows, int[] columns)
@@ -263,7 +295,7 @@ namespace WPFProjectAssignment
         }
 
 
-        private Image CreateImage(string filePath)
+        private static Image CreateImage(string filePath)
         {
             ImageSource source = new BitmapImage(new Uri(filePath, UriKind.Relative));
             Image image = new Image

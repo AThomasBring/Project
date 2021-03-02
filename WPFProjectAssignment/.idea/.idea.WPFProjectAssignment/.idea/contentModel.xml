@@ -12,7 +12,6 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Images" t="Include">
           <e p="agingPotion.jpg" t="Include" />
-          <e p="amortentia.jpg" t="Include" />
           <e p="babblingBeverage.jpg" t="Include" />
           <e p="draughtOfLivingDeath.jpg" t="Include" />
           <e p="elixirOfLife.jpg" t="Include" />
