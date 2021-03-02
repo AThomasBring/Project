@@ -97,14 +97,9 @@ namespace WPFProjectAssignment
             Height = 618;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-            // Scrolling
-            ScrollViewer root = new ScrollViewer();
-            root.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-            Content = root;
-
             // Main grid (For dividing header with rest of layout
             Grid firstgrid = CreateGrid(rows: new []{1, 6}, columns: null);
-            root.Content = firstgrid;
+            Content = firstgrid;
             // Second Grid, Left side for item list and shopping cart, right side for item description
             var secondGrid = CreateGrid(rows: null, columns: new []{1, 2});
 
@@ -170,8 +165,7 @@ namespace WPFProjectAssignment
             
             ListBox productBox = new ListBox
             {
-                Margin = new Thickness(5),
-                VerticalAlignment = VerticalAlignment.Stretch
+                Margin = new Thickness(5)
             };
 
             foreach (var product in Products)
@@ -182,9 +176,6 @@ namespace WPFProjectAssignment
             thirdGrid.Children.Add(productBox);
             Grid.SetColumn(productBox, 0);
             Grid.SetRow(productBox, 0);
-            ScrollViewer viewer = new ScrollViewer();
-            viewer.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-
             
             // The information panel describing a specific potion.
             // Fills the right half of the second row.
