@@ -45,16 +45,19 @@ namespace WPFProjectAssignment
         private ListBox productBox = new ListBox();
         private TextBlock infoText = new TextBlock();
         private Image infoImage = new Image();
-        private Grid descriptionGrid = new Grid();
+        private Grid productWindowGrid = new Grid();
         private StackPanel infoPanel = new StackPanel();
+        
+        // We store the most recent selected product here
+        private Product SelectedProduct { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
             Start();
         }
-        
-        public static Product[] LoadProducts()
+
+        private static Product[] LoadProducts()
         {
             // If the file doesn't exist, stop the program completely.
             if (!File.Exists(ProductFilePath))
@@ -66,6 +69,7 @@ namespace WPFProjectAssignment
             // Create an empty list of products, then go through each line of the file to fill it.
             List<Product> products = new List<Product>();
             string[] lines = File.ReadAllLines(ProductFilePath);
+
             foreach (string line in lines)
             {
                 try
@@ -93,9 +97,7 @@ namespace WPFProjectAssignment
             // The method returns an array rather than a list (because the products are fixed after the program has started), so we need to convert it before returning.
             return products.ToArray();
         }
-        
-        
-        public Product SelectedProduct { get; set; }
+
 
         private void Start()
         {
@@ -109,7 +111,7 @@ namespace WPFProjectAssignment
             Height = 618;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-            // Main grid (For dividing header with rest of layout
+            // Main grid (dividing header with rest of layout)
             Grid firstgrid = CreateGrid(rows: new []{1, 6}, columns: null);
             Content = firstgrid;
             // Second Grid, Left side for item list and shopping cart, right side for item description
@@ -118,13 +120,8 @@ namespace WPFProjectAssignment
             // Third Grid, Top row for list of available products, Bottom row for shopping cart
             var thirdGrid = CreateGrid(rows: new []{2, 1}, columns: null);
 
-            // Fourth Grid, Left column for items in shopping cart, right for checkout
-            var fourthGrid = CreateGrid(rows: null, columns: new []{2, 1});
-
-            // Fifth Grid, Left column for items in shopping cart, right for checkout
-            var fifthGrid = CreateGrid(rows: new []{1, 2}, columns: null);
-
-            descriptionGrid = CreateGrid(rows: new []{6, 1}, columns: new []{1, 1});;
+            // This grid gets cleared and updated every selection change
+            productWindowGrid = CreateGrid(rows: new []{6, 1}, columns: new []{1, 1});;
 
             var buttonGrid = CreateGrid(rows: new[] {6, 1}, columns: new[] {1, 1});
 
@@ -141,19 +138,19 @@ namespace WPFProjectAssignment
             Grid.SetRow(thirdGrid, 1);
             
             // add description grid to into second column of second grid
-            secondGrid.Children.Add(descriptionGrid);
-            Grid.SetColumn(descriptionGrid, 1);
-            Grid.SetRow(descriptionGrid, 1);
+            secondGrid.Children.Add(productWindowGrid);
+            Grid.SetColumn(productWindowGrid, 1);
+            Grid.SetRow(productWindowGrid, 1);
             
             //add fourth grid into third
-            thirdGrid.Children.Add(fourthGrid);
-            Grid.SetColumn(fourthGrid, 0);
-            Grid.SetRow(fourthGrid, 1);
+            //thirdGrid.Children.Add(fourthGrid);
+            //Grid.SetColumn(fourthGrid, 0);
+            //Grid.SetRow(fourthGrid, 1);
             
             //add fourth grid into third
-            fourthGrid.Children.Add(fifthGrid);
-            Grid.SetColumn(fifthGrid, 1);
-            Grid.SetRow(fifthGrid, 0);
+            //fourthGrid.Children.Add(fifthGrid);
+            //Grid.SetColumn(fifthGrid, 1);
+            //Grid.SetRow(fifthGrid, 0);
 
             secondGrid.Children.Add(buttonGrid);
             Grid.SetColumn(buttonGrid, 1);
@@ -218,7 +215,7 @@ namespace WPFProjectAssignment
                 Orientation = Orientation.Vertical,
                 Margin = new Thickness(5)
             };
-            descriptionGrid.Children.Add(infoPanel);
+            productWindowGrid.Children.Add(infoPanel);
             Grid.SetColumn(infoPanel, 0);
             Grid.SetRow(infoPanel, 0);
 
@@ -252,12 +249,17 @@ namespace WPFProjectAssignment
             SelectedProduct = (Product)((ListBoxItem)productBox.SelectedItem).Tag;
             
             //Sedan uppdatera text och grafik
-            descriptionGrid.Children.Clear();
+            productWindowGrid.Children.Clear();
             UpdateDescription(SelectedProduct);
-            infoImage = SelectedProduct.Image;
+            UpdateImage(SelectedProduct);
+        }
+
+        private void UpdateImage(Product product)
+        {
+            infoImage = product.Image;
             infoImage.Stretch = Stretch.Uniform;
-            descriptionGrid.Children.Add(infoImage);
-            Grid.SetColumn(infoImage,1);
+            productWindowGrid.Children.Add(infoImage);
+            Grid.SetColumn(infoImage, 1);
         }
 
 
