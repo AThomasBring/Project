@@ -201,7 +201,7 @@ namespace WPFProjectAssignment
                 FontSize = 16,
             };
             buttonGrid.Children.Add(addToCartButton);
-            Grid.SetColumn(addToCartButton, 1);
+            Grid.SetColumn(addToCartButton, 0);
             Grid.SetRow(addToCartButton, 1);
             //Grid.SetColumnSpan(addToCartButton, 2);
             addToCartButton.Click += AddToCartButtonOnClick;
