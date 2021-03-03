@@ -121,9 +121,9 @@ namespace WPFProjectAssignment
             var thirdGrid = CreateGrid(rows: new []{2, 1}, columns: null);
 
             // This grid gets cleared and updated every selection change
-            productWindowGrid = CreateGrid(rows: new []{6, 1}, columns: new []{1, 1});;
+            productWindowGrid = CreateGrid(rows: new []{5, 1}, columns: new []{1, 1});;
 
-            var buttonGrid = CreateGrid(rows: new[] {6, 1}, columns: new[] {1, 1});
+            var buttonGrid = CreateGrid(rows: new[] {5, 1}, columns: new[] {1, 1, 1, 1});
 
             //Adding grids to the grids
             // add second grid to into second row of first grid
@@ -196,13 +196,29 @@ namespace WPFProjectAssignment
             Button addToCartButton = new Button
             {
                 Content = "Add to cart",
-                Margin = new Thickness(5),
+                Margin = new Thickness(15),
                 Padding = new Thickness(5),
-                FontSize = 16,
+                FontSize = 12,
+                Background = Brushes.White
             };
             buttonGrid.Children.Add(addToCartButton);
             Grid.SetColumn(addToCartButton, 1);
             Grid.SetRow(addToCartButton, 1);
+            
+            // Add to Cart button
+            Button checkoutButton = new Button
+            {
+                Content = "Add to cart",
+                Margin = new Thickness(15),
+                Padding = new Thickness(5),
+                FontSize = 12,
+                Background = Brushes.White
+            };
+            buttonGrid.Children.Add(checkoutButton);
+            Grid.SetColumn(checkoutButton, 3);
+            Grid.SetRow(checkoutButton, 1);
+            
+            
             //Grid.SetColumnSpan(addToCartButton, 2);
             addToCartButton.Click += AddToCartButtonOnClick;
             
