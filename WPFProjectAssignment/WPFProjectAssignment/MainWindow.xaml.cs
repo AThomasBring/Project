@@ -96,8 +96,10 @@ namespace WPFProjectAssignment
 
             // The method returns an array rather than a list (because the products are fixed after the program has started), so we need to convert it before returning.
             return products.ToArray();
-        }
 
+            
+        }
+        
 
         private void Start()
         {
@@ -196,32 +198,41 @@ namespace WPFProjectAssignment
             Button addToCartButton = new Button
             {
                 Content = "Add to cart",
-                Margin = new Thickness(15),
+                Margin = new Thickness(10),
                 Padding = new Thickness(5),
-                FontSize = 12,
-                Background = Brushes.White
+                FontSize = 16,
+                BorderThickness = new Thickness(2),
+                Background = Brushes.White,
             };
             buttonGrid.Children.Add(addToCartButton);
             Grid.SetColumn(addToCartButton, 1);
             Grid.SetRow(addToCartButton, 1);
-            
+            //Grid.SetColumnSpan(addToCartButton, 2);
+            addToCartButton.Click += AddToCartButtonOnClick;
+
+
+
             // Add to Cart button
             Button checkoutButton = new Button
             {
-                Content = "Add to cart",
-                Margin = new Thickness(15),
+                Content = "Checkout",
+                Margin = new Thickness(10),
                 Padding = new Thickness(5),
-                FontSize = 12,
-                Background = Brushes.White
+                FontSize = 16,
+                BorderThickness = new Thickness(2),
+                Background = Brushes.White,
             };
             buttonGrid.Children.Add(checkoutButton);
             Grid.SetColumn(checkoutButton, 3);
             Grid.SetRow(checkoutButton, 1);
-            
-            
             //Grid.SetColumnSpan(addToCartButton, 2);
-            addToCartButton.Click += AddToCartButtonOnClick;
-            
+            checkoutButton.Click += CheckoutButton_Click;
+
+        }
+
+        private void CheckoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void UpdateDescription(Product product)
