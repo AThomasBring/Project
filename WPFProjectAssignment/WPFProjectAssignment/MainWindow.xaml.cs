@@ -35,9 +35,14 @@ namespace WPFProjectAssignment
         private TextBlock InfoText = new TextBlock();
         private Image InfoImage = new Image();
         private Grid TextandImageGrid = new Grid();
+        private Grid ButtonGrid = new Grid();
         private StackPanel InfoPanel = new StackPanel();
         private TextBlock cartTextBlock = new TextBlock();
-        
+        private TextBlock infoPrice = new TextBlock();
+        private Button checkoutButton = new Button();
+        private Button addToCartButton = new Button();
+        private TextBox DiscountBlock = new TextBox();
+
         // We store the most recent selected product here
         private Product SelectedProduct { get; set; }
 
@@ -182,36 +187,47 @@ namespace WPFProjectAssignment
             thirdGrid.Children.Add(cartTextBlock);
             Grid.SetRow(cartTextBlock, 1);
 
+            infoPrice = new TextBlock
+            {
+                Text = "",
+                FontSize = 16,
+                Margin = new Thickness(10),
+                Padding = new Thickness(5),
+            };
+            buttonGrid.Children.Add(infoPrice);
+            Grid.SetColumn(infoPrice, 0);
+            Grid.SetRow(infoPrice, 1);
+
             // Add to Cart button
-            Button addToCartButton = new Button
+            addToCartButton = new Button
             {
                 Content = "Add to cart",
-                Margin = new Thickness(20),
-                Padding = new Thickness(2),
-                FontSize = 12,
-                BorderThickness = new Thickness(1),
-                BorderBrush = Brushes.Gray,
-                Background = Brushes.White
+                Margin = new Thickness(10),
+                Padding = new Thickness(5),
+                FontSize = 16,
+                BorderThickness = new Thickness(2),
+                Background = Brushes.White,
             };
+
             buttonGrid.Children.Add(addToCartButton);
             Grid.SetColumn(addToCartButton, 1);
             Grid.SetRow(addToCartButton, 1);
-            //Grid.SetColumnSpan(addToCartButton, 2);
+            ////Grid.SetColumnSpan(addToCartButton, 2);
             addToCartButton.Click += AddToCartButtonOnClick;
 
 
 
             // Check out button
-            Button checkoutButton = new Button
+            checkoutButton = new Button 
             {
                 Content = "Checkout",
-                Margin = new Thickness(20),
-                Padding = new Thickness(2),
-                FontSize = 12,
-                BorderThickness = new Thickness(1),
-                BorderBrush = Brushes.Gray,
-                Background = Brushes.White
+                Margin = new Thickness(10),
+                Padding = new Thickness(5),
+                FontSize = 16,
+                BorderThickness = new Thickness(2),
+                Background = Brushes.White,
             };
+            
             buttonGrid.Children.Add(checkoutButton);
             Grid.SetColumn(checkoutButton, 3);
             Grid.SetRow(checkoutButton, 1);
@@ -259,6 +275,11 @@ namespace WPFProjectAssignment
             };
             InfoPanel.Children.Add(InfoText);
         }
+        private void PriceUpdate(Product product)
+        {
+            string a = product.Price.ToString();
+            infoPrice.Text = a + "Kr";
+        }
 
         private void ProductBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -269,6 +290,7 @@ namespace WPFProjectAssignment
             TextandImageGrid.Children.Clear();
             UpdateDescription(SelectedProduct);
             UpdateImage(SelectedProduct);
+            PriceUpdate(SelectedProduct);
         }
 
         private void UpdateImage(Product product)
