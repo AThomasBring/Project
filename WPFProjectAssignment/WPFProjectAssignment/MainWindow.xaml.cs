@@ -36,8 +36,8 @@ namespace WPFProjectAssignment
         private static StackPanel CartDisplay = new StackPanel();
         private TextBlock infoPrice = new TextBlock();
         private Button checkoutButton = new Button();
-        private Button addToCartButton = new Button();
         private TextBox DiscountBlock = new TextBox();
+        
 
         // We store the most recent selected product here
         public static Product SelectedProduct { get; set; }
@@ -200,20 +200,22 @@ namespace WPFProjectAssignment
             Grid.SetColumn(infoPrice, 0);
             Grid.SetRow(infoPrice, 1);
 
-            checkoutButton = new ShopButton(null, ShopButton.Types.Checkout, Cart) 
+            checkoutButton = new Button
             {
+                Content = "Check out",
                 Margin = new Thickness(10),
                 Padding = new Thickness(5),
                 FontSize = 16,
                 BorderThickness = new Thickness(2),
                 Background = Brushes.White,
+
             };
+            checkoutButton.Click += OnCheckoutClick;
             
             ButtonGrid.Children.Add(checkoutButton);
             Grid.SetColumn(checkoutButton, 3);
             Grid.SetRow(checkoutButton, 1);
         }
-
 
         private void UpdateDescriptionText(Product product)
         {
@@ -249,23 +251,20 @@ namespace WPFProjectAssignment
             };
             InfoPanel.Children.Add(InfoText);
 
-            var addToCart = new ShopButton(SelectedProduct, ShopButton.Types.AddToCart, Cart)
+            var addToCart = new Button
             {
+                Content = "Add to cart",
                 Margin = new Thickness(10),
                 Padding = new Thickness(5),
                 FontSize = 16,
                 BorderThickness = new Thickness(2),
-                Background = Brushes.White
+                Background = Brushes.White,
+                Tag = SelectedProduct
             };
-
             ButtonGrid.Children.Add(addToCart);
             Grid.SetColumn(addToCart, 1);
             Grid.SetRow(addToCart, 1);
-        }
-        private void UpdatePrice(Product product)
-        {
-            string a = product.Price.ToString();
-            infoPrice.Text = a + "Kr";
+            addToCart.Click += OnAddClick;
         }
 
         private void ProductBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -279,6 +278,37 @@ namespace WPFProjectAssignment
             UpdateProductImage(SelectedProduct.Image);
             UpdatePrice(SelectedProduct);
         }
+        
+        private static void OnAddClick(object sender, RoutedEventArgs e)
+        {
+            var s = (Button) sender;
+            Product product = (Product)s.Tag;
+            Cart.Add(product, 1);
+            UpdateCartDisplay();
+        }
+        
+        private static void OnRemoveClick(object sender, RoutedEventArgs e)
+        {
+            var s = (Button) sender;
+            var product = (Product)s.Tag;
+            Cart.Remove(product, 1);
+            UpdateCartDisplay();
+        }
+
+        
+        private static void OnCheckoutClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Check out is not yet implemented");
+        }
+
+
+        
+        private void UpdatePrice(Product product)
+        {
+            string a = product.Price.ToString();
+            infoPrice.Text = a + "Kr";
+        }
+
         
         
         //This method gets called when a new product has been selected
@@ -307,44 +337,30 @@ namespace WPFProjectAssignment
                 //total += item.Key.Price * item.Value;
                 cartGrid.Children.Add(cartLine);
                 CartDisplay.Children.Add(cartGrid);
-                var addButton = new ShopButton(item.Key, ShopButton.Types.Plus, Cart);
+                var addButton = new Button
+                {
+                    Content = "+",
+                    Tag = item.Key,
+                    Background = Brushes.White,
+                    Margin = new Thickness(5)
+                };
                 cartGrid.Children.Add(addButton);
                 Grid.SetColumn(addButton, 2);
+                addButton.Click += OnAddClick;
 
-                var removeButton = new ShopButton(item.Key, ShopButton.Types.Minus, Cart);
+                var removeButton = new Button
+                {
+                    Content = "-",
+                    Tag = item.Key,
+                    Background = Brushes.White,
+                    Margin = new Thickness(5)
+                };
                 cartGrid.Children.Add(removeButton);
                 Grid.SetColumn(removeButton, 1);
+                removeButton.Click += OnRemoveClick;
             }
         }
-
-        public static void ButtonOnClick(object sender, RoutedEventArgs e)
-        {
-            var source = (ShopButton)sender;
-            {
-                switch (source.Type)
-                {
-                    case ShopButton.Types.Plus:
-                        Cart.Add(source.Item, 1);
-                        break;
-                    case ShopButton.Types.Minus:
-                        Cart.Remove(source.Item, 1);
-                        break;
-                    case ShopButton.Types.AddToCart:
-                        Cart.Add(source.Item, 1);
-                        break;
-                    case ShopButton.Types.Checkout:
-                        MessageBox.Show("Clicked");
-                        break;
-                    case ShopButton.Types.Clear:
-                        break;
-                    default:
-                        MessageBox.Show("Something went wrong.");
-                        break;
-                }
-                UpdateCartDisplay();
-            }
-        }
-
+        
         private static Grid CreateGrid(int[] rows, int[] columns)
         {
             var grid = new Grid

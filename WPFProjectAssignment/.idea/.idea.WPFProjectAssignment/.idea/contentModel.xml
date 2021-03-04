@@ -35,7 +35,6 @@
         </e>
         <e p="Product.cs" t="Include" />
         <e p="Products.csv" t="Include" />
-        <e p="ShopButton.cs" t="Include" />
         <e p="ShoppingCart.cs" t="Include" />
         <e p="TextFile1.csv" t="Include" />
         <e p="WPFProjectAssignment.csproj" t="IncludeRecursive" />
