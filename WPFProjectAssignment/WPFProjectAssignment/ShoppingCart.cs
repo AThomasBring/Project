@@ -6,7 +6,7 @@ namespace WPFProjectAssignment
 {
     public class ShoppingCart
     {
-        private Dictionary<Product, int> Items;
+        public Dictionary<Product, int> Items;
 
         public ShoppingCart()
         {
@@ -24,15 +24,6 @@ namespace WPFProjectAssignment
             {
                 Items[item] = 1;
             }
-            
-            //todo detta är bara sålänge för att kontrollera att den lägger till
-            string itemsincart = "";
-            foreach (var i in Items)
-            {
-                itemsincart += i.Key.Name + " " + i.Value +"\n";
-            }
-
-            MessageBox.Show(itemsincart);
         }
         
         public void Remove(Product item)

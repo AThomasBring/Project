@@ -36,6 +36,7 @@ namespace WPFProjectAssignment
         private Image InfoImage = new Image();
         private Grid TextandImageGrid = new Grid();
         private StackPanel InfoPanel = new StackPanel();
+        private TextBlock cartTextBlock = new TextBlock();
         
         // We store the most recent selected product here
         private Product SelectedProduct { get; set; }
@@ -155,6 +156,8 @@ namespace WPFProjectAssignment
                 FontSize = 20,
                 TextAlignment = TextAlignment.Center
             };
+
+ 
             firstgrid.Children.Add(heading);
             Grid.SetColumn(heading, 0);
             Grid.SetRow(heading, 0);
@@ -174,6 +177,10 @@ namespace WPFProjectAssignment
             Grid.SetColumn(ProductBox, 0);
             Grid.SetRow(ProductBox, 0);
             ProductBox.SelectionChanged += ProductBoxOnSelectionChanged;
+            
+            //shopping cart text
+            thirdGrid.Children.Add(cartTextBlock);
+            Grid.SetRow(cartTextBlock, 1);
 
             // Add to Cart button
             Button addToCartButton = new Button
@@ -276,6 +283,19 @@ namespace WPFProjectAssignment
         private void AddToCartButtonOnClick(object sender, RoutedEventArgs e)
         {
             Cart.Add(SelectedProduct);
+            
+            double total = 0;
+            cartTextBlock.Text = "";
+            foreach (var item in Cart.Items)
+            {
+                cartTextBlock.Text += item.Value + "x " + item.Key.Name + " " + item.Key.Price + "kr." + "\n";
+                total += item.Key.Price * item.Value;
+            }
+
+            cartTextBlock.Text += "Total: " + total +"kr";
+
+
+
         }
 
         private static Grid CreateGrid(int[] rows, int[] columns)
