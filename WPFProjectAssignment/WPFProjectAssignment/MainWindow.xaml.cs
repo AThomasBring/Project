@@ -127,7 +127,7 @@ namespace WPFProjectAssignment
             // This grid is for item description and image, and gets cleared and updated every selection change
             TextandImageGrid = CreateGrid(rows: new []{5, 1}, columns: new []{1, 1});;
 
-            var buttonGrid = CreateGrid(rows: new[] {5, 1}, columns: new[] {1, 1, 1, 1});
+            ButtonGrid = CreateGrid(rows: new[] {5, 1}, columns: new[] {1, 1, 1, 1});
 
             //Adding grids to the grids
             // add second grid to into second row of first grid
@@ -147,9 +147,9 @@ namespace WPFProjectAssignment
             Grid.SetRow(TextandImageGrid, 1);
             
 
-            secondGrid.Children.Add(buttonGrid);
-            Grid.SetColumn(buttonGrid, 1);
-            Grid.SetRow(buttonGrid, 1);
+            secondGrid.Children.Add(ButtonGrid);
+            Grid.SetColumn(ButtonGrid, 1);
+            Grid.SetRow(ButtonGrid, 1);
 
             // A text heading.
             TextBlock heading = new TextBlock
@@ -194,7 +194,7 @@ namespace WPFProjectAssignment
                 Margin = new Thickness(10),
                 Padding = new Thickness(5),
             };
-            buttonGrid.Children.Add(infoPrice);
+            ButtonGrid.Children.Add(infoPrice);
             Grid.SetColumn(infoPrice, 0);
             Grid.SetRow(infoPrice, 1);
 
@@ -209,12 +209,13 @@ namespace WPFProjectAssignment
                 Background = Brushes.White,
             };
 
-            buttonGrid.Children.Add(addToCartButton);
+            ButtonGrid.Children.Add(addToCartButton);
             Grid.SetColumn(addToCartButton, 1);
             Grid.SetRow(addToCartButton, 1);
             ////Grid.SetColumnSpan(addToCartButton, 2);
             addToCartButton.Click += AddToCartButtonOnClick;
 
+            //Add discount window
 
 
             // Check out button
@@ -228,7 +229,7 @@ namespace WPFProjectAssignment
                 Background = Brushes.White,
             };
             
-            buttonGrid.Children.Add(checkoutButton);
+            ButtonGrid.Children.Add(checkoutButton);
             Grid.SetColumn(checkoutButton, 3);
             Grid.SetRow(checkoutButton, 1);
             //Grid.SetColumnSpan(addToCartButton, 2);
