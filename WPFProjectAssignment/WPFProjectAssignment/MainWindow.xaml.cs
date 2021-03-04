@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,40 +18,25 @@ using System.Windows.Shapes;
 
 namespace WPFProjectAssignment
 {
-    public class Product
-    {
-        public string Code;
-        public string Name;
-        public string Description;
-        public string Price;
-        public Image Image;
-    }
-
     public partial class MainWindow : Window
     {
         // A static variable in the `Program` class is available in every method of that class. Effectively a "global" variable.
 
-        // An array of all the products available, loaded from "Products.csv".
+        // Array of Products & Dictionary for shopping cart
         public static Product[] Products;
-
-        // A shopping cart is a dictionary mapping a Product object to the number of copies of that product we have added.
-        //public static Dictionary<Product, int> Cart;
+        public static ShoppingCart Cart;
+        
 
         // We store product information in a CSV file in the project directory.
         public const string ProductFilePath = "Products.csv";
+        public const string CartFilePath = @"C:\Windows\Temp\Cart.csv";
 
-        // We store the saved shopping cart in a CSV file outside the project directory, because then it will not be overwritten everytime we start the program.
-        //public const string CartFilePath = @"C:\Windows\Temp\Cart.csv";
-
-        private ListBox productBox = new ListBox();
-        private TextBlock infoText = new TextBlock();
-        private Image infoImage = new Image();
-        private Grid productWindowGrid = new Grid();
-        private Grid buttonGrid = new Grid();
-        private StackPanel infoPanel = new StackPanel();
-        private TextBlock infoPrice = new TextBlock();
-        private Button checkoutButton = new Button();
-        private Button addToCartButton = new Button();
+        private ListBox ProductBox = new ListBox();
+        private TextBlock InfoText = new TextBlock();
+        private Image InfoImage = new Image();
+        private Grid TextandImageGrid = new Grid();
+        private StackPanel InfoPanel = new StackPanel();
+        private TextBlock cartTextBlock = new TextBlock();
         
         // We store the most recent selected product here
         private Product SelectedProduct { get; set; }
@@ -66,8 +52,8 @@ namespace WPFProjectAssignment
             // If the file doesn't exist, stop the program completely.
             if (!File.Exists(ProductFilePath))
             {
-                Console.WriteLine(ProductFilePath + " finns inte, eller har inte blivit satt till 'Copy Always'.");
-                Environment.Exit(1);
+                //todo felhantering
+                MessageBox.Show("Could not read product file.");
             }
 
             // Create an empty list of products, then go through each line of the file to fill it.
@@ -87,21 +73,20 @@ namespace WPFProjectAssignment
                         Code = parts[0],
                         Name = parts[1],
                         Description = parts[2],
-                        Price = parts[3],
+                        Price = int.Parse(parts[3]),
                         Image = CreateImage("Images/"+parts[4])
                     };
                     products.Add(p);
                 }
                 catch
                 {
-                    Console.WriteLine("Fel vid inläsning av en produkt!");
+                    //todo felhantering
+                    MessageBox.Show("Error when reading product");
                 }
             }
 
             // The method returns an array rather than a list (because the products are fixed after the program has started), so we need to convert it before returning.
             return products.ToArray();
-
-            
         }
         
 
@@ -109,8 +94,16 @@ namespace WPFProjectAssignment
         {
 
             Products = LoadProducts();
+
+            if (File.Exists(CartFilePath))
+            {
+                Cart.LoadFromFile(CartFilePath);
+            }
             
-            
+            //Shoppingcart klassen läser in från fil om den finns, annars skapar tom shoppingcart.
+            Cart = new ShoppingCart();
+
+
             // Window options
             Title = "Potion Shop";
             Width = 1000;
@@ -126,10 +119,10 @@ namespace WPFProjectAssignment
             // Third Grid, Top row for list of available products, Bottom row for shopping cart
             var thirdGrid = CreateGrid(rows: new []{2, 1}, columns: null);
 
-            // This grid gets cleared and updated every selection change
-            productWindowGrid = CreateGrid(rows: new []{5, 1}, columns: new []{1, 1});;
+            // This grid is for item description and image, and gets cleared and updated every selection change
+            TextandImageGrid = CreateGrid(rows: new []{5, 1}, columns: new []{1, 1});;
 
-            buttonGrid = CreateGrid(rows: new[] {5, 1}, columns: new[] {1, 1, 1, 1});
+            var buttonGrid = CreateGrid(rows: new[] {5, 1}, columns: new[] {1, 1, 1, 1});
 
             //Adding grids to the grids
             // add second grid to into second row of first grid
@@ -144,19 +137,10 @@ namespace WPFProjectAssignment
             Grid.SetRow(thirdGrid, 1);
             
             // add description grid to into second column of second grid
-            secondGrid.Children.Add(productWindowGrid);
-            Grid.SetColumn(productWindowGrid, 1);
-            Grid.SetRow(productWindowGrid, 1);
+            secondGrid.Children.Add(TextandImageGrid);
+            Grid.SetColumn(TextandImageGrid, 1);
+            Grid.SetRow(TextandImageGrid, 1);
             
-            //add fourth grid into third
-            //thirdGrid.Children.Add(fourthGrid);
-            //Grid.SetColumn(fourthGrid, 0);
-            //Grid.SetRow(fourthGrid, 1);
-            
-            //add fourth grid into third
-            //fourthGrid.Children.Add(fifthGrid);
-            //Grid.SetColumn(fifthGrid, 1);
-            //Grid.SetRow(fifthGrid, 0);
 
             secondGrid.Children.Add(buttonGrid);
             Grid.SetColumn(buttonGrid, 1);
@@ -172,81 +156,85 @@ namespace WPFProjectAssignment
                 FontSize = 20,
                 TextAlignment = TextAlignment.Center
             };
+
+ 
             firstgrid.Children.Add(heading);
             Grid.SetColumn(heading, 0);
             Grid.SetRow(heading, 0);
-            //Grid.SetColumnSpan(heading, 2);
             
-            // The list box allowing us to select a product.
-            // Fills the left half of the second row.
-            //Add code here to read products in from CSV file.
-
-            
-            productBox = new ListBox
+            ProductBox = new ListBox
             {
                 Margin = new Thickness(5)
             };
 
             foreach (var product in Products)
             {
-                productBox.Items.Add(new ListBoxItem() { Content = product.Name, Tag = product });
+                ProductBox.Items.Add(new ListBoxItem() { Content = product.Name, Tag = product });
             }
             
-            productBox.SelectedIndex = -1;
-            thirdGrid.Children.Add(productBox);
-            Grid.SetColumn(productBox, 0);
-            Grid.SetRow(productBox, 0);
-            productBox.SelectionChanged += ProductBoxOnSelectionChanged;
-
-            //Update price from productBox
-            infoPrice = new TextBlock { };
-            productBox.SelectedIndex = -1;
-            //buttonGrid.Children.Add(infoPrice);
-            //Grid.SetColumn(infoPrice, 0);
-            //Grid.SetRow(infoPrice, 1);
-            //infoPrice.SelectionChanged += ProductBoxOnSelectionChanged;
-
-
+            ProductBox.SelectedIndex = -1;
+            thirdGrid.Children.Add(ProductBox);
+            Grid.SetColumn(ProductBox, 0);
+            Grid.SetRow(ProductBox, 0);
+            ProductBox.SelectionChanged += ProductBoxOnSelectionChanged;
+            
+            //shopping cart text
+            thirdGrid.Children.Add(cartTextBlock);
+            Grid.SetRow(cartTextBlock, 1);
 
             // Add to Cart button
-            addToCartButton = new Button { };
+            Button addToCartButton = new Button
+            {
+                Content = "Add to cart",
+                Margin = new Thickness(20),
+                Padding = new Thickness(2),
+                FontSize = 12,
+                BorderThickness = new Thickness(1),
+                BorderBrush = Brushes.Gray,
+                Background = Brushes.White
+            };
+            buttonGrid.Children.Add(addToCartButton);
+            Grid.SetColumn(addToCartButton, 1);
+            Grid.SetRow(addToCartButton, 1);
+            //Grid.SetColumnSpan(addToCartButton, 2);
             addToCartButton.Click += AddToCartButtonOnClick;
-            //buttonGrid.Children.Add(addToCartButton);
-            //Grid.SetColumn(addToCartButton, 1);
-            //Grid.SetRow(addToCartButton, 1);
-            ////Grid.SetColumnSpan(addToCartButton, 2);
 
 
 
-
-            //// Checkout button
-            checkoutButton = new Button { };
+            // Check out button
+            Button checkoutButton = new Button
+            {
+                Content = "Checkout",
+                Margin = new Thickness(20),
+                Padding = new Thickness(2),
+                FontSize = 12,
+                BorderThickness = new Thickness(1),
+                BorderBrush = Brushes.Gray,
+                Background = Brushes.White
+            };
+            buttonGrid.Children.Add(checkoutButton);
+            Grid.SetColumn(checkoutButton, 3);
+            Grid.SetRow(checkoutButton, 1);
+            //Grid.SetColumnSpan(addToCartButton, 2);
             checkoutButton.Click += CheckoutButton_Click;
-            //buttonGrid.Children.Add(checkoutButton);
-            //Grid.SetColumn(checkoutButton, 3);
-            //Grid.SetRow(checkoutButton, 1);
-            ////Grid.SetColumnSpan(addToCartButton, 2);
-
 
         }
 
-        
-
-        private void CheckoutButton_Click(object sender, RoutedEventArgs e)
+        private static void CheckoutButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Not yet implemented");
         }
 
         private void UpdateDescription(Product product)
         {
-            infoPanel = new StackPanel
+            InfoPanel = new StackPanel
             {
                 Orientation = Orientation.Vertical,
                 Margin = new Thickness(5)
             };
-            productWindowGrid.Children.Add(infoPanel);
-            Grid.SetColumn(infoPanel, 0);
-            Grid.SetRow(infoPanel, 0);
+            TextandImageGrid.Children.Add(InfoPanel);
+            Grid.SetColumn(InfoPanel, 0);
+            Grid.SetRow(InfoPanel, 0);
 
             // The text heading inside the information panel.
             TextBlock infoHeading = new TextBlock
@@ -258,9 +246,9 @@ namespace WPFProjectAssignment
                 FontSize = 16,
                 TextAlignment = TextAlignment.Center
             };
-            infoPanel.Children.Add(infoHeading);
+            InfoPanel.Children.Add(infoHeading);
             
-            infoText = new TextBlock
+            InfoText = new TextBlock
             {
                 //Add code to read CSV file of descriptions
                 Text = product.Description,
@@ -269,82 +257,54 @@ namespace WPFProjectAssignment
                 FontFamily = new FontFamily("Constantia"),
                 FontSize = 12
             };
-            infoPanel.Children.Add(infoText);
-
-        }
-        private void ButtonGridUpdate(Product product)
-        {
-            infoPrice = new TextBlock
-            {
-                Text = product.Price,
-                Margin = new Thickness(5),
-                FontSize = 20
-            };
-            
-            buttonGrid.Children.Add(infoPrice);
-            Grid.SetColumn(infoPrice, 0);
-            Grid.SetRow(infoPrice, 1);
-
-            addToCartButton = new Button
-            {
-                Content = "Add to cart",
-                Margin = new Thickness(10),
-                Padding = new Thickness(5),
-                FontSize = 16,
-                BorderThickness = new Thickness(2),
-                Background = Brushes.White,
-            };
-            buttonGrid.Children.Add(addToCartButton);
-            Grid.SetColumn(addToCartButton, 1);
-            Grid.SetRow(addToCartButton, 1);
-
-            checkoutButton = new Button
-            {
-                Content = "Checkout",
-                Margin = new Thickness(10),
-                Padding = new Thickness(5),
-                FontSize = 16,
-                BorderThickness = new Thickness(2),
-                Background = Brushes.White,
-            };
-            buttonGrid.Children.Add(checkoutButton);
-            Grid.SetColumn(checkoutButton, 3);
-            Grid.SetRow(checkoutButton, 1);
-
+            InfoPanel.Children.Add(InfoText);
         }
 
         private void ProductBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Först, Lagra det valda objektet i SelectedProduct
-            SelectedProduct = (Product)((ListBoxItem)productBox.SelectedItem).Tag;
-
+            SelectedProduct = (Product)((ListBoxItem)ProductBox.SelectedItem).Tag;
+            
             //Sedan uppdatera text och grafik
-            buttonGrid.Children.Clear();
-            productWindowGrid.Children.Clear();
+            TextandImageGrid.Children.Clear();
             UpdateDescription(SelectedProduct);
             UpdateImage(SelectedProduct);
-            ButtonGridUpdate(SelectedProduct);
         }
 
         private void UpdateImage(Product product)
         {
-            infoImage = product.Image;
-            infoImage.Stretch = Stretch.Uniform;
-            productWindowGrid.Children.Add(infoImage);
-            Grid.SetColumn(infoImage, 1);
+            InfoImage = product.Image;
+            InfoImage.Stretch = Stretch.Uniform;
+            TextandImageGrid.Children.Add(InfoImage);
+            Grid.SetColumn(InfoImage, 1);
         }
 
 
         private void AddToCartButtonOnClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Adding " +SelectedProduct.Name +"to Cart (Not implemented)");
+            Cart.Add(SelectedProduct);
+            
+            double total = 0;
+            cartTextBlock.Text = "";
+            foreach (var item in Cart.Items)
+            {
+                cartTextBlock.Text += item.Value + "x " + item.Key.Name + " " + item.Key.Price + "kr." + "\n";
+                total += item.Key.Price * item.Value;
+            }
+
+            cartTextBlock.Text += "Total: " + total +"kr";
+
+
+
         }
 
         private static Grid CreateGrid(int[] rows, int[] columns)
         {
-            Grid grid = new Grid();
-            grid.ShowGridLines = true;
-            grid.Margin = new Thickness(5);
+            var grid = new Grid
+            {
+                Margin = new Thickness(5)
+            };
+            //grid.ShowGridLines = true;
 
             if (rows != null)
             {
@@ -354,12 +314,10 @@ namespace WPFProjectAssignment
                 }
             }
 
-            if (columns != null)
+            if (columns == null) return grid;
+            foreach (var width in columns)
             {
-                foreach (var width in columns)
-                {
-                    grid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(width, GridUnitType.Star)});
-                }
+                grid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(width, GridUnitType.Star)});
             }
 
             return grid;
