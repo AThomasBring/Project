@@ -289,13 +289,13 @@ namespace WPFProjectAssignment
             //Sedan uppdatera text och grafik
             TextandImageGrid.Children.Clear();
             UpdateDescription(SelectedProduct);
-            UpdateImage(SelectedProduct);
+            UpdateImage(SelectedProduct.Image);
             PriceUpdate(SelectedProduct);
         }
 
-        private void UpdateImage(Product product)
+        private void UpdateImage(Image image)
         {
-            InfoImage = product.Image;
+            InfoImage = image;
             InfoImage.Stretch = Stretch.Uniform;
             TextandImageGrid.Children.Add(InfoImage);
             Grid.SetColumn(InfoImage, 1);
@@ -310,6 +310,7 @@ namespace WPFProjectAssignment
             cartTextBlock.Text = "";
             foreach (var item in Cart.Items)
             {
+                Grid cartgrid = CreateGrid(new[] {1}, new[] {1, 1, 1});
                 cartTextBlock.Text += item.Value + "x " + item.Key.Name + " " + item.Key.Price + "kr." + "\n";
                 total += item.Key.Price * item.Value;
             }

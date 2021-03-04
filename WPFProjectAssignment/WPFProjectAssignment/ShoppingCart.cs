@@ -60,7 +60,7 @@ namespace WPFProjectAssignment
                     }
                 }
 
-                // Now that we have the product object (and not just the code), we can save it in the dictionary.
+                // Save to Items dictionary
                 Items[current] = amount;
             }
         }
