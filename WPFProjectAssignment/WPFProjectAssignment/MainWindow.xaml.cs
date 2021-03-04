@@ -22,7 +22,7 @@ namespace WPFProjectAssignment
         public string Code;
         public string Name;
         public string Description;
-        public int Price;
+        public string Price;
         public Image Image;
     }
 
@@ -46,7 +46,11 @@ namespace WPFProjectAssignment
         private TextBlock infoText = new TextBlock();
         private Image infoImage = new Image();
         private Grid productWindowGrid = new Grid();
+        private Grid buttonGrid = new Grid();
         private StackPanel infoPanel = new StackPanel();
+        private TextBlock infoPrice = new TextBlock();
+        private Button checkoutButton = new Button();
+        private Button addToCartButton = new Button();
         
         // We store the most recent selected product here
         private Product SelectedProduct { get; set; }
@@ -83,7 +87,7 @@ namespace WPFProjectAssignment
                         Code = parts[0],
                         Name = parts[1],
                         Description = parts[2],
-                        Price = int.Parse(parts[3]),
+                        Price = parts[3],
                         Image = CreateImage("Images/"+parts[4])
                     };
                     products.Add(p);
@@ -125,7 +129,7 @@ namespace WPFProjectAssignment
             // This grid gets cleared and updated every selection change
             productWindowGrid = CreateGrid(rows: new []{5, 1}, columns: new []{1, 1});;
 
-            var buttonGrid = CreateGrid(rows: new[] {5, 1}, columns: new[] {1, 1, 1, 1});
+            buttonGrid = CreateGrid(rows: new[] {5, 1}, columns: new[] {1, 1, 1, 1});
 
             //Adding grids to the grids
             // add second grid to into second row of first grid
@@ -194,41 +198,38 @@ namespace WPFProjectAssignment
             Grid.SetRow(productBox, 0);
             productBox.SelectionChanged += ProductBoxOnSelectionChanged;
 
+            infoPrice = new TextBlock { };
+            productBox.SelectedIndex = -1;
+            //buttonGrid.Children.Add(infoPrice);
+            //Grid.SetColumn(infoPrice, 0);
+            //Grid.SetRow(infoPrice, 1);
+            //infoPrice.SelectionChanged += ProductBoxOnSelectionChanged;
+
+
+
             // Add to Cart button
-            Button addToCartButton = new Button
-            {
-                Content = "Add to cart",
-                Margin = new Thickness(10),
-                Padding = new Thickness(5),
-                FontSize = 16,
-                BorderThickness = new Thickness(2),
-                Background = Brushes.White,
-            };
-            buttonGrid.Children.Add(addToCartButton);
-            Grid.SetColumn(addToCartButton, 1);
-            Grid.SetRow(addToCartButton, 1);
-            //Grid.SetColumnSpan(addToCartButton, 2);
+            addToCartButton = new Button { };
             addToCartButton.Click += AddToCartButtonOnClick;
+            //buttonGrid.Children.Add(addToCartButton);
+            //Grid.SetColumn(addToCartButton, 1);
+            //Grid.SetRow(addToCartButton, 1);
+            ////Grid.SetColumnSpan(addToCartButton, 2);
 
 
 
-            // Add to Cart button
-            Button checkoutButton = new Button
-            {
-                Content = "Checkout",
-                Margin = new Thickness(10),
-                Padding = new Thickness(5),
-                FontSize = 16,
-                BorderThickness = new Thickness(2),
-                Background = Brushes.White,
-            };
-            buttonGrid.Children.Add(checkoutButton);
-            Grid.SetColumn(checkoutButton, 3);
-            Grid.SetRow(checkoutButton, 1);
-            //Grid.SetColumnSpan(addToCartButton, 2);
+
+            //// Checkout button
+            checkoutButton = new Button { };
             checkoutButton.Click += CheckoutButton_Click;
+            //buttonGrid.Children.Add(checkoutButton);
+            //Grid.SetColumn(checkoutButton, 3);
+            //Grid.SetRow(checkoutButton, 1);
+            ////Grid.SetColumnSpan(addToCartButton, 2);
+
 
         }
+
+        
 
         private void CheckoutButton_Click(object sender, RoutedEventArgs e)
         {
@@ -268,17 +269,60 @@ namespace WPFProjectAssignment
                 FontSize = 12
             };
             infoPanel.Children.Add(infoText);
+
+        }
+        private void ButtonGridUpdate(Product product)
+        {
+            infoPrice = new TextBlock
+            {
+                Text = product.Price,
+                Margin = new Thickness(5),
+                FontSize = 20
+            };
+            
+            buttonGrid.Children.Add(infoPrice);
+            Grid.SetColumn(infoPrice, 0);
+            Grid.SetRow(infoPrice, 1);
+
+            addToCartButton = new Button
+            {
+                Content = "Add to cart",
+                Margin = new Thickness(10),
+                Padding = new Thickness(5),
+                FontSize = 16,
+                BorderThickness = new Thickness(2),
+                Background = Brushes.White,
+            };
+            buttonGrid.Children.Add(addToCartButton);
+            Grid.SetColumn(addToCartButton, 1);
+            Grid.SetRow(addToCartButton, 1);
+
+            checkoutButton = new Button
+            {
+                Content = "Checkout",
+                Margin = new Thickness(10),
+                Padding = new Thickness(5),
+                FontSize = 16,
+                BorderThickness = new Thickness(2),
+                Background = Brushes.White,
+            };
+            buttonGrid.Children.Add(checkoutButton);
+            Grid.SetColumn(checkoutButton, 3);
+            Grid.SetRow(checkoutButton, 1);
+
         }
 
         private void ProductBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Först, Lagra det valda objektet i SelectedProduct
             SelectedProduct = (Product)((ListBoxItem)productBox.SelectedItem).Tag;
-            
+
             //Sedan uppdatera text och grafik
+            buttonGrid.Children.Clear();
             productWindowGrid.Children.Clear();
             UpdateDescription(SelectedProduct);
             UpdateImage(SelectedProduct);
+            ButtonGridUpdate(SelectedProduct);
         }
 
         private void UpdateImage(Product product)
