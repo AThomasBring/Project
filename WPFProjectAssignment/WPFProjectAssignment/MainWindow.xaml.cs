@@ -198,6 +198,7 @@ namespace WPFProjectAssignment
             Grid.SetRow(productBox, 0);
             productBox.SelectionChanged += ProductBoxOnSelectionChanged;
 
+            //Update price from productBox
             infoPrice = new TextBlock { };
             productBox.SelectedIndex = -1;
             //buttonGrid.Children.Add(infoPrice);

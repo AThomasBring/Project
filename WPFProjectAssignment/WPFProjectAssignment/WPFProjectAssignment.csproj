@@ -34,6 +34,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Product.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="TextFile1.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
