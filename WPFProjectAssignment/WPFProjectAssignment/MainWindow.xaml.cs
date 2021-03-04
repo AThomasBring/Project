@@ -20,14 +20,10 @@ namespace WPFProjectAssignment
 {
     public partial class MainWindow : Window
     {
-        // A static variable in the `Program` class is available in every method of that class. Effectively a "global" variable.
 
-        // Array of Products & Dictionary for shopping cart
         public static Product[] Products;
         public static ShoppingCart Cart;
         
-
-        // We store product information in a CSV file in the project directory.
         public const string ProductFilePath = "Products.csv";
         public const string CartFilePath = @"C:\Windows\Temp\Cart.csv";
 
@@ -37,14 +33,14 @@ namespace WPFProjectAssignment
         private Grid TextandImageGrid = new Grid();
         private Grid ButtonGrid = new Grid();
         private StackPanel InfoPanel = new StackPanel();
-        private TextBlock cartTextBlock = new TextBlock();
+        private static StackPanel CartDisplay = new StackPanel();
         private TextBlock infoPrice = new TextBlock();
         private Button checkoutButton = new Button();
         private Button addToCartButton = new Button();
         private TextBox DiscountBlock = new TextBox();
 
         // We store the most recent selected product here
-        private Product SelectedProduct { get; set; }
+        public static Product SelectedProduct { get; set; }
 
         public MainWindow()
         {
@@ -70,10 +66,10 @@ namespace WPFProjectAssignment
                 try
                 {
                     // First, split the line on commas (CSV means "comma-separated values").
-                    string[] parts = line.Split(',');
+                    var parts = line.Split(',');
 
                     // Then create a product with its values set to the different parts of the line.
-                    Product p = new Product
+                    var p = new Product
                     {
                         Code = parts[0],
                         Name = parts[1],
@@ -107,7 +103,6 @@ namespace WPFProjectAssignment
             
             //Shoppingcart klassen läser in från fil om den finns, annars skapar tom shoppingcart.
             Cart = new ShoppingCart();
-
 
             // Window options
             Title = "Potion Shop";
@@ -176,6 +171,13 @@ namespace WPFProjectAssignment
             {
                 ProductBox.Items.Add(new ListBoxItem() { Content = product.Name, Tag = product });
             }
+
+            CartDisplay = new StackPanel()
+            {
+                Margin = new Thickness(5),
+                Orientation = Orientation.Vertical,
+                //Width = MaxWidth
+            };
             
             ProductBox.SelectedIndex = -1;
             thirdGrid.Children.Add(ProductBox);
@@ -184,8 +186,8 @@ namespace WPFProjectAssignment
             ProductBox.SelectionChanged += ProductBoxOnSelectionChanged;
             
             //shopping cart text
-            thirdGrid.Children.Add(cartTextBlock);
-            Grid.SetRow(cartTextBlock, 1);
+            thirdGrid.Children.Add(CartDisplay);
+            Grid.SetRow(CartDisplay, 1);
 
             infoPrice = new TextBlock
             {
@@ -198,30 +200,8 @@ namespace WPFProjectAssignment
             Grid.SetColumn(infoPrice, 0);
             Grid.SetRow(infoPrice, 1);
 
-            // Add to Cart button
-            addToCartButton = new Button
+            checkoutButton = new ShopButton(null, ShopButton.Types.Checkout, Cart) 
             {
-                Content = "Add to cart",
-                Margin = new Thickness(10),
-                Padding = new Thickness(5),
-                FontSize = 16,
-                BorderThickness = new Thickness(2),
-                Background = Brushes.White,
-            };
-
-            ButtonGrid.Children.Add(addToCartButton);
-            Grid.SetColumn(addToCartButton, 1);
-            Grid.SetRow(addToCartButton, 1);
-            ////Grid.SetColumnSpan(addToCartButton, 2);
-            addToCartButton.Click += AddToCartButtonOnClick;
-
-            //Add discount window
-
-
-            // Check out button
-            checkoutButton = new Button 
-            {
-                Content = "Checkout",
                 Margin = new Thickness(10),
                 Padding = new Thickness(5),
                 FontSize = 16,
@@ -232,22 +212,15 @@ namespace WPFProjectAssignment
             ButtonGrid.Children.Add(checkoutButton);
             Grid.SetColumn(checkoutButton, 3);
             Grid.SetRow(checkoutButton, 1);
-            //Grid.SetColumnSpan(addToCartButton, 2);
-            checkoutButton.Click += CheckoutButton_Click;
-
         }
 
-        private static void CheckoutButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Not yet implemented");
-        }
 
-        private void UpdateDescription(Product product)
+        private void UpdateDescriptionText(Product product)
         {
             InfoPanel = new StackPanel
             {
                 Orientation = Orientation.Vertical,
-                Margin = new Thickness(5)
+                Margin = new Thickness(1)
             };
             TextandImageGrid.Children.Add(InfoPanel);
             Grid.SetColumn(InfoPanel, 0);
@@ -275,8 +248,21 @@ namespace WPFProjectAssignment
                 FontSize = 12
             };
             InfoPanel.Children.Add(InfoText);
+
+            var addToCart = new ShopButton(SelectedProduct, ShopButton.Types.AddToCart, Cart)
+            {
+                Margin = new Thickness(10),
+                Padding = new Thickness(5),
+                FontSize = 16,
+                BorderThickness = new Thickness(2),
+                Background = Brushes.White
+            };
+
+            ButtonGrid.Children.Add(addToCart);
+            Grid.SetColumn(addToCart, 1);
+            Grid.SetRow(addToCart, 1);
         }
-        private void PriceUpdate(Product product)
+        private void UpdatePrice(Product product)
         {
             string a = product.Price.ToString();
             infoPrice.Text = a + "Kr";
@@ -284,42 +270,79 @@ namespace WPFProjectAssignment
 
         private void ProductBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Först, Lagra det valda objektet i SelectedProduct
+            //First, we store the selected product in our SelectedProduct variable so that other objects can know about it.
             SelectedProduct = (Product)((ListBoxItem)ProductBox.SelectedItem).Tag;
             
-            //Sedan uppdatera text och grafik
+            //Then, we update texts and image
             TextandImageGrid.Children.Clear();
-            UpdateDescription(SelectedProduct);
-            UpdateImage(SelectedProduct.Image);
-            PriceUpdate(SelectedProduct);
+            UpdateDescriptionText(SelectedProduct);
+            UpdateProductImage(SelectedProduct.Image);
+            UpdatePrice(SelectedProduct);
         }
-
-        private void UpdateImage(Image image)
+        
+        
+        //This method gets called when a new product has been selected
+        private void UpdateProductImage(Image image)
         {
             InfoImage = image;
             InfoImage.Stretch = Stretch.Uniform;
             TextandImageGrid.Children.Add(InfoImage);
             Grid.SetColumn(InfoImage, 1);
         }
-
-
-        private void AddToCartButtonOnClick(object sender, RoutedEventArgs e)
+        
+        public static void UpdateCartDisplay()
         {
-            Cart.Add(SelectedProduct);
-            
-            double total = 0;
-            cartTextBlock.Text = "";
+            CartDisplay.Children.Clear();
             foreach (var item in Cart.Items)
             {
-                Grid cartgrid = CreateGrid(new[] {1}, new[] {1, 1, 1});
-                cartTextBlock.Text += item.Value + "x " + item.Key.Name + " " + item.Key.Price + "kr." + "\n";
-                total += item.Key.Price * item.Value;
+                var cartGrid = new Grid();
+                cartGrid.RowDefinitions.Add(new RowDefinition {Height = new GridLength(1, GridUnitType.Auto)});
+                cartGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(6, GridUnitType.Star)});
+                cartGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)});
+                cartGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)});
+                var cartLine = new TextBlock
+                {
+                    Text = item.Value + "x " + item.Key.Name + " " + item.Key.Price + "kr." + "\n"
+                };
+                //total += item.Key.Price * item.Value;
+                cartGrid.Children.Add(cartLine);
+                CartDisplay.Children.Add(cartGrid);
+                var addButton = new ShopButton(item.Key, ShopButton.Types.Plus, Cart);
+                cartGrid.Children.Add(addButton);
+                Grid.SetColumn(addButton, 2);
+
+                var removeButton = new ShopButton(item.Key, ShopButton.Types.Minus, Cart);
+                cartGrid.Children.Add(removeButton);
+                Grid.SetColumn(removeButton, 1);
             }
+        }
 
-            cartTextBlock.Text += "Total: " + total +"kr";
-
-
-
+        public static void ButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            var source = (ShopButton)sender;
+            {
+                switch (source.Type)
+                {
+                    case ShopButton.Types.Plus:
+                        Cart.Add(source.Item, 1);
+                        break;
+                    case ShopButton.Types.Minus:
+                        Cart.Remove(source.Item, 1);
+                        break;
+                    case ShopButton.Types.AddToCart:
+                        Cart.Add(source.Item, 1);
+                        break;
+                    case ShopButton.Types.Checkout:
+                        MessageBox.Show("Clicked");
+                        break;
+                    case ShopButton.Types.Clear:
+                        break;
+                    default:
+                        MessageBox.Show("Something went wrong.");
+                        break;
+                }
+                UpdateCartDisplay();
+            }
         }
 
         private static Grid CreateGrid(int[] rows, int[] columns)

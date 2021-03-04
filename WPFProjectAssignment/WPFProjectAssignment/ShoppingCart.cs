@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Windows.Input;
 
 namespace WPFProjectAssignment
 {
@@ -13,11 +14,11 @@ namespace WPFProjectAssignment
             Items = new Dictionary<Product, int>();
         }
 
-        public void Add(Product item)
+        public void Add(Product item, int number)
         {
             if (Items.ContainsKey(item))
             {
-                Items[item]++;
+                Items[item] += number;
 
             }
             else
@@ -26,11 +27,19 @@ namespace WPFProjectAssignment
             }
         }
         
-        public void Remove(Product item)
+        public void Remove(Product item, int number)
         {
+
             if (Items.ContainsKey(item))
             {
-                Items[item]--;
+                if (Items[item] <= number)
+                {
+                    Items.Remove(item);
+                }
+                else
+                {
+                    Items[item]--;   
+                }
             }
         }
         
