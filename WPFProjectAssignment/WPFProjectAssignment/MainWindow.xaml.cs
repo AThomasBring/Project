@@ -168,7 +168,7 @@ namespace WPFProjectAssignment
             {
                 Margin = new Thickness(5),
                 Orientation = Orientation.Vertical,
-                //Width = MaxWidth
+                
             };
             
             ProductBox.SelectedIndex = -1;
@@ -320,6 +320,8 @@ namespace WPFProjectAssignment
             {
                 File.Delete(CartFilePath);
             }
+            UpdateCartDisplay();
+            MessageBox.Show("Show receipt not yet implemented.");
 
         }
         
