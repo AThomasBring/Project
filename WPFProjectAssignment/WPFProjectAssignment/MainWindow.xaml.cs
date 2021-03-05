@@ -10,7 +10,7 @@ namespace WPFProjectAssignment
 {
     public class DiscountCodes
     {
-        public string code;
+        public string Code;
     }
     public partial class MainWindow : Window
     {
@@ -52,11 +52,11 @@ namespace WPFProjectAssignment
             List<DiscountCodes> codes = new List<DiscountCodes>();
             string[] words = File.ReadAllLines(DiscountFilePath);
 
-            foreach (string code in words)
+            foreach (string Code in words)
             {
                 try
                 {
-                    var word = code.Split(',');
+                    var word = Code.Split(',');
                     var c = new DiscountCodes { };
                     codes.Add(c);
 
@@ -131,7 +131,7 @@ namespace WPFProjectAssignment
             var secondGrid = CreateGrid(rows: null, columns: new[] { 1, 2 });
 
             // Third Grid, Top row for list of available products, Bottom row for shopping cart
-            var thirdGrid = CreateGrid(rows: new[] { 2, 1 }, columns: null);
+            var thirdGrid = CreateGrid(rows: new[] { 5, 4, 1, 2 }, columns: null);
 
             // This grid is for item description and image, and gets cleared and updated every selection change
             TextandImageGrid = CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 1, 1 }); ;
@@ -222,9 +222,8 @@ namespace WPFProjectAssignment
                 FontSize = 16,
                 BorderThickness = new Thickness(2),
             };
-            ButtonGrid.Children.Add(DiscountBlock);
-            Grid.SetColumn(DiscountBlock, 2);
-            Grid.SetRow(DiscountBlock, 1);
+            thirdGrid.Children.Add(DiscountBlock);
+            Grid.SetRow(DiscountBlock, 2);
 
             //if (DiscountBlock.Text == DiscountCodes[0] || DiscountBlock.Text == DiscountCodes[1] || DiscountBlock.Text == DiscountCodes[2] || DiscountBlock.Text == DiscountCodes[3] || DiscountBlock.Text == DiscountCodes[4])
             //{
