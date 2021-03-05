@@ -117,15 +117,7 @@ namespace WPFProjectAssignment
         {
             DiscountCodes = LoadCodes();
             Products = LoadProducts();
-
-            if (File.Exists(CartFilePath))
-            {
-                Cart.LoadFromFile(CartFilePath);
-            }
-
-            //Shoppingcart klassen läser in från fil om den finns, annars skapar tom shoppingcart.
             Cart = new ShoppingCart();
-
             // Window options
             Title = "Potion Shop";
             Width = 1000;
@@ -198,7 +190,7 @@ namespace WPFProjectAssignment
             {
                 Margin = new Thickness(5),
                 Orientation = Orientation.Vertical,
-                //Width = MaxWidth
+                
             };
 
             ProductBox.SelectedIndex = -1;
@@ -249,12 +241,37 @@ namespace WPFProjectAssignment
                 Background = Brushes.White,
 
             };
-            checkoutButton.Click += OnCheckoutClick;
-
             ButtonGrid.Children.Add(checkoutButton);
             Grid.SetColumn(checkoutButton, 3);
             Grid.SetRow(checkoutButton, 1);
+            checkoutButton.Click += OnCheckoutClick;
+            
+            var saveCartButton = new Button
+            {
+                Content = "Save Cart",
+                Margin = new Thickness(10),
+                Padding = new Thickness(5),
+                FontSize = 16,
+                BorderThickness = new Thickness(2),
+                Background = Brushes.White,
+
+            };
+            ButtonGrid.Children.Add(saveCartButton);
+            Grid.SetColumn(saveCartButton, 2);
+            Grid.SetRow(saveCartButton, 1);
+            saveCartButton.Click += OnSaveCartClick;
+            
+            //Read saved shoppingcart
+            if (File.Exists(CartFilePath))
+            {
+                Cart.LoadFromFile(CartFilePath);
+                UpdateCartDisplay();
+            }
+
+
+
         }
+
 
         private void UpdateDescriptionText(Product product)
         {
@@ -337,11 +354,24 @@ namespace WPFProjectAssignment
 
         private static void OnCheckoutClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Check out is not yet implemented");
+            Cart.Clear();
+            if (File.Exists(CartFilePath))
+            {
+                File.Delete(CartFilePath);
+            }
+            UpdateCartDisplay();
+            MessageBox.Show("Show receipt not yet implemented.");
+
+        }
+        
+        private void OnSaveCartClick(object sender, RoutedEventArgs e)
+        {
+            Cart.SaveToFile(CartFilePath);
         }
 
 
 
+        
         private void UpdatePrice(Product product)
         {
             string a = product.Price.ToString();
@@ -362,13 +392,13 @@ namespace WPFProjectAssignment
         public static void UpdateCartDisplay()
         {
             CartDisplay.Children.Clear();
-            foreach (var item in Cart.Items)
+            foreach (var item in Cart.Products)
             {
                 var cartGrid = new Grid();
-                cartGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) });
-                cartGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(6, GridUnitType.Star) });
-                cartGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                cartGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                cartGrid.RowDefinitions.Add(new RowDefinition {Height = new GridLength(1, GridUnitType.Auto)});
+                cartGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(6, GridUnitType.Star)});
+                cartGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)});
+                cartGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)});
                 var cartLine = new TextBlock
                 {
                     Text = item.Value + "x " + item.Key.Name + " " + item.Key.Price + "kr." + "\n"
@@ -412,14 +442,14 @@ namespace WPFProjectAssignment
             {
                 foreach (var height in rows)
                 {
-                    grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(height, GridUnitType.Star) });
+                    grid.RowDefinitions.Add(new RowDefinition {Height = new GridLength(height, GridUnitType.Star)});
                 }
             }
 
             if (columns == null) return grid;
             foreach (var width in columns)
             {
-                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(width, GridUnitType.Star) });
+                grid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(width, GridUnitType.Star)});
             }
 
             return grid;

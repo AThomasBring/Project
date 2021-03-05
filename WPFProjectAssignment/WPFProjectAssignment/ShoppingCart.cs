@@ -7,45 +7,45 @@ namespace WPFProjectAssignment
 {
     public class ShoppingCart
     {
-        public Dictionary<Product, int> Items;
+        public Dictionary<Product, int> Products;
 
         public ShoppingCart()
         {
-            Items = new Dictionary<Product, int>();
+            Products = new Dictionary<Product, int>();
         }
 
-        public void Add(Product item, int number)
+        public void Add(Product product, int number)
         {
-            if (Items.ContainsKey(item))
+            if (Products.ContainsKey(product))
             {
-                Items[item] += number;
+                Products[product] += number;
 
             }
             else
             {
-                Items[item] = 1;
+                Products[product] = 1;
             }
         }
         
-        public void Remove(Product item, int number)
+        public void Remove(Product product, int number)
         {
 
-            if (Items.ContainsKey(item))
+            if (Products.ContainsKey(product))
             {
-                if (Items[item] <= number)
+                if (Products[product] <= number)
                 {
-                    Items.Remove(item);
+                    Products.Remove(product);
                 }
                 else
                 {
-                    Items[item]--;   
+                    Products[product]--;   
                 }
             }
         }
         
         public void Clear()
         {
-            Items.Clear();
+            Products.Clear();
         }
         
         public void LoadFromFile(string CartFilePath)
@@ -70,13 +70,31 @@ namespace WPFProjectAssignment
                 }
 
                 // Save to Items dictionary
-                Items[current] = amount;
+                Products[current] = amount;
             }
         }
 
         public void SaveToFile(string path)
         {
-            
+            // Create an empty list of text lines that we will fill with strings and then write to a textfile using `WriteAllLines`.
+            if (Products.Count < 1)
+            {
+                MessageBox.Show("Your shopping cart is empty, nothing to save.");
+                return;
+            }
+            List<string> lines = new List<string>();
+            foreach (KeyValuePair<Product, int> pair in Products)
+            {
+                Product p = pair.Key;
+                int amount = pair.Value;
+
+                // For each product, we only save the code and the amount.
+                // The other info (name, price, description) is already in "Products.csv" and we can look it up when we load the cart.
+                lines.Add(p.Code + "," + amount);
+            }
+            File.WriteAllLines(path, lines);
+            MessageBox.Show("Saved shopping cart.");
+
         }
     }
 }
