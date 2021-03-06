@@ -131,7 +131,7 @@ namespace WPFProjectAssignment
             var secondGrid = CreateGrid(rows: null, columns: new[] { 1, 2 });
 
             // Third Grid, Top row for list of available products, Bottom row for shopping cart
-            var thirdGrid = CreateGrid(rows: new[] { 5, 4, 1, 2 }, columns: null);
+            var thirdGrid = CreateGrid(rows: new[] { 5, 3, 1, 2 }, columns: null);
 
             // This grid is for item description and image, and gets cleared and updated every selection change
             TextandImageGrid = CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 1, 1 }); ;
