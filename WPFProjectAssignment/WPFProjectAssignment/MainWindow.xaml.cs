@@ -10,7 +10,8 @@ namespace WPFProjectAssignment
 {
     public class DiscountCodes
     {
-        public string Code;
+        public string CodeName;
+        public int Percentage;
     }
     public partial class MainWindow : Window
     {
@@ -56,12 +57,16 @@ namespace WPFProjectAssignment
             List<DiscountCodes> codes = new List<DiscountCodes>();
             string[] words = File.ReadAllLines(DiscountFilePath);
 
-            foreach (string Code in words)
+            foreach (string discountline in words)
             {
                 try
                 {
-                    var word = Code.Split(',');
-                    var c = new DiscountCodes { };
+                    var word = discountline.Split(',');
+                    var c = new DiscountCodes 
+                    { 
+                        CodeName = word[0],
+                        Percentage = int.Parse(word[1]),
+                    };
                     codes.Add(c);
 
 
@@ -237,7 +242,7 @@ namespace WPFProjectAssignment
 
             DiscountLabel = new Label
             {
-                Content = "Enter discount code: ",
+                Content = "Enter discount code",
                 FontSize = 16,
             };
             discountGrid.Children.Add(DiscountLabel);
