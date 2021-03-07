@@ -30,8 +30,12 @@ namespace WPFProjectAssignment
         private StackPanel InfoPanel = new StackPanel();
         private static StackPanel CartDisplay = new StackPanel();
         private TextBlock infoPrice = new TextBlock();
-        private Button checkoutButton = new Button();
+        private Button CheckoutButton = new Button();
+        private Button RemoveAllProducts = new Button();
+        private Button ApplyDiscount = new Button();
         private TextBox DiscountBlock = new TextBox();
+        private Label DiscountLabel = new Label();
+
 
 
         // We store the most recent selected product here
@@ -130,8 +134,10 @@ namespace WPFProjectAssignment
             // Second Grid, Left side for item list and shopping cart, right side for item description
             var secondGrid = CreateGrid(rows: null, columns: new[] { 1, 2 });
 
-            // Third Grid, Top row for list of available products, Bottom row for shopping cart
-            var thirdGrid = CreateGrid(rows: new[] { 5, 3, 1, 2 }, columns: null);
+            // Left Side Grid, Top row for list of available products, Bottom row for shopping cart and disocunt Grid
+            var leftSideGrid = CreateGrid(rows: new[] { 5, 3, 1, 2 }, columns: null);
+
+            var discountGrid = CreateGrid(rows: new[] { 2, 1}, columns: new[] { 2, 2});
 
             // This grid is for item description and image, and gets cleared and updated every selection change
             TextandImageGrid = CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 1, 1 }); ;
@@ -146,9 +152,9 @@ namespace WPFProjectAssignment
             Grid.SetRow(secondGrid, 1);
 
             // add third grid to into first column of second grid
-            secondGrid.Children.Add(thirdGrid);
-            Grid.SetColumn(thirdGrid, 0);
-            Grid.SetRow(thirdGrid, 1);
+            secondGrid.Children.Add(leftSideGrid);
+            Grid.SetColumn(leftSideGrid, 0);
+            Grid.SetRow(leftSideGrid, 1);
 
             // add description grid to into second column of second grid
             secondGrid.Children.Add(TextandImageGrid);
@@ -159,6 +165,10 @@ namespace WPFProjectAssignment
             secondGrid.Children.Add(ButtonGrid);
             Grid.SetColumn(ButtonGrid, 1);
             Grid.SetRow(ButtonGrid, 1);
+
+            leftSideGrid.Children.Add(discountGrid);
+            Grid.SetColumn(discountGrid, 0);
+            Grid.SetRow(discountGrid, 3);
 
             // A text heading.
             TextBlock heading = new TextBlock
@@ -194,13 +204,13 @@ namespace WPFProjectAssignment
             };
 
             ProductBox.SelectedIndex = -1;
-            thirdGrid.Children.Add(ProductBox);
+            leftSideGrid.Children.Add(ProductBox);
             Grid.SetColumn(ProductBox, 0);
             Grid.SetRow(ProductBox, 0);
             ProductBox.SelectionChanged += ProductBoxOnSelectionChanged;
 
             //shopping cart text
-            thirdGrid.Children.Add(CartDisplay);
+            leftSideGrid.Children.Add(CartDisplay);
             Grid.SetRow(CartDisplay, 1);
 
             infoPrice = new TextBlock
@@ -214,23 +224,52 @@ namespace WPFProjectAssignment
             Grid.SetColumn(infoPrice, 0);
             Grid.SetRow(infoPrice, 1);
 
+            RemoveAllProducts = new Button
+            {
+                Content = "Remove all products from Cart",
+                Margin = new Thickness(2),
+                Padding = new Thickness(2),
+                FontSize = 16,
+                Background = Brushes.White,
+            };
+            leftSideGrid.Children.Add(RemoveAllProducts);
+            Grid.SetRow(RemoveAllProducts, 2);
+
+            DiscountLabel = new Label
+            {
+                Content = "Enter discount code: ",
+                FontSize = 16,
+            };
+            discountGrid.Children.Add(DiscountLabel);
+            Grid.SetColumn(DiscountLabel, 0);
+            Grid.SetRow(DiscountLabel, 0);
+
             DiscountBlock = new TextBox
             {
                 Text = "",
-                Margin = new Thickness(10),
-                Padding = new Thickness(5),
+                Margin = new Thickness(5),
                 FontSize = 16,
                 BorderThickness = new Thickness(2),
             };
-            thirdGrid.Children.Add(DiscountBlock);
-            Grid.SetRow(DiscountBlock, 2);
+            discountGrid.Children.Add(DiscountBlock);
+            Grid.SetColumn(DiscountBlock, 1);
+            Grid.SetRow(DiscountBlock, 0);
 
             //if (DiscountBlock.Text == DiscountCodes[0] || DiscountBlock.Text == DiscountCodes[1] || DiscountBlock.Text == DiscountCodes[2] || DiscountBlock.Text == DiscountCodes[3] || DiscountBlock.Text == DiscountCodes[4])
             //{
 
             //}
 
-            checkoutButton = new Button
+            ApplyDiscount = new Button
+            {
+                Content = "Apply discount",
+                FontSize = 16,
+            };
+            discountGrid.Children.Add(ApplyDiscount);
+            Grid.SetColumnSpan(ApplyDiscount, 2);
+            Grid.SetRow(ApplyDiscount, 1);
+
+            CheckoutButton = new Button
             {
                 Content = "Check out",
                 Margin = new Thickness(10),
@@ -240,10 +279,10 @@ namespace WPFProjectAssignment
                 Background = Brushes.White,
 
             };
-            ButtonGrid.Children.Add(checkoutButton);
-            Grid.SetColumn(checkoutButton, 3);
-            Grid.SetRow(checkoutButton, 1);
-            checkoutButton.Click += OnCheckoutClick;
+            ButtonGrid.Children.Add(CheckoutButton);
+            Grid.SetColumn(CheckoutButton, 3);
+            Grid.SetRow(CheckoutButton, 1);
+            CheckoutButton.Click += OnCheckoutClick;
             
             var saveCartButton = new Button
             {
