@@ -10,6 +10,7 @@
         <e p="App.xaml.cs" t="Include" />
         <e p="AssemblyInfo.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="DiscountCodes.txt" t="Include" />
         <e p="Images" t="Include">
           <e p="agingPotion.jpg" t="Include" />
           <e p="babblingBeverage.jpg" t="Include" />

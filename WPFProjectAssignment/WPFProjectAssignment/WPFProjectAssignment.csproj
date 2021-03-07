@@ -37,6 +37,10 @@
     <Compile Update="Product.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <None Remove="DiscountCodes.txt" />
+    <Content Include="DiscountCodes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
