@@ -13,5 +13,6 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/babblingbeverage.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/elixiroflife.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/draughtoflivingdeath.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("discountcodes.txt")]
 
 

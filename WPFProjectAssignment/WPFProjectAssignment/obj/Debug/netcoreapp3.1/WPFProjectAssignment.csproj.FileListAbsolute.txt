@@ -72,3 +72,4 @@ C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\WPFProjectA
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\bin\Debug\netcoreapp3.1\Product.cs
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\bin\Debug\netcoreapp3.1\TextFile1.csv
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\bin\Debug\netcoreapp3.1\DiscountCodes.txt
+C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\bin\Debug\netcoreapp3.1\DiscountCodes.txt

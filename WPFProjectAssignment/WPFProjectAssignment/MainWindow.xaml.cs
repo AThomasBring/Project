@@ -260,32 +260,50 @@ namespace WPFProjectAssignment
             Grid.SetColumn(DiscountBlock, 1);
             Grid.SetRow(DiscountBlock, 0);
 
-            //if (DiscountBlock.Text == DiscountCodes[0] || DiscountBlock.Text == DiscountCodes[1] || DiscountBlock.Text == DiscountCodes[2] || DiscountBlock.Text == DiscountCodes[3] || DiscountBlock.Text == DiscountCodes[4])
-            //{
-
-            //}
-
-            ApplyDiscount = new Button
+            if (DiscountBlock.Text == DiscountCodes[0].CodeName)
             {
-                Content = "Apply discount",
-                FontSize = 16,
-            };
-            discountGrid.Children.Add(ApplyDiscount);
-            Grid.SetColumnSpan(ApplyDiscount, 2);
-            Grid.SetRow(ApplyDiscount, 1);
+                //Apply 15% discount to order
+            }
+            else if (DiscountBlock.Text == DiscountCodes[1].CodeName)
+            {
+                //Apply 20% discount to order
+            }
+            else if (DiscountBlock.Text == DiscountCodes[2].CodeName)
+            {
+                //Apply 30% discount to order
+            }
+            else if (DiscountBlock.Text == DiscountCodes[3].CodeName)
+            {
+                //Apply 50% discount to order
+            }
+            else if (DiscountBlock.Text != "" && DiscountBlock.Text != DiscountCodes[0].CodeName && DiscountBlock.Text != DiscountCodes[1].CodeName && DiscountBlock.Text != DiscountCodes[2].CodeName && DiscountBlock.Text != DiscountCodes[3].CodeName)
+            {
+                //Show error message "Please enter a valid discount"
+            }
+            else
+            {
+                //Go through to showing reciept without a discount applied
+            }
+
+            //ApplyDiscount = new Button
+            //{
+            //    Content = "Apply discount",
+            //    FontSize = 16,
+            //};
+            //discountGrid.Children.Add(ApplyDiscount);
+            //Grid.SetColumnSpan(ApplyDiscount, 2);
+            //Grid.SetRow(ApplyDiscount, 1);
 
             CheckoutButton = new Button
             {
                 Content = "Check out",
-                Margin = new Thickness(10),
-                Padding = new Thickness(5),
                 FontSize = 16,
                 BorderThickness = new Thickness(2),
                 Background = Brushes.White,
 
             };
-            ButtonGrid.Children.Add(CheckoutButton);
-            Grid.SetColumn(CheckoutButton, 3);
+            discountGrid.Children.Add(CheckoutButton);
+            Grid.SetColumnSpan(CheckoutButton, 2);
             Grid.SetRow(CheckoutButton, 1);
             CheckoutButton.Click += OnCheckoutClick;
             
@@ -301,6 +319,7 @@ namespace WPFProjectAssignment
             };
             ButtonGrid.Children.Add(saveCartButton);
             Grid.SetColumn(saveCartButton, 2);
+            Grid.SetColumnSpan(saveCartButton, 2);
             Grid.SetRow(saveCartButton, 1);
             saveCartButton.Click += OnSaveCartClick;
             
