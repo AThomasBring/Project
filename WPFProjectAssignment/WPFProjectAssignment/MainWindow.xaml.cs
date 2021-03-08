@@ -239,6 +239,7 @@ namespace WPFProjectAssignment
             };
             leftSideGrid.Children.Add(RemoveAllProducts);
             Grid.SetRow(RemoveAllProducts, 2);
+            RemoveAllProducts.Click += RemoveAllProducts_Click;
 
             DiscountLabel = new Label
             {
@@ -335,6 +336,13 @@ namespace WPFProjectAssignment
 
         }
 
+        private void RemoveAllProducts_Click(object sender, RoutedEventArgs e)
+        {
+
+            //Cart.Remove(Products);
+            UpdateCartDisplay();
+
+        }
 
         private void UpdateDescriptionText(Product product)
         {

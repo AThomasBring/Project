@@ -7,7 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\polyjuicepotion.jpg" />
+    <None Remove="Images\shrinkingSolution.png" />
+    <None Remove="Images\skeleGroPotion.jpg" />
+    <None Remove="Images\strengtheningsolution.jpg" />
+    <None Remove="Images\wolfsbanePotion.jpg" />
     <None Remove="Products.csv" />
+    <Content Include="Images\polyjuicepotion.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\shrinkingSolution.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\skeleGroPotion.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\strengtheningsolution.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\wolfsbanePotion.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Products.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -8,6 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/polyjuicepotion.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/shrinkingsolution.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/skelegropotion.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/strengtheningsolution.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/wolfsbanepotion.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("products.csv")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/agingpotion.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/babblingbeverage.jpg")]
