@@ -33,7 +33,6 @@ namespace WPFProjectAssignment
         private TextBlock infoPrice = new TextBlock();
         private Button CheckoutButton = new Button();
         private Button RemoveAllProducts = new Button();
-        private Button ApplyDiscount = new Button();
         private TextBox DiscountBlock = new TextBox();
         private Label DiscountLabel = new Label();
 
@@ -200,6 +199,11 @@ namespace WPFProjectAssignment
             {
                 ProductBox.Items.Add(new ListBoxItem() { Content = product.Name, Tag = product });
             }
+            ProductBox.SelectedIndex = -1;
+            leftSideGrid.Children.Add(ProductBox);
+            Grid.SetColumn(ProductBox, 0);
+            Grid.SetRow(ProductBox, 0);
+            ProductBox.SelectionChanged += ProductBoxOnSelectionChanged;
 
             CartDisplay = new StackPanel()
             {
@@ -207,13 +211,6 @@ namespace WPFProjectAssignment
                 Orientation = Orientation.Vertical,
                 
             };
-
-            ProductBox.SelectedIndex = -1;
-            leftSideGrid.Children.Add(ProductBox);
-            Grid.SetColumn(ProductBox, 0);
-            Grid.SetRow(ProductBox, 0);
-            ProductBox.SelectionChanged += ProductBoxOnSelectionChanged;
-
             //shopping cart text
             leftSideGrid.Children.Add(CartDisplay);
             Grid.SetRow(CartDisplay, 1);
@@ -262,30 +259,7 @@ namespace WPFProjectAssignment
             Grid.SetColumn(DiscountBlock, 1);
             Grid.SetRow(DiscountBlock, 0);
 
-            if (DiscountBlock.Text == DiscountCodes[0].CodeName)
-            {
-                //Apply 15% discount to order
-            }
-            else if (DiscountBlock.Text == DiscountCodes[1].CodeName)
-            {
-                //Apply 20% discount to order
-            }
-            else if (DiscountBlock.Text == DiscountCodes[2].CodeName)
-            {
-                //Apply 30% discount to order
-            }
-            else if (DiscountBlock.Text == DiscountCodes[3].CodeName)
-            {
-                //Apply 50% discount to order
-            }
-            else if (DiscountBlock.Text != "" && DiscountBlock.Text != DiscountCodes[0].CodeName && DiscountBlock.Text != DiscountCodes[1].CodeName && DiscountBlock.Text != DiscountCodes[2].CodeName && DiscountBlock.Text != DiscountCodes[3].CodeName)
-            {
-                //Show error message "Please enter a valid discount"
-            }
-            else
-            {
-                //Go through to showing reciept without a discount applied
-            }
+            
 
             //ApplyDiscount = new Button
             //{
@@ -347,6 +321,7 @@ namespace WPFProjectAssignment
         private void UpdateDescriptionText(Product product)
         {
             InfoPanel = new StackPanel
+            
             {
                 Orientation = Orientation.Vertical,
                 Margin = new Thickness(1)
@@ -425,6 +400,33 @@ namespace WPFProjectAssignment
 
         private static void OnCheckoutClick(object sender, RoutedEventArgs e)
         {
+            var a = (Button)sender;
+            
+            //if (DiscountBlock.Text == DiscountCodes[0].CodeName)
+            //{
+            //    //Apply 15% discount to order
+            //}
+            //else if (DiscountBlock.Text == DiscountCodes[1].CodeName)
+            //{
+            //    //Apply 20% discount to order
+            //}
+            //else if (DiscountBlock.Text == DiscountCodes[2].CodeName)
+            //{
+            //    //Apply 30% discount to order
+            //}
+            //else if (DiscountBlock.Text == DiscountCodes[3].CodeName)
+            //{
+            //    //Apply 50% discount to order
+            //}
+            //else if (DiscountBlock.Text != "" && DiscountBlock.Text != DiscountCodes[0].CodeName && DiscountBlock.Text != DiscountCodes[1].CodeName && DiscountBlock.Text != DiscountCodes[2].CodeName && DiscountBlock.Text != DiscountCodes[3].CodeName)
+            //{
+            //    //Show error message "Please enter a valid discount"
+            //}
+            //else
+            //{
+            //    //Go through to showing reciept without a discount applied
+            //}
+
             Cart.Clear();
             if (File.Exists(CartFilePath))
             {
@@ -477,6 +479,7 @@ namespace WPFProjectAssignment
                 //total += item.Key.Price * item.Value;
                 cartGrid.Children.Add(cartLine);
                 CartDisplay.Children.Add(cartGrid);
+
                 var addButton = new Button
                 {
                     Content = "+",
