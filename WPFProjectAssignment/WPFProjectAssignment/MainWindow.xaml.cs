@@ -255,6 +255,7 @@ namespace WPFProjectAssignment
                 Margin = new Thickness(5),
                 FontSize = 16,
                 BorderThickness = new Thickness(2),
+                Height = 32,
             };
             discountGrid.Children.Add(DiscountBlock);
             Grid.SetColumn(DiscountBlock, 1);
@@ -300,7 +301,7 @@ namespace WPFProjectAssignment
                 FontSize = 16,
                 BorderThickness = new Thickness(2),
                 Background = Brushes.White,
-
+                Height = 25,
             };
             discountGrid.Children.Add(CheckoutButton);
             Grid.SetColumnSpan(CheckoutButton, 2);
