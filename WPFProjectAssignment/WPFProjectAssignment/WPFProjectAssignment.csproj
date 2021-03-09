@@ -43,6 +43,10 @@
     <Content Include="Images\elixirOfLife.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Remove="Images\welcome.jpg" />
+    <Content Include="Images\welcome.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

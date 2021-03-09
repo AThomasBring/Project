@@ -20,6 +20,7 @@
           <e p="shrinkingSolution.png" t="Include" />
           <e p="skeleGroPotion.jpg" t="Include" />
           <e p="strengtheningsolution.jpg" t="Include" />
+          <e p="welcome.jpg" t="Include" />
           <e p="wolfsbanePotion.jpg" t="Include" />
         </e>
         <e p="MainWindow.xaml" t="Include" />

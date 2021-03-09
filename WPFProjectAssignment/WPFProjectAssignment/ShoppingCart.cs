@@ -76,10 +76,15 @@ namespace WPFProjectAssignment
 
         public void SaveToFile(string path)
         {
-            // Create an empty list of text lines that we will fill with strings and then write to a textfile using `WriteAllLines`.
+            
             if (Products.Count < 1)
             {
-                MessageBox.Show("Your shopping cart is empty, nothing to save.");
+                //if user saves empty cart
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+                MessageBox.Show("Your shopping cart is empty");
                 return;
             }
             List<string> lines = new List<string>();

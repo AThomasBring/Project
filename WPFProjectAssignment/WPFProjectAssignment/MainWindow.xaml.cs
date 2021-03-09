@@ -5,23 +5,25 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Microsoft.VisualBasic;
 
 namespace WPFProjectAssignment
 {
-    public class DiscountCodes
+    public class DiscountCode
     {
         public string CodeName;
         public int Percentage;
     }
     public partial class MainWindow : Window
     {
-        public static DiscountCodes[] DiscountCodes;
+        public static DiscountCode[] DiscountCodes;
         public static Product[] Products;
         public static ShoppingCart Cart;
 
         public const string DiscountFilePath = "DiscountCodes.txt";
         public const string ProductFilePath = "Products.csv";
         public const string CartFilePath = @"C:\Windows\Temp\Cart.csv";
+        public const string WelcomeImagePath = "Images/welcome.jpg";
 
         private ListBox ProductBox = new ListBox();
         private static TextBlock InfoText = new TextBlock();
@@ -33,8 +35,8 @@ namespace WPFProjectAssignment
         private static TextBlock infoPrice = new TextBlock();
         private Button CheckoutButton = new Button();
         private Button RemoveAllProducts = new Button();
-        private TextBox DiscountBlock = new TextBox();
-        private Label DiscountLabel = new Label();
+        public static TextBox DiscountBlock = new TextBox();
+        private static Label DiscountLabel = new Label();
         private static Grid firstGrid = new Grid();
         private static Grid discountGrid = new Grid();
 
@@ -49,13 +51,13 @@ namespace WPFProjectAssignment
             Start();
         }
 
-        private static DiscountCodes[] LoadCodes()
+        private static DiscountCode[] LoadCodes()
         {
             if (!File.Exists(DiscountFilePath))
             {
                 MessageBox.Show("Could not read discount file.");
             }
-            List<DiscountCodes> codes = new List<DiscountCodes>();
+            List<DiscountCode> codes = new List<DiscountCode>();
             string[] words = File.ReadAllLines(DiscountFilePath);
 
             foreach (string discountline in words)
@@ -63,7 +65,7 @@ namespace WPFProjectAssignment
                 try
                 {
                     var word = discountline.Split(',');
-                    var c = new DiscountCodes 
+                    var c = new DiscountCode 
                     { 
                         CodeName = word[0],
                         Percentage = int.Parse(word[1]),
@@ -210,82 +212,15 @@ namespace WPFProjectAssignment
             {
                 Cart.LoadFromFile(CartFilePath);
                 UpdateCartDisplay();
-                UpdateButtons();
+                ShowWelcomeBackScreen();
             }
-            //shopping cart text
-            
+            else ShowWelcomeScreen();
+
             leftSideGrid.Children.Add(CartDisplay);
             Grid.SetRow(CartDisplay, 1);
-
             
             
-            //Read saved shoppingcart
-
-
-
-
-        }
-
-        private static void RemoveAllProducts_Click(object sender, RoutedEventArgs e)
-        {
-            
-            Cart.Clear();
-            UpdateCartDisplay();
-
-        }
-
-        private void UpdateDescriptionText(Product product)
-        {
-            InfoPanel = new StackPanel
-            
-            {
-                Orientation = Orientation.Vertical,
-                Margin = new Thickness(1)
-            };
-            textAndImageGrid.Children.Add(InfoPanel);
-            Grid.SetColumn(InfoPanel, 0);
-            Grid.SetRow(InfoPanel, 0);
-
-            // The text heading inside the information panel.
-            TextBlock infoHeading = new TextBlock
-            {
-                Text = product.Name,
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(5),
-                FontSize = 16,
-                TextAlignment = TextAlignment.Center
-            };
-            InfoPanel.Children.Add(infoHeading);
-
-            InfoText = new TextBlock
-            {
-                Text = product.Description,
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(5),
-                FontSize = 12
-            };
-            InfoPanel.Children.Add(InfoText);
-            InfoPanel.Children.Add(new TextBlock());
-
-            infoPrice = new TextBlock
-            {
-                Text = "",
-                FontSize = 12,
-                Margin = new Thickness(10),
-                Padding = new Thickness(5),
-                HorizontalAlignment = HorizontalAlignment.Right
-            };
-            InfoPanel.Children.Add(infoPrice);
-            
-            
-            UpdateButtons();
-        }
-
-        private void UpdateButtons()
-        {
-            var addToCart = CreateButton("Add to Cart", SelectedProduct);
-            InfoPanel.Children.Add(addToCart);
-            addToCart.Click += OnAddClick;
+            //Create Buttons:
 
 
             RemoveAllProducts = CreateButton("Empty Cart");
@@ -329,14 +264,160 @@ namespace WPFProjectAssignment
             Grid.SetColumn(saveCartButton, 1);
             Grid.SetRow(saveCartButton, 1);
             saveCartButton.Click += OnSaveCartClick;
+
+
+
+            //Read saved shoppingcart
+
+
+
+
         }
 
-        private static void ShowReceipt()
+        private void ShowWelcomeScreen()
+        {
+            InfoPanel = new StackPanel
+            
+            {
+                Orientation = Orientation.Vertical,
+                Margin = new Thickness(1)
+            };
+            textAndImageGrid.Children.Add(InfoPanel);
+            Grid.SetColumn(InfoPanel, 0);
+            Grid.SetRow(InfoPanel, 0);
+
+            // The text heading inside the information panel.
+            TextBlock infoHeading = new TextBlock
+            {
+                Text = "Welcome",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 16,
+                TextAlignment = TextAlignment.Center
+            };
+            InfoPanel.Children.Add(infoHeading);
+
+            InfoText = new TextBlock
+            {
+                Text = "Whether you’re a serious wizard, lazy student, or simply looking to have a laugh, all our products are infused with carefully selected magical properties to achieve optimum impact.\n \n" +
+                       "We just stocked a new batch of the highly sought-after Polyjuice Potion. They won´t last long, so make sure to snatch one before they´re gone!",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 12
+            };
+            InfoPanel.Children.Add(InfoText);
+            InfoImage = CreateImage(WelcomeImagePath);
+            InfoImage.Stretch = Stretch.Uniform;
+            textAndImageGrid.Children.Add(InfoImage);
+            Grid.SetColumn(InfoImage, 1);
+        }
+        
+        private void ShowWelcomeBackScreen()
+        {
+            InfoPanel = new StackPanel
+            
+            {
+                Orientation = Orientation.Vertical,
+                Margin = new Thickness(1)
+            };
+            textAndImageGrid.Children.Add(InfoPanel);
+            Grid.SetColumn(InfoPanel, 0);
+            Grid.SetRow(InfoPanel, 0);
+
+            // The text heading inside the information panel.
+            TextBlock infoHeading = new TextBlock
+            {
+                Text = "Welcome Back",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 16,
+                TextAlignment = TextAlignment.Center
+            };
+            InfoPanel.Children.Add(infoHeading);
+
+            InfoText = new TextBlock
+            {
+                Text = "Thanks for coming back to our store. We have stored the cart from your last visit so you can just carry on shopping!",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 12
+            };
+            InfoPanel.Children.Add(InfoText);
+
+            InfoImage = CreateImage(WelcomeImagePath);
+            InfoImage.Stretch = Stretch.Uniform;
+            textAndImageGrid.Children.Add(InfoImage);
+            Grid.SetColumn(InfoImage, 1);
+        }
+
+        private static void RemoveAllProducts_Click(object sender, RoutedEventArgs e)
+        {
+            
+            Cart.Clear();
+            UpdateCartDisplay();
+
+        }
+
+        private void UpdateDescriptionText(Product product)
+        {
+            InfoPanel = new StackPanel
+            
+            {
+                Orientation = Orientation.Vertical,
+                Margin = new Thickness(1)
+            };
+            textAndImageGrid.Children.Add(InfoPanel);
+            Grid.SetColumn(InfoPanel, 0);
+            Grid.SetRow(InfoPanel, 0);
+
+            // The text heading inside the information panel.
+            TextBlock infoHeading = new TextBlock
+            {
+                Text = product.Name,
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 16,
+                TextAlignment = TextAlignment.Center
+            };
+            InfoPanel.Children.Add(infoHeading);
+
+            InfoText = new TextBlock
+            {
+                Text = product.Description + "\n",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 12
+            };
+            InfoPanel.Children.Add(InfoText);
+
+            infoPrice = new TextBlock
+            {
+                Text = "",
+                FontSize = 12,
+                Margin = new Thickness(10),
+                Padding = new Thickness(5),
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
+            InfoPanel.Children.Add(infoPrice);
+            
+            var addToCart = CreateButton("Add to Cart", SelectedProduct);
+            InfoPanel.Children.Add(addToCart);
+            addToCart.Click += OnAddClick;
+            
+            //because we hide the buttons on checkout, we make them visible here in case the customer continues shopping.
+            buttonGrid.Visibility = Visibility.Visible;
+        }
+
+        private void CreateButtons()
+        {
+            
+        }
+
+        private static void ShowReceipt(DiscountCode discountCode)
         {
             textAndImageGrid.Children.Clear();
-
+            
             double totalAmount = 0;
-            double discountRatio = 0;
 
             foreach (var product in Cart.Products)
             {
@@ -444,7 +525,7 @@ namespace WPFProjectAssignment
 
             Label discountUsed = new Label
             {
-                Content = "Not implemented."
+                Content = discountCode.CodeName
             };
             discountCodeRow.Children.Add(discountUsed);
             Grid.SetColumn(discountUsed, 3);
@@ -485,10 +566,10 @@ namespace WPFProjectAssignment
             appliedDiscountRow.Children.Add(appliedDiscountLabel);
             Grid.SetColumn(appliedDiscountLabel, 2);
 
-            var appliedDiscountString = Convert.ToString(totalAmount*discountRatio);
+            var appliedDiscountString = Convert.ToString(Math.Round(totalAmount*(discountCode.Percentage/100), 2));
             Label appliedDiscountAmount = new Label
             {
-                Content = appliedDiscountString + "kr (" +discountRatio*100 + "%)"
+                Content = appliedDiscountString + "kr (" +discountCode.Percentage + "%)"
             };
             appliedDiscountRow.Children.Add(appliedDiscountAmount);
             Grid.SetColumn(appliedDiscountAmount, 3);
@@ -506,7 +587,7 @@ namespace WPFProjectAssignment
             totalWithDiscountRow.Children.Add(totalWithDiscountLabel);
             Grid.SetColumn(totalWithDiscountLabel, 2);
 
-            var totalWithDiscountString = Convert.ToString(totalAmount - totalAmount*discountRatio);
+            var totalWithDiscountString = Convert.ToString(totalAmount - (totalAmount*discountCode.Percentage/100));
             Label totalWithDiscountAmount = new Label
             {
                 Content = totalWithDiscountString + "kr",
@@ -520,12 +601,12 @@ namespace WPFProjectAssignment
             
             Cart.Clear();
             UpdateCartDisplay();
-            buttonGrid.Children.Clear();
+            buttonGrid.Visibility = Visibility.Hidden;
 
 
 
         }
-
+        
 
         
         private static Button CreateButton(string content)
@@ -585,34 +666,27 @@ namespace WPFProjectAssignment
 
         private static void OnCheckoutClick(object sender, RoutedEventArgs e)
         {
-            var a = (Button)sender;
-            
-            //if (DiscountBlock.Text == DiscountCodes[0].CodeName)
-            //{
-            //    //Apply 15% discount to order
-            //}
-            //else if (DiscountBlock.Text == DiscountCodes[1].CodeName)
-            //{
-            //    //Apply 20% discount to order
-            //}
-            //else if (DiscountBlock.Text == DiscountCodes[2].CodeName)
-            //{
-            //    //Apply 30% discount to order
-            //}
-            //else if (DiscountBlock.Text == DiscountCodes[3].CodeName)
-            //{
-            //    //Apply 50% discount to order
-            //}
-            //else if (DiscountBlock.Text != "" && DiscountBlock.Text != DiscountCodes[0].CodeName && DiscountBlock.Text != DiscountCodes[1].CodeName && DiscountBlock.Text != DiscountCodes[2].CodeName && DiscountBlock.Text != DiscountCodes[3].CodeName)
-            //{
-            //    //Show error message "Please enter a valid discount"
-            //}
-            //else
-            //{
-            //    //Go through to showing reciept without a discount applied
-            //}
-            
-            ShowReceipt();
+            //first we check if a valid discount code is applied.
+            foreach (var code in DiscountCodes)
+            {
+                if (DiscountBlock.Text == code.CodeName)
+                {
+                    ShowReceipt(code);
+                }
+            }
+
+            if (string.IsNullOrEmpty(DiscountBlock.Text))
+            {
+                DiscountCode noDiscount = new DiscountCode
+                {
+                    CodeName = "No Discount",
+                    Percentage = 0
+                };
+                ShowReceipt(noDiscount);
+            }
+
+            DiscountLabel.Content = "Enter Discount Code*";
+            DiscountLabel.Foreground = Brushes.Crimson;
 
         }
         
