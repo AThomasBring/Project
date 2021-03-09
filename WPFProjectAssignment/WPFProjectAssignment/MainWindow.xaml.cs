@@ -27,14 +27,14 @@ namespace WPFProjectAssignment
 
         private ListBox ProductBox = new ListBox();
         private static TextBlock InfoText = new TextBlock();
-        private Image InfoImage = new Image();
+        private Image ImageDisplayed = new Image();
         private static Grid textAndImageGrid = new Grid();
         private static Grid buttonGrid = new Grid();
         private static StackPanel InfoPanel = new StackPanel();
         private static StackPanel CartDisplay = new StackPanel();
         private static TextBlock infoPrice = new TextBlock();
         private Button CheckoutButton = new Button();
-        private Button RemoveAllProducts = new Button();
+        private Button EmptyCartButton = new Button();
         public static TextBox DiscountBlock = new TextBox();
         private static Label DiscountLabel = new Label();
         private static Grid firstGrid = new Grid();
@@ -131,6 +131,7 @@ namespace WPFProjectAssignment
             Products = LoadProducts();
             Cart = new ShoppingCart();
             
+            
             // Window options
             Title = "Potion Shop";
             Width = 1080;
@@ -223,10 +224,10 @@ namespace WPFProjectAssignment
             //Create Buttons:
 
 
-            RemoveAllProducts = CreateButton("Empty Cart");
-            buttonGrid.Children.Add(RemoveAllProducts);
-            Grid.SetRow(RemoveAllProducts, 1);
-            RemoveAllProducts.Click += RemoveAllProducts_Click;
+            EmptyCartButton = CreateButton("Empty Cart");
+            AddToGui(EmptyCartButton, buttonGrid, 1, 0);
+            
+            EmptyCartButton.Click += EmptyCartButtonClick;
 
             DiscountLabel = new Label
             {
@@ -254,15 +255,11 @@ namespace WPFProjectAssignment
             Grid.SetRow(discountGrid, 1);
 
             CheckoutButton = CreateButton("Check Out");
-            buttonGrid.Children.Add(CheckoutButton);
-            Grid.SetRow(CheckoutButton, 1);
-            Grid.SetColumn(CheckoutButton, 3);
+            AddToGui(CheckoutButton, buttonGrid, 1, 3);
             CheckoutButton.Click += OnCheckoutClick;
 
             var saveCartButton = CreateButton("Save Cart");
-            buttonGrid.Children.Add(saveCartButton);
-            Grid.SetColumn(saveCartButton, 1);
-            Grid.SetRow(saveCartButton, 1);
+            AddToGui(saveCartButton, buttonGrid, 1, 1);
             saveCartButton.Click += OnSaveCartClick;
 
 
@@ -272,6 +269,13 @@ namespace WPFProjectAssignment
 
 
 
+        }
+
+        private static void AddToGui(UIElement element, Panel panel, int row = 0, int column = 0)
+        {
+            panel.Children.Add(element);
+            Grid.SetRow(element, row);
+            Grid.SetColumn(element, column);
         }
 
         private void ShowWelcomeScreen()
@@ -306,10 +310,9 @@ namespace WPFProjectAssignment
                 FontSize = 12
             };
             InfoPanel.Children.Add(InfoText);
-            InfoImage = CreateImage(WelcomeImagePath);
-            InfoImage.Stretch = Stretch.Uniform;
-            textAndImageGrid.Children.Add(InfoImage);
-            Grid.SetColumn(InfoImage, 1);
+            ImageDisplayed = CreateImage(WelcomeImagePath);
+            ImageDisplayed.Stretch = Stretch.Uniform;
+            AddToGui(ImageDisplayed, textAndImageGrid, 0, 1);
         }
         
         private void ShowWelcomeBackScreen()
@@ -320,12 +323,10 @@ namespace WPFProjectAssignment
                 Orientation = Orientation.Vertical,
                 Margin = new Thickness(1)
             };
-            textAndImageGrid.Children.Add(InfoPanel);
-            Grid.SetColumn(InfoPanel, 0);
-            Grid.SetRow(InfoPanel, 0);
+            AddToGui(InfoPanel, textAndImageGrid);
 
             // The text heading inside the information panel.
-            TextBlock infoHeading = new TextBlock
+            var infoHeading = new TextBlock
             {
                 Text = "Welcome Back",
                 TextWrapping = TextWrapping.Wrap,
@@ -342,15 +343,15 @@ namespace WPFProjectAssignment
                 Margin = new Thickness(5),
                 FontSize = 12
             };
-            InfoPanel.Children.Add(InfoText);
+            AddToGui(InfoText, InfoPanel);
 
-            InfoImage = CreateImage(WelcomeImagePath);
-            InfoImage.Stretch = Stretch.Uniform;
-            textAndImageGrid.Children.Add(InfoImage);
-            Grid.SetColumn(InfoImage, 1);
+            ImageDisplayed = CreateImage(WelcomeImagePath);
+            AddToGui(ImageDisplayed, textAndImageGrid, 0, 1);
+            ImageDisplayed.Stretch = Stretch.Uniform;
+            
         }
 
-        private static void RemoveAllProducts_Click(object sender, RoutedEventArgs e)
+        private static void EmptyCartButtonClick(object sender, RoutedEventArgs e)
         {
             
             Cart.Clear();
@@ -366,12 +367,10 @@ namespace WPFProjectAssignment
                 Orientation = Orientation.Vertical,
                 Margin = new Thickness(1)
             };
-            textAndImageGrid.Children.Add(InfoPanel);
-            Grid.SetColumn(InfoPanel, 0);
-            Grid.SetRow(InfoPanel, 0);
-
+            AddToGui(InfoPanel, textAndImageGrid);
+                
             // The text heading inside the information panel.
-            TextBlock infoHeading = new TextBlock
+            var infoHeading = new TextBlock
             {
                 Text = product.Name,
                 TextWrapping = TextWrapping.Wrap,
@@ -379,7 +378,7 @@ namespace WPFProjectAssignment
                 FontSize = 16,
                 TextAlignment = TextAlignment.Center
             };
-            InfoPanel.Children.Add(infoHeading);
+            AddToGui(infoHeading, InfoPanel);
 
             InfoText = new TextBlock
             {
@@ -388,18 +387,20 @@ namespace WPFProjectAssignment
                 Margin = new Thickness(5),
                 FontSize = 12
             };
-            InfoPanel.Children.Add(InfoText);
-
+            AddToGui(InfoText, InfoPanel);
+            
+            var price = product.Price.ToString();
             infoPrice = new TextBlock
             {
-                Text = "",
+                Text = price + "kr",
                 FontSize = 12,
                 Margin = new Thickness(10),
                 Padding = new Thickness(5),
                 HorizontalAlignment = HorizontalAlignment.Right
             };
-            InfoPanel.Children.Add(infoPrice);
             
+            AddToGui(infoPrice, InfoPanel);
+
             var addToCart = CreateButton("Add to Cart", SelectedProduct);
             InfoPanel.Children.Add(addToCart);
             addToCart.Click += OnAddClick;
@@ -408,36 +409,28 @@ namespace WPFProjectAssignment
             buttonGrid.Visibility = Visibility.Visible;
         }
 
-        private void CreateButtons()
-        {
-            
-        }
-
         private static void ShowReceipt(DiscountCode discountCode)
         {
             textAndImageGrid.Children.Clear();
             
             double totalAmount = 0;
+            var colorPicker = 0;
 
             foreach (var product in Cart.Products)
             {
                 totalAmount += (double)product.Key.Price * product.Value;
             }
 
-            StackPanel receiptPanel = new StackPanel();
-            textAndImageGrid.Children.Add(receiptPanel);
-            Grid.SetColumn(receiptPanel, 0);
-            Grid.SetColumnSpan(receiptPanel, 2);
-            Grid.SetRow(receiptPanel, 0);
+            var receiptPanel = new StackPanel();
+            
 
-            Label message = new Label
+            var message = new Label
             {
                 Content = "Thanks for your order! Here´s your reciept: \n "
             };
 
-            receiptPanel.Children.Add(message);
-
-            Grid columnCategories = CreateGrid(null, columns: new []{1, 1, 1, 1});
+            
+            var columnCategories = CreateGrid(null, columns: new []{1, 1, 1, 1});
             
             Label[] categories = {
                 new Label
@@ -468,9 +461,12 @@ namespace WPFProjectAssignment
                 Grid.SetColumn(categories[i], i);
             }
             
-            receiptPanel.Children.Add(columnCategories);
+            AddToGui(receiptPanel, textAndImageGrid);
+            Grid.SetColumnSpan(receiptPanel, 2);
+            AddToGui(message, receiptPanel);
+            AddToGui(columnCategories, receiptPanel);
 
-            var colorPicker = 0;
+            
             foreach (var product in Cart.Products)
             {
                 Grid productRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
@@ -511,8 +507,6 @@ namespace WPFProjectAssignment
                 receiptPanel.Children.Add(productRow);
                 colorPicker++;
             }
-
-            
             
             Grid discountCodeRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
 
@@ -520,25 +514,28 @@ namespace WPFProjectAssignment
             {
                 Content = "Discount Code"
             };
-            discountCodeRow.Children.Add(discountLabel);
-            Grid.SetColumn(discountLabel, 2);
+            AddToGui(discountLabel, discountCodeRow, 0, 2);
+            //discountCodeRow.Children.Add(discountLabel);
+            //Grid.SetColumn(discountLabel, 2);
 
-            Label discountUsed = new Label
+            var discountUsed = new Label
             {
                 Content = discountCode.CodeName
             };
-            discountCodeRow.Children.Add(discountUsed);
-            Grid.SetColumn(discountUsed, 3);
+            AddToGui(discountUsed, discountCodeRow, 0 , 3);
+            //discountCodeRow.Children.Add(discountUsed);
+            //Grid.SetColumn(discountUsed, 3);
             
             //Tom label för att skapa lite mellanrum.
             receiptPanel.Children.Add(new Label());
             
-            receiptPanel.Children.Add(discountCodeRow);
+            AddToGui(discountCodeRow, receiptPanel);
+            //receiptPanel.Children.Add(discountCodeRow);
 
 
-            Grid sumRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
+            var sumRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
 
-            Label sumLabel = new Label
+            var sumLabel = new Label
             {
                 Content = "Total:",
             };
@@ -546,12 +543,16 @@ namespace WPFProjectAssignment
             Grid.SetColumn(sumLabel, 2);
 
             var sumstring = Convert.ToString(totalAmount);
-            Label sumAmount = new Label
+            //var sumAmount = new Label
+            //{
+            //    Content = sumstring + "kr",
+            //};
+            AddToGui(new Label
             {
                 Content = sumstring + "kr",
-            };
-            sumRow.Children.Add(sumAmount);
-            Grid.SetColumn(sumAmount, 3);
+            }, sumRow, 0, 3);
+            //sumRow.Children.Add(sumAmount);
+            //Grid.SetColumn(sumAmount, 3);
 
             receiptPanel.Children.Add(sumRow);
             
@@ -602,14 +603,15 @@ namespace WPFProjectAssignment
             Cart.Clear();
             UpdateCartDisplay();
             buttonGrid.Visibility = Visibility.Hidden;
+            CartDisplay.Visibility = Visibility.Hidden;
 
 
 
         }
         
 
-        
-        private static Button CreateButton(string content)
+        //Product parameter is optional, because not all buttons need to be tagged.
+        private static Button CreateButton(string content, Product tag = null)
         {
             var newButton = new Button
             {
@@ -621,16 +623,13 @@ namespace WPFProjectAssignment
                 Background = Brushes.White,
                 HorizontalAlignment = HorizontalAlignment.Right
             };
+            if (tag != null)
+            {
+                newButton.Tag = tag;
+            }
             return newButton;
         }
         
-        //We overload this method so we can add a tag to the buttons who need it.
-        private static Button CreateButton(string content, Product tag)
-        {
-            var newButton = CreateButton(content);
-            newButton.Tag = tag;
-            return newButton;
-        }
 
 
 
@@ -644,7 +643,6 @@ namespace WPFProjectAssignment
             textAndImageGrid.Children.Clear();
             UpdateDescriptionText(SelectedProduct);
             UpdateProductImage(SelectedProduct.Image);
-            UpdatePrice(SelectedProduct);
         }
 
         private static void OnAddClick(object sender, RoutedEventArgs e)
@@ -695,24 +693,13 @@ namespace WPFProjectAssignment
             Cart.SaveToFile(CartFilePath);
         }
 
-
-
-        
-        private void UpdatePrice(Product product)
-        {
-            string a = product.Price.ToString();
-            infoPrice.Text = a + "Kr";
-        }
-
-
-
         //This method gets called when a new product has been selected
         private void UpdateProductImage(Image image)
         {
-            InfoImage = image;
-            InfoImage.Stretch = Stretch.Uniform;
-            textAndImageGrid.Children.Add(InfoImage);
-            Grid.SetColumn(InfoImage, 1);
+            ImageDisplayed = image;
+            ImageDisplayed.Stretch = Stretch.Uniform;
+            textAndImageGrid.Children.Add(ImageDisplayed);
+            Grid.SetColumn(ImageDisplayed, 1);
         }
 
         public static void UpdateCartDisplay()
@@ -731,9 +718,10 @@ namespace WPFProjectAssignment
                 {
                     Text = item.Value + "x " + item.Key.Name + " " + item.Key.Price + "kr." + "\n"
                 };
-                //total += item.Key.Price * item.Value;
-                cartGrid.Children.Add(cartLine);
-                CartDisplay.Children.Add(cartGrid);
+                
+                AddToGui(cartLine, cartGrid);
+                AddToGui(cartGrid, CartDisplay);
+                
 
                 var addButton = new Button
                 {
@@ -742,8 +730,7 @@ namespace WPFProjectAssignment
                     Background = Brushes.White,
                     Margin = new Thickness(5)
                 };
-                cartGrid.Children.Add(addButton);
-                Grid.SetColumn(addButton, 2);
+                AddToGui(addButton, cartGrid, 0, 2);
                 addButton.Click += OnAddClick;
 
                 var removeButton = new Button
@@ -753,8 +740,7 @@ namespace WPFProjectAssignment
                     Background = Brushes.White,
                     Margin = new Thickness(5)
                 };
-                cartGrid.Children.Add(removeButton);
-                Grid.SetColumn(removeButton, 1);
+                AddToGui(removeButton, cartGrid, 0, 1);
                 removeButton.Click += OnRemoveClick;
 
                 totalSum = totalSum + item.Value * item.Key.Price;
@@ -766,10 +752,13 @@ namespace WPFProjectAssignment
                 Text = "Total: " + totalSum,
                 HorizontalAlignment = HorizontalAlignment.Right
             };
-            //total += item.Key.Price * item.Value;
-            totalGrid.Children.Add(totalLine);
-            CartDisplay.Children.Add(totalGrid);
-            
+  
+            AddToGui(totalLine, totalGrid);
+            AddToGui(totalGrid, CartDisplay);
+
+            //This is to make CartDisplay visible again in case customers continues shopping after checking out.
+            CartDisplay.Visibility = Visibility.Visible;
+
         }
 
         private static Grid CreateGrid(int[] rows, int[] columns)
@@ -778,7 +767,6 @@ namespace WPFProjectAssignment
             {
                 Margin = new Thickness(5)
             };
-            //grid.ShowGridLines = true;
 
             if (rows != null)
             {
@@ -812,5 +800,6 @@ namespace WPFProjectAssignment
             RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
             return image;
         }
+        
     }
 }

@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b64e7a94-9873-49da-9da8-a468d762395c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignment/Images/welcome.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WPFProjectAssignment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WPFProjectAssignment/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/ShoppingCart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/ShoppingCart.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/WPFProjectAssignment.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/WPFProjectAssignment.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.baml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.baml" afterDir="false" />
@@ -112,7 +109,8 @@
       <workItem from="1614860722296" duration="1341000" />
       <workItem from="1614862107608" duration="26930000" />
       <workItem from="1615115849387" duration="1557000" />
-      <workItem from="1615291829758" duration="24188000" />
+      <workItem from="1615291829758" duration="24518000" />
+      <workItem from="1615324368894" duration="4879000" />
     </task>
     <servers />
   </component>
