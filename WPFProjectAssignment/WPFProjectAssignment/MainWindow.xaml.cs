@@ -24,17 +24,19 @@ namespace WPFProjectAssignment
         public const string CartFilePath = @"C:\Windows\Temp\Cart.csv";
 
         private ListBox ProductBox = new ListBox();
-        private TextBlock InfoText = new TextBlock();
+        private static TextBlock InfoText = new TextBlock();
         private Image InfoImage = new Image();
-        private Grid TextandImageGrid = new Grid();
-        private Grid ButtonGrid = new Grid();
-        private StackPanel InfoPanel = new StackPanel();
+        private static Grid textAndImageGrid = new Grid();
+        private static Grid buttonGrid = new Grid();
+        private static StackPanel InfoPanel = new StackPanel();
         private static StackPanel CartDisplay = new StackPanel();
-        private TextBlock infoPrice = new TextBlock();
+        private static TextBlock infoPrice = new TextBlock();
         private Button CheckoutButton = new Button();
         private Button RemoveAllProducts = new Button();
         private TextBox DiscountBlock = new TextBox();
         private Label DiscountLabel = new Label();
+        private static Grid firstGrid = new Grid();
+        private static Grid discountGrid = new Grid();
 
 
 
@@ -126,67 +128,59 @@ namespace WPFProjectAssignment
             DiscountCodes = LoadCodes();
             Products = LoadProducts();
             Cart = new ShoppingCart();
+            
             // Window options
             Title = "Potion Shop";
-            Width = 1000;
-            Height = 618;
+            Width = 1080;
+            Height = 720;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-            // Main grid (dividing header with rest of layout)
-            Grid firstgrid = CreateGrid(rows: new[] { 1, 6 }, columns: null);
-            Content = firstgrid;
-            // Second Grid, Left side for item list and shopping cart, right side for item description
-            var secondGrid = CreateGrid(rows: null, columns: new[] { 1, 2 });
+            // Main grid
+            firstGrid = CreateGrid(rows: new[] { 1, 9 }, new[] { 1, 2 });
+            Content = firstGrid;
 
-            // Left Side Grid, Top row for list of available products, Bottom row for shopping cart and disocunt Grid
-            var leftSideGrid = CreateGrid(rows: new[] { 5, 3, 1, 2 }, columns: null);
-
-            var discountGrid = CreateGrid(rows: new[] { 2, 1}, columns: new[] { 2, 2});
+            // This grid is for dividing the left side of the main window to display available products and shopping cart
+            var leftSideGrid = CreateGrid(rows: new[] { 1, 1 }, columns: null);
 
             // This grid is for item description and image, and gets cleared and updated every selection change
-            TextandImageGrid = CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 1, 1 }); ;
+            textAndImageGrid = CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 1, 1 });
+            
+            // This grid is where we put the buttons for check out, save/clear cart as well as discount code.
+            buttonGrid = CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 2, 2, 3, 1 });
+            
+            //This grid is to divide the space where we show the discount code so that we can display both a label and a text block.
+            discountGrid = CreateGrid(rows: null, columns: new []{1, 1});
 
-            ButtonGrid = CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 1, 1, 1, 1 });
-
-            //Adding grids to the grids
-            // add second grid to into second row of first grid
-
-            firstgrid.Children.Add(secondGrid);
-            Grid.SetColumn(secondGrid, 0);
-            Grid.SetRow(secondGrid, 1);
-
-            // add third grid to into first column of second grid
-            secondGrid.Children.Add(leftSideGrid);
+            
+            //Setting up the grids
+            
+            firstGrid.Children.Add(leftSideGrid);
             Grid.SetColumn(leftSideGrid, 0);
             Grid.SetRow(leftSideGrid, 1);
 
             // add description grid to into second column of second grid
-            secondGrid.Children.Add(TextandImageGrid);
-            Grid.SetColumn(TextandImageGrid, 1);
-            Grid.SetRow(TextandImageGrid, 1);
+            firstGrid.Children.Add(textAndImageGrid);
+            Grid.SetColumn(textAndImageGrid, 1);
+            Grid.SetRow(textAndImageGrid, 1);
 
 
-            secondGrid.Children.Add(ButtonGrid);
-            Grid.SetColumn(ButtonGrid, 1);
-            Grid.SetRow(ButtonGrid, 1);
-
-            leftSideGrid.Children.Add(discountGrid);
-            Grid.SetColumn(discountGrid, 0);
-            Grid.SetRow(discountGrid, 3);
+            firstGrid.Children.Add(buttonGrid);
+            Grid.SetColumn(buttonGrid, 1);
+            Grid.SetRow(buttonGrid, 1);
 
             // A text heading.
-            TextBlock heading = new TextBlock
+            var heading = new TextBlock
             {
                 Text = "Potion Shop",
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(5),
-                FontFamily = new FontFamily("Constantia"),
                 FontSize = 20,
                 TextAlignment = TextAlignment.Center
             };
 
 
-            firstgrid.Children.Add(heading);
+            firstGrid.Children.Add(heading);
+            Grid.SetColumnSpan(heading, 2);
             Grid.SetColumn(heading, 0);
             Grid.SetRow(heading, 0);
 
@@ -211,109 +205,31 @@ namespace WPFProjectAssignment
                 Orientation = Orientation.Vertical,
                 
             };
-            //shopping cart text
-            leftSideGrid.Children.Add(CartDisplay);
-            Grid.SetRow(CartDisplay, 1);
-
-            infoPrice = new TextBlock
-            {
-                Text = "",
-                FontSize = 16,
-                Margin = new Thickness(10),
-                Padding = new Thickness(5),
-            };
-            ButtonGrid.Children.Add(infoPrice);
-            Grid.SetColumn(infoPrice, 0);
-            Grid.SetRow(infoPrice, 1);
-
-            RemoveAllProducts = new Button
-            {
-                Content = "Remove all products from Cart",
-                Margin = new Thickness(2),
-                Padding = new Thickness(2),
-                FontSize = 16,
-                Background = Brushes.White,
-            };
-            leftSideGrid.Children.Add(RemoveAllProducts);
-            Grid.SetRow(RemoveAllProducts, 2);
-            RemoveAllProducts.Click += RemoveAllProducts_Click;
-
-            DiscountLabel = new Label
-            {
-                Content = "Enter discount code",
-                FontSize = 16,
-            };
-            discountGrid.Children.Add(DiscountLabel);
-            Grid.SetColumn(DiscountLabel, 0);
-            Grid.SetRow(DiscountLabel, 0);
-
-            DiscountBlock = new TextBox
-            {
-                Text = "",
-                Margin = new Thickness(5),
-                FontSize = 16,
-                BorderThickness = new Thickness(2),
-                Height = 32,
-            };
-            discountGrid.Children.Add(DiscountBlock);
-            Grid.SetColumn(DiscountBlock, 1);
-            Grid.SetRow(DiscountBlock, 0);
-
             
-
-            //ApplyDiscount = new Button
-            //{
-            //    Content = "Apply discount",
-            //    FontSize = 16,
-            //};
-            //discountGrid.Children.Add(ApplyDiscount);
-            //Grid.SetColumnSpan(ApplyDiscount, 2);
-            //Grid.SetRow(ApplyDiscount, 1);
-
-            CheckoutButton = new Button
-            {
-                Content = "Check out",
-                FontSize = 16,
-                BorderThickness = new Thickness(2),
-                Background = Brushes.White,
-                Height = 25,
-            };
-            discountGrid.Children.Add(CheckoutButton);
-            Grid.SetColumnSpan(CheckoutButton, 2);
-            Grid.SetRow(CheckoutButton, 1);
-            CheckoutButton.Click += OnCheckoutClick;
-            
-            var saveCartButton = new Button
-            {
-                Content = "Save Cart",
-                Margin = new Thickness(10),
-                Padding = new Thickness(5),
-                FontSize = 16,
-                BorderThickness = new Thickness(2),
-                Background = Brushes.White,
-
-            };
-            ButtonGrid.Children.Add(saveCartButton);
-            Grid.SetColumn(saveCartButton, 2);
-            Grid.SetColumnSpan(saveCartButton, 2);
-            Grid.SetRow(saveCartButton, 1);
-            saveCartButton.Click += OnSaveCartClick;
-            
-            //Read saved shoppingcart
             if (File.Exists(CartFilePath))
             {
                 Cart.LoadFromFile(CartFilePath);
                 UpdateCartDisplay();
+                UpdateButtons();
             }
+            //shopping cart text
+            
+            leftSideGrid.Children.Add(CartDisplay);
+            Grid.SetRow(CartDisplay, 1);
+
+            
+            
+            //Read saved shoppingcart
+
 
 
 
         }
 
-        private void RemoveAllProducts_Click(object sender, RoutedEventArgs e)
+        private static void RemoveAllProducts_Click(object sender, RoutedEventArgs e)
         {
-
-            //Cart.Remove(Products);
+            
+            Cart.Clear();
             UpdateCartDisplay();
 
         }
@@ -326,7 +242,7 @@ namespace WPFProjectAssignment
                 Orientation = Orientation.Vertical,
                 Margin = new Thickness(1)
             };
-            TextandImageGrid.Children.Add(InfoPanel);
+            textAndImageGrid.Children.Add(InfoPanel);
             Grid.SetColumn(InfoPanel, 0);
             Grid.SetRow(InfoPanel, 0);
 
@@ -336,7 +252,6 @@ namespace WPFProjectAssignment
                 Text = product.Name,
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(5),
-                FontFamily = new FontFamily("Constantia"),
                 FontSize = 16,
                 TextAlignment = TextAlignment.Center
             };
@@ -344,30 +259,300 @@ namespace WPFProjectAssignment
 
             InfoText = new TextBlock
             {
-                //Add code to read CSV file of descriptions
                 Text = product.Description,
                 TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(5),
-                FontFamily = new FontFamily("Constantia"),
                 FontSize = 12
             };
             InfoPanel.Children.Add(InfoText);
+            InfoPanel.Children.Add(new TextBlock());
 
-            var addToCart = new Button
+            infoPrice = new TextBlock
             {
-                Content = "Add to cart",
+                Text = "",
+                FontSize = 12,
                 Margin = new Thickness(10),
                 Padding = new Thickness(5),
-                FontSize = 16,
-                BorderThickness = new Thickness(2),
-                Background = Brushes.White,
-                Tag = SelectedProduct
+                HorizontalAlignment = HorizontalAlignment.Right
             };
-            ButtonGrid.Children.Add(addToCart);
-            Grid.SetColumn(addToCart, 1);
-            Grid.SetRow(addToCart, 1);
-            addToCart.Click += OnAddClick;
+            InfoPanel.Children.Add(infoPrice);
+            
+            
+            UpdateButtons();
         }
+
+        private void UpdateButtons()
+        {
+            var addToCart = CreateButton("Add to Cart", SelectedProduct);
+            InfoPanel.Children.Add(addToCart);
+            addToCart.Click += OnAddClick;
+
+
+            RemoveAllProducts = CreateButton("Empty Cart");
+            buttonGrid.Children.Add(RemoveAllProducts);
+            Grid.SetRow(RemoveAllProducts, 1);
+            RemoveAllProducts.Click += RemoveAllProducts_Click;
+
+            DiscountLabel = new Label
+            {
+                Content = "Enter discount code",
+                FontSize = 12,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+
+            discountGrid.Children.Add(DiscountLabel);
+            Grid.SetColumn(DiscountLabel, 0);
+
+            DiscountBlock = new TextBox
+            {
+                Text = "",
+                Margin = new Thickness(5),
+                FontSize = 12,
+                BorderThickness = new Thickness(2),
+                Height = 32,
+            };
+            discountGrid.Children.Add(DiscountBlock);
+            Grid.SetColumn(DiscountBlock, 1);
+            
+            buttonGrid.Children.Add(discountGrid);
+            Grid.SetColumn(discountGrid, 2);
+            Grid.SetRow(discountGrid, 1);
+
+            CheckoutButton = CreateButton("Check Out");
+            buttonGrid.Children.Add(CheckoutButton);
+            Grid.SetRow(CheckoutButton, 1);
+            Grid.SetColumn(CheckoutButton, 3);
+            CheckoutButton.Click += OnCheckoutClick;
+
+            var saveCartButton = CreateButton("Save Cart");
+            buttonGrid.Children.Add(saveCartButton);
+            Grid.SetColumn(saveCartButton, 1);
+            Grid.SetRow(saveCartButton, 1);
+            saveCartButton.Click += OnSaveCartClick;
+        }
+
+        private static void ShowReceipt()
+        {
+            textAndImageGrid.Children.Clear();
+
+            double totalAmount = 0;
+            double discountRatio = 0;
+
+            foreach (var product in Cart.Products)
+            {
+                totalAmount += (double)product.Key.Price * product.Value;
+            }
+
+            StackPanel receiptPanel = new StackPanel();
+            textAndImageGrid.Children.Add(receiptPanel);
+            Grid.SetColumn(receiptPanel, 0);
+            Grid.SetColumnSpan(receiptPanel, 2);
+            Grid.SetRow(receiptPanel, 0);
+
+            Label message = new Label
+            {
+                Content = "Thanks for your order! Here´s your reciept: \n "
+            };
+
+            receiptPanel.Children.Add(message);
+
+            Grid columnCategories = CreateGrid(null, columns: new []{1, 1, 1, 1});
+            
+            Label[] categories = {
+                new Label
+                {
+                    Content = "Product",
+                    Background = Brushes.LightBlue
+                },
+                new Label
+                {
+                    Content = "Quantity",
+                    Background = Brushes.LightBlue
+                },
+                new Label
+                {
+                    Content = "Unit Price",
+                    Background = Brushes.LightBlue
+                },
+                new Label
+                {
+                    Content = "Total Price",
+                    Background = Brushes.LightBlue
+                }
+            };
+
+            for (int i = 0; i < categories.Length; i++)
+            {
+                columnCategories.Children.Add(categories[i]);
+                Grid.SetColumn(categories[i], i);
+            }
+            
+            receiptPanel.Children.Add(columnCategories);
+
+            var colorPicker = 0;
+            foreach (var product in Cart.Products)
+            {
+                Grid productRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
+                Label[] productDetails = new[]
+                {
+                    new Label
+                    {
+                        Content = product.Key.Name
+                    },
+                    new Label
+                    {
+                        Content = product.Value
+                    },
+                    new Label
+                    {
+                        Content = product.Key.Price + "kr"
+                    },
+                    new Label
+                    {
+                        Content = product.Key.Price * product.Value + "kr"
+                    },
+                };
+
+                if (colorPicker %2 != 0)
+                {
+                    foreach (var label in productDetails)
+                    {
+                        label.Background = Brushes.Honeydew;
+                    }
+                }
+                
+                for (int i = 0; i < productDetails.Length; i++)
+                {
+                    productRow.Children.Add(productDetails[i]);
+                    Grid.SetColumn(productDetails[i], i);
+                }
+
+                receiptPanel.Children.Add(productRow);
+                colorPicker++;
+            }
+
+            
+            
+            Grid discountCodeRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
+
+            Label discountLabel = new Label
+            {
+                Content = "Discount Code"
+            };
+            discountCodeRow.Children.Add(discountLabel);
+            Grid.SetColumn(discountLabel, 2);
+
+            Label discountUsed = new Label
+            {
+                Content = "Not implemented."
+            };
+            discountCodeRow.Children.Add(discountUsed);
+            Grid.SetColumn(discountUsed, 3);
+            
+            //Tom label för att skapa lite mellanrum.
+            receiptPanel.Children.Add(new Label());
+            
+            receiptPanel.Children.Add(discountCodeRow);
+
+
+            Grid sumRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
+
+            Label sumLabel = new Label
+            {
+                Content = "Total:",
+            };
+            sumRow.Children.Add(sumLabel);
+            Grid.SetColumn(sumLabel, 2);
+
+            var sumstring = Convert.ToString(totalAmount);
+            Label sumAmount = new Label
+            {
+                Content = sumstring + "kr",
+            };
+            sumRow.Children.Add(sumAmount);
+            Grid.SetColumn(sumAmount, 3);
+
+            receiptPanel.Children.Add(sumRow);
+            
+            
+            
+            Grid appliedDiscountRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
+
+            Label appliedDiscountLabel = new Label
+            {
+                Content = "Your discount:"
+            };
+            appliedDiscountRow.Children.Add(appliedDiscountLabel);
+            Grid.SetColumn(appliedDiscountLabel, 2);
+
+            var appliedDiscountString = Convert.ToString(totalAmount*discountRatio);
+            Label appliedDiscountAmount = new Label
+            {
+                Content = appliedDiscountString + "kr (" +discountRatio*100 + "%)"
+            };
+            appliedDiscountRow.Children.Add(appliedDiscountAmount);
+            Grid.SetColumn(appliedDiscountAmount, 3);
+
+            receiptPanel.Children.Add(appliedDiscountRow);
+            
+            
+            
+            Grid totalWithDiscountRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
+
+            Label totalWithDiscountLabel = new Label
+            {
+                Content = "After Discount:"
+            };
+            totalWithDiscountRow.Children.Add(totalWithDiscountLabel);
+            Grid.SetColumn(totalWithDiscountLabel, 2);
+
+            var totalWithDiscountString = Convert.ToString(totalAmount - totalAmount*discountRatio);
+            Label totalWithDiscountAmount = new Label
+            {
+                Content = totalWithDiscountString + "kr",
+                FontWeight = FontWeights.Bold
+            };
+            totalWithDiscountRow.Children.Add(totalWithDiscountAmount);
+            Grid.SetColumn(totalWithDiscountAmount, 3);
+
+            receiptPanel.Children.Add(totalWithDiscountRow);
+            
+            
+            Cart.Clear();
+            UpdateCartDisplay();
+            buttonGrid.Children.Clear();
+
+
+
+        }
+
+
+        
+        private static Button CreateButton(string content)
+        {
+            var newButton = new Button
+            {
+                Content = content,
+                FontSize = 12,
+                BorderThickness = new Thickness(1),
+                Height = 26,
+                Width = 80,
+                Background = Brushes.White,
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
+            return newButton;
+        }
+        
+        //We overload this method so we can add a tag to the buttons who need it.
+        private static Button CreateButton(string content, Product tag)
+        {
+            var newButton = CreateButton(content);
+            newButton.Tag = tag;
+            return newButton;
+        }
+
+
+
 
         private void ProductBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -375,7 +560,7 @@ namespace WPFProjectAssignment
             SelectedProduct = (Product)((ListBoxItem)ProductBox.SelectedItem).Tag;
 
             //Then, we update texts and image
-            TextandImageGrid.Children.Clear();
+            textAndImageGrid.Children.Clear();
             UpdateDescriptionText(SelectedProduct);
             UpdateProductImage(SelectedProduct.Image);
             UpdatePrice(SelectedProduct);
@@ -426,14 +611,8 @@ namespace WPFProjectAssignment
             //{
             //    //Go through to showing reciept without a discount applied
             //}
-
-            Cart.Clear();
-            if (File.Exists(CartFilePath))
-            {
-                File.Delete(CartFilePath);
-            }
-            UpdateCartDisplay();
-            MessageBox.Show("Show receipt not yet implemented.");
+            
+            ShowReceipt();
 
         }
         
@@ -458,12 +637,14 @@ namespace WPFProjectAssignment
         {
             InfoImage = image;
             InfoImage.Stretch = Stretch.Uniform;
-            TextandImageGrid.Children.Add(InfoImage);
+            textAndImageGrid.Children.Add(InfoImage);
             Grid.SetColumn(InfoImage, 1);
         }
 
         public static void UpdateCartDisplay()
         {
+            decimal totalSum = 0;
+            
             CartDisplay.Children.Clear();
             foreach (var item in Cart.Products)
             {
@@ -501,7 +682,20 @@ namespace WPFProjectAssignment
                 cartGrid.Children.Add(removeButton);
                 Grid.SetColumn(removeButton, 1);
                 removeButton.Click += OnRemoveClick;
+
+                totalSum = totalSum + item.Value * item.Key.Price;
             }
+
+            var totalGrid = CreateGrid(rows: new []{1}, columns: new []{1});
+            var totalLine = new TextBlock
+            {
+                Text = "Total: " + totalSum,
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
+            //total += item.Key.Price * item.Value;
+            totalGrid.Children.Add(totalLine);
+            CartDisplay.Children.Add(totalGrid);
+            
         }
 
         private static Grid CreateGrid(int[] rows, int[] columns)

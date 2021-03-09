@@ -70,7 +70,7 @@ namespace WPFProjectAssignment
                 }
 
                 // Save to Items dictionary
-                Products[current] = amount;
+                this.Products[current] = amount;
             }
         }
 
