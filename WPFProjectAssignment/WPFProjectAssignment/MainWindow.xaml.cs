@@ -489,24 +489,19 @@ namespace WPFProjectAssignment
                 Content = "Discount Code"
             };
             AddToGui(discountLabel, discountCodeRow, 0, 2);
-            //discountCodeRow.Children.Add(discountLabel);
-            //Grid.SetColumn(discountLabel, 2);
 
             var discountUsed = new Label
             {
                 Content = discountCode.CodeName
             };
             AddToGui(discountUsed, discountCodeRow, 0 , 3);
-            //discountCodeRow.Children.Add(discountUsed);
-            //Grid.SetColumn(discountUsed, 3);
+
             
             //Tom label för att skapa lite mellanrum.
             receiptPanel.Children.Add(new Label());
             
             AddToGui(discountCodeRow, receiptPanel);
-            //receiptPanel.Children.Add(discountCodeRow);
-
-
+            
             var sumRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
 
             var sumLabel = new Label
@@ -517,10 +512,7 @@ namespace WPFProjectAssignment
             Grid.SetColumn(sumLabel, 2);
 
             var sumstring = Convert.ToString(totalAmount);
-            //var sumAmount = new Label
-            //{
-            //    Content = sumstring + "kr",
-            //};
+            
             AddToGui(new Label
             {
                 Content = sumstring + "kr",
