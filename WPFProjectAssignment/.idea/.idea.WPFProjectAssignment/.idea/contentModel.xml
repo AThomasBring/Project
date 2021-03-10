@@ -45,12 +45,14 @@
         </e>
         <e p="Product.cs" t="Include" />
         <e p="Products.csv" t="Include" />
+        <e p="Receipt.cs" t="Include" />
         <e p="ShoppingCart.cs" t="Include" />
         <e p="WPFProjectAssignment.csproj" t="IncludeRecursive" />
       </e>
       <e p="WPFProjectAssignment.sln" t="IncludeFlat" />
       <e p="WPFProjectAssignmentTests1" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
+        <e p="CheckReceipt.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -58,7 +60,6 @@
             </e>
           </e>
         </e>
-        <e p="ShoppingCartTests.cs" t="Include" />
         <e p="WPFProjectAssignmentTests1.csproj" t="IncludeRecursive" />
       </e>
     </e>

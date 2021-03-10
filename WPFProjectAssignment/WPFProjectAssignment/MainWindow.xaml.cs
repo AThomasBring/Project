@@ -17,71 +17,6 @@ namespace WPFProjectAssignment
         public int Percentage;
     }
 
-    public class Receipt
-    {
-        public string[][] ItemsInCart;
-        public string[][] AmountSummary;
-
-        public Receipt(DiscountCode discountCode, ShoppingCart cart)
-        {
-
-            double totalAmount = cart.Products.Sum(product => (double) product.Key.Price * product.Value);
-            
-            List<string[]> receiptLines = new List<string[]>();
-
-            foreach (var product in cart.Products)
-            {
-                string[] receiptLine = new[]
-                {
-                    product.Key.Name,
-                    product.Value.ToString(),
-                    product.Key.Price + "kr",
-                    product.Key.Price * product.Value + "kr"
-                };
-                receiptLines.Add(receiptLine);
-            }
-            
-            List<string[]> summaryLines = new List<string[]>();
-
-            string[] discountCodeLine = new[]
-            {
-                "Discount Code",
-                discountCode.CodeName,
-            };
-            summaryLines.Add(discountCodeLine);
-            
-            string[] totalLine = new[]
-            {
-                "Total",
-                totalAmount + "kr"
-            };
-            summaryLines.Add(totalLine);
-
-            var appliedDiscount = Math.Round(totalAmount*discountCode.Percentage / 100, 2);
-            var appliedDiscountString = appliedDiscount.ToString();
-            
-            string[] appliedDiscountLine = new[]
-            {
-                "Your discount:",
-                appliedDiscountString + "kr (" +discountCode.Percentage + "%)"
-            };
-            summaryLines.Add(appliedDiscountLine);
-            
-            var totalWithDiscountString = Convert.ToString(totalAmount - (totalAmount*discountCode.Percentage/100));
-            string[] afterDiscountLine = new[]
-            {
-                "After discount:",
-                totalWithDiscountString + "kr"
-                
-            };
-            summaryLines.Add(afterDiscountLine);
-
-            ItemsInCart = receiptLines.ToArray();
-            AmountSummary = summaryLines.ToArray();
-
-
-        }
-    }
     public partial class MainWindow : Window
     {
         public static DiscountCode[] DiscountCodes;
@@ -383,7 +318,7 @@ namespace WPFProjectAssignment
 
         private static void UpdateCartGui()
         {
-            double totalSum = Cart.Products.Sum(product => (double) product.Key.Price * product.Value);
+            var totalSum = Math.Round(Cart.Products.Sum(product => product.Key.Price * product.Value), 2);
             
             CartDisplay.Children.Clear();
             foreach (var item in Cart.Products)
@@ -590,7 +525,7 @@ namespace WPFProjectAssignment
             AddToGui(columnCategories, receiptPanel);
 
             
-            foreach (var product in receipt.ItemsInCart)
+            foreach (var product in receipt.ItemsBreakdown)
             {
                 var productRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
                 Label[] productDetails = new[]
@@ -634,7 +569,7 @@ namespace WPFProjectAssignment
             var discountCodeRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
 
             colorPicker = 0;
-            foreach (var row in receipt.AmountSummary)
+            foreach (var row in receipt.SumBreakdown)
             {
                 var summaryRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
                 Label[] summaryLabels = new[]
@@ -771,25 +706,22 @@ namespace WPFProjectAssignment
 
         private static void OnCheckoutClick(object sender, RoutedEventArgs e)
         {
-            //first we check if a valid discount code is applied.
+            //We check if a valid discount code is applied to the text box and pass the discount object on to receipt class if they match.
             foreach (var code in DiscountCodes)
             {
                 if (CustomerDiscount.Text.ToLower() == code.CodeName.ToLower())
                 {
-                    ShowReceipt(new Receipt(code, Cart)); 
+                    ShowReceipt(new Receipt(Cart, code)); 
                 }
             }
-
+            
+            //if no discount is applied in the text box, we just pass the cart. The receipt class will handle that as no discount.
             if (string.IsNullOrEmpty(CustomerDiscount.Text))
             {
-                var noDiscount = new DiscountCode
-                {
-                    CodeName = "No Discount",
-                    Percentage = 0
-                };
-                ShowReceipt(new Receipt(noDiscount, Cart));
+                ShowReceipt(new Receipt(Cart));
             }
             
+            //if none of the above were true, it means the user entered an incorrect code and is notified by the discount label turning red.
             DiscountLabel.Content = "Enter Discount Code*";
             DiscountLabel.Foreground = Brushes.Crimson;
 

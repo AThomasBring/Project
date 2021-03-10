@@ -7,7 +7,7 @@ namespace WPFProjectAssignment
         public string Code;
         public string Name;
         public string Description;
-        public int Price;
+        public decimal Price;
         public Image Image;
     }
 
