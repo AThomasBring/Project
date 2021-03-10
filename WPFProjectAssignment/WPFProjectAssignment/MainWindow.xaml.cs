@@ -101,8 +101,8 @@ namespace WPFProjectAssignment
             {
                 try
                 {
-                    // First, split the line on commas (CSV means "comma-separated values").
-                    var parts = line.Split(',');
+                    //We are using \ as separator because we use commas in the text file.
+                    var parts = line.Split('\\');
 
                     // Then create a product with its values set to the different parts of the line.
                     var p = new Product
@@ -117,12 +117,10 @@ namespace WPFProjectAssignment
                 }
                 catch
                 {
-                    //todo felhantering
                     MessageBox.Show("Error when reading product");
                 }
             }
-
-            // The method returns an array rather than a list (because the products are fixed after the program has started), so we need to convert it before returning.
+            
             return products.ToArray();
         }
 
@@ -139,15 +137,15 @@ namespace WPFProjectAssignment
             Width = 1080;
             Height = 720;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
-            // Main grid
+            
+            //Our method for creating grids takes the lenght of an int array for number of rows/columns, and the value of integers for their respective height/width. (relative proportions, not pixels)
             firstGrid = CreateGrid(rows: new[] { 1, 9 }, new[] { 1, 2 });
             Content = firstGrid;
 
             // This grid is for dividing the left side of the main window to display available products and shopping cart
             var leftSideGrid = CreateGrid(rows: new[] { 1, 1 }, columns: null);
 
-            // This grid is for item description and image, and gets cleared and updated every selection change
+            // This grid is for item description and image, and gets cleared and updated every product selection change
             TextAndImageGrid = CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 1, 1 });
             
             // This grid is where we put the buttons for check out, save/clear cart as well as discount code.
@@ -159,21 +157,11 @@ namespace WPFProjectAssignment
             
             //Setting up the grids
             AddToGui(leftSideGrid, firstGrid, 1 , 0);
-            //firstGrid.Children.Add(leftSideGrid);
-            //Grid.SetColumn(leftSideGrid, 0);
-            //Grid.SetRow(leftSideGrid, 1);
 
-            // add description grid to into second column of second grid
             AddToGui(TextAndImageGrid, firstGrid, 1, 1);
-            //firstGrid.Children.Add(TextAndImageGrid);
-            //Grid.SetColumn(TextAndImageGrid, 1);
-            //Grid.SetRow(TextAndImageGrid, 1);
 
             AddToGui(ButtonGrid, firstGrid, 1, 1);
-            //firstGrid.Children.Add(ButtonGrid);
-            //Grid.SetColumn(ButtonGrid, 1);
-            //Grid.SetRow(ButtonGrid, 1);
-
+            
             // A text heading.
             var heading = new TextBlock
             {
@@ -199,9 +187,7 @@ namespace WPFProjectAssignment
             ProductBox.SelectedIndex = -1;
             
             AddToGui(ProductBox, leftSideGrid);
-            //leftSideGrid.Children.Add(ProductBox);
-            //Grid.SetColumn(ProductBox, 0);
-            //Grid.SetRow(ProductBox, 0);
+
             ProductBox.SelectionChanged += ProductBoxOnSelectionChanged;
 
             CartDisplay = new StackPanel()
@@ -214,7 +200,7 @@ namespace WPFProjectAssignment
             if (File.Exists(CartFilePath))
             {
                 Cart.LoadFromFile(CartFilePath);
-                UpdateCartDisplay();
+                UpdateCartGui();
                 ShowWelcomeBackScreen();
             }
             else ShowWelcomeScreen();
@@ -263,14 +249,6 @@ namespace WPFProjectAssignment
             var saveCartButton = CreateButton("Save Cart");
             AddToGui(saveCartButton, ButtonGrid, 1, 1);
             saveCartButton.Click += OnSaveCartClick;
-
-
-
-            //Read saved shoppingcart
-
-
-
-
         }
 
         private static void AddToGui(UIElement element, Panel panel, int row = 0, int column = 0)
@@ -356,7 +334,7 @@ namespace WPFProjectAssignment
         private static void OnEmptyCartButtonClick(object sender, RoutedEventArgs e)
         {
             Cart.Clear();
-            UpdateCartDisplay();
+            UpdateCartGui();
         }
 
         private static void UpdateDescriptionText(Product product)
@@ -598,7 +576,7 @@ namespace WPFProjectAssignment
             
             
             Cart.Clear();
-            UpdateCartDisplay();
+            UpdateCartGui();
             ButtonGrid.Visibility = Visibility.Hidden;
             CartDisplay.Visibility = Visibility.Hidden;
 
@@ -647,7 +625,7 @@ namespace WPFProjectAssignment
             var s = (Button)sender;
             Product product = (Product)s.Tag;
             Cart.Add(product, 1);
-            UpdateCartDisplay();
+            UpdateCartGui();
         }
 
         private static void OnRemoveClick(object sender, RoutedEventArgs e)
@@ -655,7 +633,7 @@ namespace WPFProjectAssignment
             var s = (Button)sender;
             var product = (Product)s.Tag;
             Cart.Remove(product, 1);
-            UpdateCartDisplay();
+            UpdateCartGui();
         }
 
 
@@ -672,7 +650,7 @@ namespace WPFProjectAssignment
 
             if (string.IsNullOrEmpty(DiscountBlock.Text))
             {
-                DiscountCode noDiscount = new DiscountCode
+                var noDiscount = new DiscountCode
                 {
                     CodeName = "No Discount",
                     Percentage = 0
@@ -699,9 +677,9 @@ namespace WPFProjectAssignment
             Grid.SetColumn(ImageDisplayed, 1);
         }
 
-        public static void UpdateCartDisplay()
+        private static void UpdateCartGui()
         {
-            decimal totalSum = 0;
+            double totalSum = Cart.Products.Sum(product => (double) product.Key.Price * product.Value);
             
             CartDisplay.Children.Clear();
             foreach (var item in Cart.Products)
@@ -739,8 +717,6 @@ namespace WPFProjectAssignment
                 };
                 AddToGui(removeButton, cartGrid, 0, 1);
                 removeButton.Click += OnRemoveClick;
-
-                totalSum = totalSum + item.Value * item.Key.Price;
             }
 
             var totalGrid = CreateGrid(rows: new []{1}, columns: new []{1});

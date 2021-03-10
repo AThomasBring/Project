@@ -7,6 +7,8 @@
     <list default="true" id="b64e7a94-9873-49da-9da8-a468d762395c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WPFProjectAssignment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WPFProjectAssignment/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/Products.csv" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/Products.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Products.csv" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Products.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.baml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.baml" afterDir="false" />
@@ -37,7 +39,6 @@
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/WPFProjectAssignment/Products" />
-      <option value="$PROJECT_DIR$/WPFProjectAssignment/Products.csv" />
       <option value="$PROJECT_DIR$/WPFProjectAssignment/Product.cs" />
       <option value="$PROJECT_DIR$/WPFProjectAssignment/CartButton.cs" />
       <option value="$PROJECT_DIR$/WPFProjectAssignment/Control.cs" />
@@ -45,6 +46,7 @@
       <option value="$PROJECT_DIR$/WPFProjectAssignment/DiscountCodes.cs" />
       <option value="$PROJECT_DIR$/WPFProjectAssignment/ShoppingCart.cs" />
       <option value="$PROJECT_DIR$/WPFProjectAssignment/MainWindow.xaml.cs" />
+      <option value="$PROJECT_DIR$/WPFProjectAssignment/Products.csv" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1oha6Y6is5fAvgzJ6Hae2eLlRQN" />
@@ -111,7 +113,7 @@
       <workItem from="1615115849387" duration="1557000" />
       <workItem from="1615291829758" duration="24518000" />
       <workItem from="1615324368894" duration="5053000" />
-      <workItem from="1615363230440" duration="2760000" />
+      <workItem from="1615363230440" duration="8405000" />
     </task>
     <servers />
   </component>
