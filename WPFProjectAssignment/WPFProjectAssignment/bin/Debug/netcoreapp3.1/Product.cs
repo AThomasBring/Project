@@ -10,4 +10,6 @@ namespace WPFProjectAssignment
         public int Price;
         public Image Image;
     }
+
+
 }

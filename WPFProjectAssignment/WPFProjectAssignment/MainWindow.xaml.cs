@@ -16,6 +16,72 @@ namespace WPFProjectAssignment
         public string CodeName;
         public int Percentage;
     }
+
+    public class Receipt
+    {
+        public string[][] ItemsInCart;
+        public string[][] AmountSummary;
+
+        public Receipt(DiscountCode discountCode, ShoppingCart cart)
+        {
+
+            double totalAmount = cart.Products.Sum(product => (double) product.Key.Price * product.Value);
+            
+            List<string[]> receiptLines = new List<string[]>();
+
+            foreach (var product in cart.Products)
+            {
+                string[] receiptLine = new[]
+                {
+                    product.Key.Name,
+                    product.Value.ToString(),
+                    product.Key.Price + "kr",
+                    product.Key.Price * product.Value + "kr"
+                };
+                receiptLines.Add(receiptLine);
+            }
+            
+            List<string[]> summaryLines = new List<string[]>();
+
+            string[] discountCodeLine = new[]
+            {
+                "Discount Code",
+                discountCode.CodeName,
+            };
+            summaryLines.Add(discountCodeLine);
+            
+            string[] totalLine = new[]
+            {
+                "Total",
+                totalAmount + "kr"
+            };
+            summaryLines.Add(totalLine);
+
+            var appliedDiscount = Math.Round(totalAmount*discountCode.Percentage / 100, 2);
+            var appliedDiscountString = appliedDiscount.ToString();
+            
+            string[] appliedDiscountLine = new[]
+            {
+                "Your discount:",
+                appliedDiscountString + "kr (" +discountCode.Percentage + "%)"
+            };
+            summaryLines.Add(appliedDiscountLine);
+            
+            var totalWithDiscountString = Convert.ToString(totalAmount - (totalAmount*discountCode.Percentage/100));
+            string[] afterDiscountLine = new[]
+            {
+                "After discount:",
+                totalWithDiscountString + "kr"
+                
+            };
+            summaryLines.Add(afterDiscountLine);
+
+            ItemsInCart = receiptLines.ToArray();
+            AmountSummary = summaryLines.ToArray();
+
+
+        }
+    }
     public partial class MainWindow : Window
     {
         public static DiscountCode[] DiscountCodes;
@@ -72,9 +138,8 @@ namespace WPFProjectAssignment
                         CodeName = word[0],
                         Percentage = int.Parse(word[1]),
                     };
+                    
                     codes.Add(c);
-
-
                 }
                 catch
                 {
@@ -127,6 +192,11 @@ namespace WPFProjectAssignment
 
         private void Start()
         {
+            foreach (string newPath in Directory.GetFiles(@"\Images\", "*.*", 
+                SearchOption.AllDirectories))
+                File.Copy(newPath, @"C:\Windows\Temp\"+newPath, true);
+            
+            
             DiscountCodes = LoadCodes();
             Products = LoadProducts();
             Cart = new ShoppingCart();
@@ -462,13 +532,12 @@ namespace WPFProjectAssignment
             AddToGui(ImageDisplayed, TextAndImageGrid, 0, 1);
         }
 
-        private static void ShowReceipt(DiscountCode discountCode)
+        private static void ShowReceipt(Receipt receipt)
         {
             TextAndImageGrid.Children.Clear();
 
             var colorPicker = 0;
-            double totalAmount = Cart.Products.Sum(product => (double) product.Key.Price * product.Value);
-            var sumstring = Convert.ToString(totalAmount);
+            
             var receiptPanel = new StackPanel();
             var message = new Label
             {
@@ -512,26 +581,26 @@ namespace WPFProjectAssignment
             AddToGui(columnCategories, receiptPanel);
 
             
-            foreach (var product in Cart.Products)
+            foreach (var product in receipt.ItemsInCart)
             {
-                Grid productRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
+                var productRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
                 Label[] productDetails = new[]
                 {
                     new Label
                     {
-                        Content = product.Key.Name
+                        Content = product[0]
                     },
                     new Label
                     {
-                        Content = product.Value
+                        Content = product[1]
                     },
                     new Label
                     {
-                        Content = product.Key.Price + "kr"
+                        Content = product[2] + "kr"
                     },
                     new Label
                     {
-                        Content = product.Key.Price * product.Value + "kr"
+                        Content = product[3] + "kr"
                     },
                 };
 
@@ -554,16 +623,20 @@ namespace WPFProjectAssignment
             }
             
             var discountCodeRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
+            
+            
+            
+            
 
             var discountLabel = new Label
             {
-                Content = "Discount Code"
+                Content = receipt.AmountSummary[0][0]
             };
             AddToGui(discountLabel, discountCodeRow, 0, 2);
 
             var discountUsed = new Label
             {
-                Content = discountCode.CodeName
+                Content = receipt.AmountSummary[0][1]
             };
             AddToGui(discountUsed, discountCodeRow, 0 , 3);
 
@@ -577,14 +650,14 @@ namespace WPFProjectAssignment
 
             var sumLabel = new Label
             {
-                Content = "Total:",
+                Content = receipt.AmountSummary[1][0]
             };
             sumRow.Children.Add(sumLabel);
             Grid.SetColumn(sumLabel, 2);
             
             AddToGui(new Label
             {
-                Content = sumstring + "kr",
+                Content = receipt.AmountSummary[1][1]
             }, sumRow, 0, 3);
 
             receiptPanel.Children.Add(sumRow);
@@ -593,16 +666,14 @@ namespace WPFProjectAssignment
 
             var appliedDiscountLabel = new Label
             {
-                Content = "Your discount:"
+                Content = receipt.AmountSummary[2][0]
             };
             appliedDiscountRow.Children.Add(appliedDiscountLabel);
             Grid.SetColumn(appliedDiscountLabel, 2);
-
-            var appliedDiscount = Math.Round(totalAmount*discountCode.Percentage / 100, 2);
-            var appliedDiscountString = appliedDiscount.ToString();
+            
             var appliedDiscountAmount = new Label
             {
-                Content = appliedDiscountString + "kr (" +discountCode.Percentage + "%)"
+                Content = receipt.AmountSummary[2][1]
             };
             appliedDiscountRow.Children.Add(appliedDiscountAmount);
             Grid.SetColumn(appliedDiscountAmount, 3);
@@ -613,15 +684,15 @@ namespace WPFProjectAssignment
 
             var totalWithDiscountLabel = new Label
             {
-                Content = "After Discount:"
+                Content = receipt.AmountSummary[3][0]
             };
             totalWithDiscountRow.Children.Add(totalWithDiscountLabel);
             Grid.SetColumn(totalWithDiscountLabel, 2);
-
-            var totalWithDiscountString = Convert.ToString(totalAmount - (totalAmount*discountCode.Percentage/100));
+            
+            
             var totalWithDiscountAmount = new Label
             {
-                Content = totalWithDiscountString + "kr",
+                Content = receipt.AmountSummary[3][1],
                 FontWeight = FontWeights.Bold
             };
             totalWithDiscountRow.Children.Add(totalWithDiscountAmount);
@@ -659,7 +730,7 @@ namespace WPFProjectAssignment
             {
                 if (CustomerDiscount.Text.ToLower() == code.CodeName.ToLower())
                 {
-                    ShowReceipt(code);
+                    ShowReceipt(new Receipt(code, Cart)); 
                 }
             }
 
@@ -670,9 +741,9 @@ namespace WPFProjectAssignment
                     CodeName = "No Discount",
                     Percentage = 0
                 };
-                ShowReceipt(noDiscount);
+                ShowReceipt(new Receipt(noDiscount, Cart));
             }
-
+            
             DiscountLabel.Content = "Enter Discount Code*";
             DiscountLabel.Foreground = Brushes.Crimson;
 

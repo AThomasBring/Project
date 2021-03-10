@@ -1,21 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj": {}
+    "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj": {}
   },
   "projects": {
-    "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj": {
+    "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj",
         "projectName": "WPFProjectAssignment",
-        "projectPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj",
-        "packagesPath": "C:\\Users\\anton\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet"
+        ],
         "configFilePaths": [
-          "C:\\Users\\anton\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -57,7 +61,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     }

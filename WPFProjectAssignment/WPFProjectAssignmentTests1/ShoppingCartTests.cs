@@ -1,11 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WPFProjectAssignment;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
 
-namespace WPFProjectAssignment.Tests
+namespace WPFProjectAssignmentTests1
 {
     [TestClass()]
     public class ShoppingCartTests
@@ -13,12 +9,28 @@ namespace WPFProjectAssignment.Tests
         [TestMethod()]
         public void LoadFromFileTest()
         {
-            string newTextFile = "abcd123";
-            File.WriteAllText(@"C:\Windows\Temp\TestFile.txt", newTextFile);
-
+            var shoppingCart = new ShoppingCart();
+            var noDiscount = new DiscountCode
+            {
+                CodeName = "No Discount",
+                Percentage = 0
+            };
             
+            Product testProduct = new Product
+            {
+                Code = "001",
+                Name = "Test Product",
+                Price = 100
+            };
+            
+            shoppingCart.Add(testProduct, 5);
 
-            Assert.AreEqual
+            var testReciept = new Receipt(noDiscount, shoppingCart);
+
+            var amountAfterDiscount = testReciept.AmountSummary[3][1];
+            
+            Assert.AreEqual(500, amountAfterDiscount);
+
         }
     }
 }
