@@ -68,9 +68,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="TextFile1.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Folder Include="obj\Debug\netcoreapp3.1" />
   </ItemGroup>
 
 </Project>
