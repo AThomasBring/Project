@@ -68,7 +68,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -110,7 +110,8 @@
       <workItem from="1614862107608" duration="26930000" />
       <workItem from="1615115849387" duration="1557000" />
       <workItem from="1615291829758" duration="24518000" />
-      <workItem from="1615324368894" duration="4879000" />
+      <workItem from="1615324368894" duration="5053000" />
+      <workItem from="1615363230440" duration="2760000" />
     </task>
     <servers />
   </component>
