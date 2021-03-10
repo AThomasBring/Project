@@ -176,7 +176,7 @@ namespace WPFProjectAssignment
                         Name = parts[1],
                         Description = parts[2],
                         Price = int.Parse(parts[3]),
-                        Image = CreateImage("Images/" + parts[4])
+                        Image = CreateImage(@"C:\Windows\Temp\PotionShopTempFiles\Images\" + parts[4])
                     };
                     products.Add(p);
                 }
@@ -192,9 +192,18 @@ namespace WPFProjectAssignment
 
         private void Start()
         {
-            foreach (string newPath in Directory.GetFiles(@"\Images\", "*.*", 
-                SearchOption.AllDirectories))
-                File.Copy(newPath, @"C:\Windows\Temp\"+newPath, true);
+            //Copy images to temp folder
+            Directory.CreateDirectory(@"C:\Windows\Temp\PotionShopTempFiles\Images\");
+            foreach (string newPath in Directory.GetFiles(@"Images\"))
+                //We need to extract the filename from the path
+            {
+                int fileNameIndex = newPath.LastIndexOf('\\');
+                string fileName = newPath.Substring(fileNameIndex + 1);
+                
+                File.Copy(newPath, @"C:\Windows\Temp\PotionShopTempFiles\Images\"+fileName, true);
+            }
+
+            
             
             
             DiscountCodes = LoadCodes();
@@ -475,7 +484,7 @@ namespace WPFProjectAssignment
 
         private static Image CreateImage(string filePath)
         {
-            ImageSource source = new BitmapImage(new Uri(filePath, UriKind.Relative));
+            ImageSource source = new BitmapImage(new Uri(filePath, UriKind.RelativeOrAbsolute));
             Image image = new Image
             {
                 Source = source,
@@ -596,11 +605,11 @@ namespace WPFProjectAssignment
                     },
                     new Label
                     {
-                        Content = product[2] + "kr"
+                        Content = product[2]
                     },
                     new Label
                     {
-                        Content = product[3] + "kr"
+                        Content = product[3]
                     },
                 };
 
@@ -623,12 +632,49 @@ namespace WPFProjectAssignment
             }
             
             var discountCodeRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
-            
-            
-            
+
+            colorPicker = 0;
+            foreach (var row in receipt.AmountSummary)
+            {
+                var summaryRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
+                Label[] summaryLabels = new[]
+                {
+                    new Label
+                    {
+                        Content = ""
+                    },
+                    new Label
+                    {
+                        Content = ""
+                    },
+                    new Label
+                    {
+                        Content = row[0]
+                    },
+                    new Label
+                    {
+                        Content = row[1]
+                    }
+                };
+                
+                //Make total price bold
+                if (colorPicker == 3)
+                {
+                    summaryLabels[3].FontWeight = FontWeights.Bold;
+                }
+                colorPicker++;
+
+                for (int i = 0; i < summaryLabels.Length; i++)
+                {
+                    summaryRow.Children.Add(summaryLabels[i]);
+                    Grid.SetColumn(summaryLabels[i], i);
+                }
+                receiptPanel.Children.Add(summaryRow);
+                
+            }
             
 
-            var discountLabel = new Label
+            /*var discountLabel = new Label
             {
                 Content = receipt.AmountSummary[0][0]
             };
@@ -698,7 +744,7 @@ namespace WPFProjectAssignment
             totalWithDiscountRow.Children.Add(totalWithDiscountAmount);
             Grid.SetColumn(totalWithDiscountAmount, 3);
 
-            receiptPanel.Children.Add(totalWithDiscountRow);
+            receiptPanel.Children.Add(totalWithDiscountRow);*/
             
             Cart.Clear();
             UpdateCartGui();

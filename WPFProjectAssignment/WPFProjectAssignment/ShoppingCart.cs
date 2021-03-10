@@ -23,7 +23,7 @@ namespace WPFProjectAssignment
             }
             else
             {
-                Products[product] = 1;
+                Products[product] = number;
             }
         }
         
