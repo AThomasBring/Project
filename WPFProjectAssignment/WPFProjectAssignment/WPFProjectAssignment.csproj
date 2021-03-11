@@ -13,9 +13,6 @@
     <None Remove="Images\strengtheningsolution.jpg" />
     <None Remove="Images\wolfsbanePotion.jpg" />
     <None Remove="Products.csv" />
-    <Content Include="Products.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Remove="Images\agingPotion.jpg" />
     <None Remove="Images\babblingBeverage.jpg" />
     <None Remove="Images\elixirOfLife.jpg" />

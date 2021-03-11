@@ -34,6 +34,7 @@
             </e>
           </e>
         </e>
+        <e p="Products.csv" t="Include" />
         <e p="Utilities.cs" t="Include" />
         <e p="Utilities.csproj" t="IncludeRecursive" />
       </e>
@@ -55,7 +56,6 @@
             </e>
           </e>
         </e>
-        <e p="Products.csv" t="Include" />
         <e p="WPFProjectAssignment.csproj" t="IncludeRecursive" />
       </e>
       <e p="WPFProjectAssignment.sln" t="IncludeFlat" />

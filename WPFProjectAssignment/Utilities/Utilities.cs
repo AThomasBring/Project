@@ -6,8 +6,9 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
-namespace Shared
+namespace Utilities
 {
     public class Methods
     {
@@ -148,11 +149,90 @@ namespace Shared
             }
             return newButton;
         }
+
+        public static void UpdateProductImage(string imagePath)
+        {
+            Shared.ImageDisplayed = CreateImage(imagePath);
+            Shared.ImageDisplayed.Stretch = Stretch.Uniform;
+            Shared.TextAndImageGrid.Children.Add(Shared.ImageDisplayed);
+            Grid.SetColumn(Shared.ImageDisplayed, 1);
+        }
+
+        public static void UpdateDescriptionText(Product product)
+        {
+            Shared.InfoPanel = new StackPanel
+
+            {
+                Orientation = Orientation.Vertical,
+                Margin = new Thickness(1)
+            };
+            Methods.AddToGui(Shared.InfoPanel, Shared.TextAndImageGrid);
+
+            // The text heading inside the information panel.
+            var productName = new TextBlock
+            {
+                Text = product.Name,
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 16,
+                TextAlignment = TextAlignment.Center
+            };
+            Methods.AddToGui(productName, Shared.InfoPanel);
+
+            Shared.ProductDescription = new TextBlock
+            {
+                Text = product.Description + "\n",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 12
+            };
+            Methods.AddToGui(Shared.ProductDescription, Shared.InfoPanel);
+
+            var price = product.Price.ToString(CultureInfo.InvariantCulture);
+            Shared.ProductPrice = new TextBlock
+            {
+                Text = price + "kr",
+                FontSize = 12,
+                Margin = new Thickness(10),
+                Padding = new Thickness(5),
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
+
+            Methods.AddToGui(Shared.ProductPrice, Shared.InfoPanel);
+
+        }
+
+        public static Image CreateImage(string filePath)
+        {
+            ImageSource source = new BitmapImage(new Uri(filePath, UriKind.RelativeOrAbsolute));
+            Image image = new Image
+            {
+                Source = source,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(5)
+            };
+            // A small rendering tweak to ensure maximum visual appeal.
+            RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
+            return image;
+        }
+        
     }
+    
     public static class Shared
     {
         public static Product[] Products;
         public static DiscountCode[] DiscountCodes;
+        public static ListBox ProductBox = new ListBox();
+        public static TextBlock ProductDescription = new TextBlock();
+        public static Image ImageDisplayed = new Image();
+        public static Grid TextAndImageGrid = new Grid();
+        public static Grid ButtonGrid = new Grid();
+        public static StackPanel InfoPanel = new StackPanel();
+        public static TextBlock ProductPrice = new TextBlock();
+        
+        // We store the most recent selected product here
+        public static Product SelectedProduct { get; set; }
         
         public const string DiscountFilePath = "DiscountCodes.txt";
         public const string ProductFilePath = "Products.csv";

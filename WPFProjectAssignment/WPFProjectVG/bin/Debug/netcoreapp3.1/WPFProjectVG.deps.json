@@ -15,14 +15,13 @@
           "WPFProjectVG.dll": {}
         }
       },
-      "Utilites/1.0.0": {
+      "Utilities/1.0.0": {
         "runtime": {
-          "Utilites.dll": {}
+          "Utilities.dll": {}
         }
       },
       "WPFProjectAssignment/1.0.0": {
         "dependencies": {
-          "Utilites": "1.0.0",
           "Utilities": "1.0.0"
         },
         "runtime": {
@@ -37,7 +36,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Utilites/1.0.0": {
+    "Utilities/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

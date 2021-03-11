@@ -14,13 +14,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Shared;
+using Utilities;
 using WPFProjectAssignment;
 
 namespace WPFProjectVG
 {
     public partial class MainWindow : Window
     {
+
         Grid MainGrid = new Grid();
         private Grid TextAndImageGrid = new Grid();
         private Grid ButtonGrid = new Grid();
@@ -37,11 +38,11 @@ namespace WPFProjectVG
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             
             Methods.CopyImagesToTempFolder(@"C:\Windows\Temp\PotionShopTempFiles\Images\");
-            Shared.Shared.DiscountCodes = Methods.LoadCodes(Shared.Shared.DiscountFilePath);
-            Shared.Shared.Products = Methods.LoadProducts(Shared.Shared.ProductFilePath);
+            Shared.DiscountCodes = Methods.LoadCodes(Utilities.Shared.DiscountFilePath);
+            Shared.Products = Methods.LoadProducts(Utilities.Shared.ProductFilePath);
             
             // Window options
-            Title = "Potion Shop";
+            Title = "Behind the magic curtain";
             Width = 1080;
             Height = 720;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -55,23 +56,56 @@ namespace WPFProjectVG
             Methods.AddToGui(leftSideGrid, MainGrid, 1 , 0);
 
             // This grid is for item description and image, and gets cleared and updated every product selection change
-            TextAndImageGrid = Methods.CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 1, 1 });
-            Methods.AddToGui(TextAndImageGrid, MainGrid, 1, 1);
+            Shared.TextAndImageGrid = Methods.CreateGrid(rows: new[] {5, 1}, columns: new[] {1, 1});
+            Methods.AddToGui(Shared.TextAndImageGrid, MainGrid, 1, 1);
             
             // This grid is where we put the buttons for check out, save/clear cart as well as discount code.
             ButtonGrid = Methods.CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 2, 2, 3, 1 });
             Methods.AddToGui(ButtonGrid, MainGrid, 1, 1);
 
-            //This grid is to divide the space where we show the discount code so that we can display both a label and a text block.
-            DiscountGrid = Methods.CreateGrid(rows: null, columns: new []{1, 1});
-            Methods.AddToGui(DiscountGrid, ButtonGrid, 1, 2);
-
             MainGrid.ShowGridLines = true;
             
             
+                        
+            //Setting up Controls
+            var heading = new TextBlock
+            {
+                Text = "Manage Inventory",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 20,
+                TextAlignment = TextAlignment.Center
+            };
+
+            Methods.AddToGui(heading, MainGrid);
+            Grid.SetColumnSpan(heading, 2);
+            
+            Shared.ProductBox = new ListBox
+            {
+                Margin = new Thickness(5)
+            };
+
+            foreach (var product in Shared.Products)
+            {
+                Shared.ProductBox.Items.Add(new ListBoxItem() { Content = product.Name, Tag = product });
+            }
+            Shared.ProductBox.SelectedIndex = -1;
+            Methods.AddToGui(Shared.ProductBox, leftSideGrid);
+            Shared.ProductBox.SelectionChanged += ProductBoxOnSelectionChanged;
             
             
             
         }
+        private void ProductBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //First, we store the selected product in our SelectedProduct variable so that other objects can know about it.
+            Shared.SelectedProduct = (Product)((ListBoxItem)Shared.ProductBox.SelectedItem).Tag;
+
+            //Then, we update texts and image
+            Shared.TextAndImageGrid.Children.Clear();
+            Methods.UpdateDescriptionText(Shared.SelectedProduct);
+            Methods.UpdateProductImage(Shared.SelectedProduct.Image);
+        }
+        
     }
 }
