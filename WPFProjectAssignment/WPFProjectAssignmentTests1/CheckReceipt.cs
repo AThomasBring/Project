@@ -46,7 +46,7 @@ namespace WPFProjectAssignmentTests1
             }
             actual = actual.TrimEnd();
 
-            var expected = "Discount code: Yay35Percent Total: 23kr Your discount: 8,05kr (35%) After discount: 14,95kr";
+            var expected = "Discount code: Yay35Percent Total: 23kr Your discount: 8.05kr (35%) After discount: 14.95kr";
             
             Assert.AreEqual(expected, actual);
         }
