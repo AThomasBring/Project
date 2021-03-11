@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Utilites
+namespace Utilities
 {
     public class Methods
     {

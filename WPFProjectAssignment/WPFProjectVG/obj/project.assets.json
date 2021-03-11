@@ -2,19 +2,6 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "Utilites/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "compile": {
-          "bin/placeholder/Utilites.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Utilites.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.WindowsDesktop.App.WPF"
-        ]
-      },
       "Utilities/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -23,13 +10,15 @@
         },
         "runtime": {
           "bin/placeholder/Utilities.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
       },
       "WPFProjectAssignment/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "Utilites": "1.0.0",
           "Utilities": "1.0.0"
         },
         "compile": {
@@ -45,11 +34,6 @@
     }
   },
   "libraries": {
-    "Utilites/1.0.0": {
-      "type": "project",
-      "path": "../Utilites/Utilites.csproj",
-      "msbuildProject": "../Utilites/Utilites.csproj"
-    },
     "Utilities/1.0.0": {
       "type": "project",
       "path": "../Utilities/Utilities.csproj",

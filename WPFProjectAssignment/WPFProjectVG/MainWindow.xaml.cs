@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Utilites;
+using Utilities;
 using WPFProjectAssignment;
 
 namespace WPFProjectVG
@@ -67,6 +67,9 @@ namespace WPFProjectVG
             Methods.AddToGui(DiscountGrid, ButtonGrid, 1, 2);
 
             MainGrid.ShowGridLines = true;
+            
+            
+            
             
             
         }

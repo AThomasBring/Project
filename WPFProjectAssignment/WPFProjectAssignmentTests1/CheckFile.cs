@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Utilites;
+using Utilities;
 
 namespace WPFProjectAssignmentTests1
 {
@@ -14,10 +14,10 @@ namespace WPFProjectAssignmentTests1
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             
             var shoppingCart = new ShoppingCart();
-            Utilites.Shared.Products = Utilites.Methods.LoadProducts("TestProducts.csv");
+            Utilities.Shared.Products = Utilities.Methods.LoadProducts("TestProducts.csv");
             
-            shoppingCart.Add(Utilites.Shared.Products[0], 2);
-            shoppingCart.Add(Utilites.Shared.Products[1], 3);
+            shoppingCart.Add(Utilities.Shared.Products[0], 2);
+            shoppingCart.Add(Utilities.Shared.Products[1], 3);
             shoppingCart.SaveToFile("TestCart.csv");
 
             var newCart = new ShoppingCart();
@@ -42,7 +42,7 @@ namespace WPFProjectAssignmentTests1
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             
             var shoppingCart = new ShoppingCart();
-            Utilites.Shared.Products = Utilites.Methods.LoadProducts("TestProducts.csv");
+            Utilities.Shared.Products = Utilities.Methods.LoadProducts("TestProducts.csv");
             
             shoppingCart.SaveToFile("TestCart.csv");
             shoppingCart.LoadFromFile("TestCart.csv");

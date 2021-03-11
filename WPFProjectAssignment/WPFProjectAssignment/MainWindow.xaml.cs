@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Utilites;
+using Utilities;
 
 namespace WPFProjectAssignment
 {
@@ -61,7 +61,7 @@ namespace WPFProjectAssignment
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             
             //Our method for creating grids takes the lenght of an int array for number of rows/columns, and the value of integers for their respective height/width. (relative proportions, not pixels)
-            MainGrid = Utilites.Methods.CreateGrid(rows: new[] { 1, 9 }, new[] { 1, 2 });
+            MainGrid = Utilities.Methods.CreateGrid(rows: new[] { 1, 9 }, new[] { 1, 2 });
             Content = MainGrid;
 
             // This grid is for dividing the left side of the main window to display available products and shopping cart
@@ -484,7 +484,7 @@ namespace WPFProjectAssignment
         private static void OnCheckoutClick(object sender, RoutedEventArgs e)
         {
             //We check if a valid discount code is applied to the text box and pass the discount object on to receipt class if they match.
-            foreach (var code in Utilites.Shared.DiscountCodes)
+            foreach (var code in Utilities.Shared.DiscountCodes)
             {
                 if (CustomerDiscount.Text.ToLower() == code.CodeName.ToLower())
                 {
@@ -506,7 +506,7 @@ namespace WPFProjectAssignment
         
         private static void OnSaveCartClick(object sender, RoutedEventArgs e)
         {
-            Cart.SaveToFile(Utilites.Shared.CartFilePath);
+            Cart.SaveToFile(Utilities.Shared.CartFilePath);
         }
         
         private static void OnEmptyCartButtonClick(object sender, RoutedEventArgs e)

@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Utilites;
+using Utilities;
 
 namespace WPFProjectAssignmentTests1
 {

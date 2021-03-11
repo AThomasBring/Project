@@ -20,8 +20,9 @@ C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\obj\De
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\WPFProjectAssignment.exe
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Products.csv
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\DiscountCodes.txt
-C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Utilities.dll
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\WPFProjectAssignment.dll
-C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Utilities.pdb
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\WPFProjectAssignment.pdb
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\obj\Debug\netcoreapp3.1\WPFProjectVG.csproj.CopyComplete
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Images\welcome.jpg
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Utilites.dll
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Utilites.pdb
