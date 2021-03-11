@@ -19,7 +19,7 @@
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt.CheckTotalSumAfterDiscount&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8ec2008c_002D9f19_002D470b_002Dbf4e_002Dd9a98100e50b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CheckTotalSumAfterDiscount #5" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8ec2008c_002D9f19_002D470b_002Dbf4e_002Dd9a98100e50b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckTotalSumAfterDiscount #5" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
@@ -34,9 +34,9 @@
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ad08d521_002D0cf4_002D4dfb_002D9957_002Daa9fb4cae319/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckTotalSumAfterDiscount" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ad08d521_002D0cf4_002D4dfb_002D9957_002Daa9fb4cae319/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CheckTotalSumAfterDiscount" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt.CheckTotalSumAfterDiscount&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f2aa44e8_002Dfea0_002D43ae_002D9335_002Df852e7e894dd/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckTotalSumOnReceipt" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;

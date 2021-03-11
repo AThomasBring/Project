@@ -62,6 +62,24 @@
         </e>
         <e p="WPFProjectAssignmentTests1.csproj" t="IncludeRecursive" />
       </e>
+      <e p="WPFProjectVG" t="IncludeRecursive">
+        <e p="App.xaml" t="Include" />
+        <e p="App.xaml.cs" t="Include" />
+        <e p="AssemblyInfo.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="MainWindow.xaml" t="Include" />
+        <e p="MainWindow.xaml.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="App.g.cs" t="Include" />
+              <e p="MainWindow.g.cs" t="Include" />
+              <e p="WPFProjectVG.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="WPFProjectVG.csproj" t="IncludeRecursive" />
+      </e>
     </e>
   </component>
 </project>

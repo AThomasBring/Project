@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace WPFProjectAssignment
@@ -64,7 +65,7 @@ namespace WPFProjectAssignment
             };
             summaryLines.Add(appliedDiscountLine);
             
-            var totalWithDiscountString = Convert.ToString(totalAmount - (totalAmount*discountCode.Percentage/100));
+            var totalWithDiscountString = Convert.ToString(totalAmount - (totalAmount*discountCode.Percentage/100), CultureInfo.InvariantCulture);
             string[] afterDiscountLine =
             {
                 "After discount:",

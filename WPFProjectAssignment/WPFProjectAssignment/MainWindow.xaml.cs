@@ -138,9 +138,6 @@ namespace WPFProjectAssignment
                 File.Copy(newPath, @"C:\Windows\Temp\PotionShopTempFiles\Images\"+fileName, true);
             }
 
-            
-            
-            
             DiscountCodes = LoadCodes();
             Products = LoadProducts();
             Cart = new ShoppingCart();
@@ -171,9 +168,6 @@ namespace WPFProjectAssignment
             //This grid is to divide the space where we show the discount code so that we can display both a label and a text block.
             DiscountGrid = CreateGrid(rows: null, columns: new []{1, 1});
             AddToGui(DiscountGrid, ButtonGrid, 1, 2);
-
-
-            
             
             //Setting up Controls
             var heading = new TextBlock
@@ -257,7 +251,6 @@ namespace WPFProjectAssignment
             AddToGui(CartDisplay, leftSideGrid, 1);
         }
         
-        //This method gets called when a new product has been selected
         private void UpdateProductImage(Image image)
         {
             ImageDisplayed = image;
@@ -296,7 +289,7 @@ namespace WPFProjectAssignment
             };
             AddToGui(ProductDescription, InfoPanel);
             
-            var price = product.Price.ToString();
+            var price = product.Price.ToString(CultureInfo.InvariantCulture);
             ProductPrice = new TextBlock
             {
                 Text = price + "kr",
@@ -605,82 +598,8 @@ namespace WPFProjectAssignment
                     Grid.SetColumn(summaryLabels[i], i);
                 }
                 receiptPanel.Children.Add(summaryRow);
-                
             }
-            
 
-            /*var discountLabel = new Label
-            {
-                Content = receipt.AmountSummary[0][0]
-            };
-            AddToGui(discountLabel, discountCodeRow, 0, 2);
-
-            var discountUsed = new Label
-            {
-                Content = receipt.AmountSummary[0][1]
-            };
-            AddToGui(discountUsed, discountCodeRow, 0 , 3);
-
-            
-            //Tom label för att skapa lite mellanrum.
-            receiptPanel.Children.Add(new Label());
-            
-            AddToGui(discountCodeRow, receiptPanel);
-            
-            var sumRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
-
-            var sumLabel = new Label
-            {
-                Content = receipt.AmountSummary[1][0]
-            };
-            sumRow.Children.Add(sumLabel);
-            Grid.SetColumn(sumLabel, 2);
-            
-            AddToGui(new Label
-            {
-                Content = receipt.AmountSummary[1][1]
-            }, sumRow, 0, 3);
-
-            receiptPanel.Children.Add(sumRow);
-            
-            var appliedDiscountRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
-
-            var appliedDiscountLabel = new Label
-            {
-                Content = receipt.AmountSummary[2][0]
-            };
-            appliedDiscountRow.Children.Add(appliedDiscountLabel);
-            Grid.SetColumn(appliedDiscountLabel, 2);
-            
-            var appliedDiscountAmount = new Label
-            {
-                Content = receipt.AmountSummary[2][1]
-            };
-            appliedDiscountRow.Children.Add(appliedDiscountAmount);
-            Grid.SetColumn(appliedDiscountAmount, 3);
-
-            receiptPanel.Children.Add(appliedDiscountRow);
-
-            var totalWithDiscountRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
-
-            var totalWithDiscountLabel = new Label
-            {
-                Content = receipt.AmountSummary[3][0]
-            };
-            totalWithDiscountRow.Children.Add(totalWithDiscountLabel);
-            Grid.SetColumn(totalWithDiscountLabel, 2);
-            
-            
-            var totalWithDiscountAmount = new Label
-            {
-                Content = receipt.AmountSummary[3][1],
-                FontWeight = FontWeights.Bold
-            };
-            totalWithDiscountRow.Children.Add(totalWithDiscountAmount);
-            Grid.SetColumn(totalWithDiscountAmount, 3);
-
-            receiptPanel.Children.Add(totalWithDiscountRow);*/
-            
             Cart.Clear();
             UpdateCartGui();
             ButtonGrid.Visibility = Visibility.Hidden;
