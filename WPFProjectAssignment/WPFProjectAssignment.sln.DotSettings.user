@@ -4,6 +4,12 @@
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=45f4aac5_002D36bf_002D430d_002Dadd3_002Dae93e0bc24ac/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="LoadCart #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckFile&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6230cca5_002Dfe9a_002D43de_002D9da3_002Dc3e940460490/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckTotalSumAfterDiscount #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt.CheckTotalSumAfterDiscount&lt;/TestId&gt;&#xD;
@@ -14,9 +20,17 @@
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt.CheckTotalSumAfterDiscount&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8add5107_002D2767_002D4010_002D9ffc_002Db55e624e853b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckLargeNumbers #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignmentTests1" Presentation="&amp;lt;WPFProjectAssignmentTests1&amp;gt;" /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8c1b45a2_002D2ed7_002D46fb_002D81b5_002D28785ee223f0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckTotalSumAfterDiscount #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt.CheckTotalSumAfterDiscount&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8e296406_002D98ac_002D4180_002Da876_002Dce1b52912254/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckFile&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8ec2008c_002D9f19_002D470b_002Dbf4e_002Dd9a98100e50b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckTotalSumAfterDiscount #5" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
@@ -34,13 +48,33 @@
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ad08d521_002D0cf4_002D4dfb_002D9957_002Daa9fb4cae319/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CheckTotalSumAfterDiscount" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ad08d521_002D0cf4_002D4dfb_002D9957_002Daa9fb4cae319/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckTotalSumAfterDiscount" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b94a964a_002D599a_002D4f76_002Dbd5a_002D6e7fbcc491dc/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckReceipt #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=bbd33cc9_002Dc5ba_002D495e_002Dbe3d_002D75dc894ff17f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckLargeNumbers" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt.CheckLargeNumbers&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f007be84_002D1480_002D418c_002Db36d_002D5cbdc630499c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="LoadCart" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckFile.LoadCart&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f2aa44e8_002Dfea0_002D43ae_002D9335_002Df852e7e894dd/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckTotalSumOnReceipt" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f474666a_002D33fd_002D45a8_002D83aa_002Df24673fdfaae/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckLargeNumbers #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt.CheckLargeNumbers&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

@@ -13,6 +13,8 @@ namespace WPFProjectAssignment
 
         public Receipt(ShoppingCart cart, DiscountCode discountCode = null)
         {
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            
             //if no discount code was passed, we make a DiscountCode object that wont apply a discount so our calculations and receipt layout will work later.
             if (discountCode == null)
             {
@@ -56,7 +58,7 @@ namespace WPFProjectAssignment
             summaryLines.Add(totalLine);
 
             var appliedDiscount = Math.Round(totalAmount*discountCode.Percentage / 100, 2);
-            var appliedDiscountString = appliedDiscount.ToString();
+            var appliedDiscountString = Convert.ToString(appliedDiscount, CultureInfo.InvariantCulture);
             
             string[] appliedDiscountLine = new[]
             {
@@ -64,8 +66,9 @@ namespace WPFProjectAssignment
                 appliedDiscountString + "kr (" +discountCode.Percentage + "%)"
             };
             summaryLines.Add(appliedDiscountLine);
-            
-            var totalWithDiscountString = Convert.ToString(totalAmount - (totalAmount*discountCode.Percentage/100), CultureInfo.InvariantCulture);
+
+            decimal totalWithDiscount = Math.Round(totalAmount - totalAmount * discountCode.Percentage / 100, 2);
+            var totalWithDiscountString = Convert.ToString(totalWithDiscount, CultureInfo.InvariantCulture);
             string[] afterDiscountLine =
             {
                 "After discount:",

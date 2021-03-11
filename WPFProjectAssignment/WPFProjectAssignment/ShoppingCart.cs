@@ -50,6 +50,10 @@ namespace WPFProjectAssignment
         
         public void LoadFromFile(string CartFilePath)
         {
+            if (!File.Exists(CartFilePath))
+            {
+                return;
+            }
             // Go through each line and split it on commas, as in `LoadProducts`.
             string[] lines = File.ReadAllLines(CartFilePath);
             foreach (string line in lines)

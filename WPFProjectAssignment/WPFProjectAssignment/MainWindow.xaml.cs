@@ -11,6 +11,7 @@ using Microsoft.VisualBasic;
 
 namespace WPFProjectAssignment
 {
+    
     public class DiscountCode
     {
         public string CodeName;
@@ -85,17 +86,17 @@ namespace WPFProjectAssignment
             return codes.ToArray();
         }
 
-        private static Product[] LoadProducts()
+        public static Product[] LoadProducts(string path)
         {
             // If the file doesn't exist, stop the program completely.
-            if (!File.Exists(ProductFilePath))
+            if (!File.Exists(path))
             {
                 MessageBox.Show("Could not read product file.");
             }
 
             // Create an empty list of products, then go through each line of the file to fill it.
             List<Product> products = new List<Product>();
-            string[] lines = File.ReadAllLines(ProductFilePath);
+            string[] lines = File.ReadAllLines(path);
 
             foreach (string line in lines)
             {
@@ -110,8 +111,8 @@ namespace WPFProjectAssignment
                         Code = parts[0],
                         Name = parts[1],
                         Description = parts[2],
-                        Price = int.Parse(parts[3]),
-                        Image = CreateImage(@"C:\Windows\Temp\PotionShopTempFiles\Images\" + parts[4])
+                        Price = decimal.Parse(parts[3]),
+                        Image = @"C:\Windows\Temp\PotionShopTempFiles\Images\" + parts[4]
                     };
                     products.Add(p);
                 }
@@ -127,6 +128,8 @@ namespace WPFProjectAssignment
 
         private void Start()
         {
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            
             //Copy images to temp folder
             Directory.CreateDirectory(@"C:\Windows\Temp\PotionShopTempFiles\Images\");
             foreach (string newPath in Directory.GetFiles(@"Images\"))
@@ -139,7 +142,7 @@ namespace WPFProjectAssignment
             }
 
             DiscountCodes = LoadCodes();
-            Products = LoadProducts();
+            Products = LoadProducts(ProductFilePath);
             Cart = new ShoppingCart();
             
             
@@ -251,9 +254,9 @@ namespace WPFProjectAssignment
             AddToGui(CartDisplay, leftSideGrid, 1);
         }
         
-        private void UpdateProductImage(Image image)
+        private void UpdateProductImage(string imagePath)
         {
-            ImageDisplayed = image;
+            ImageDisplayed = CreateImage(imagePath);
             ImageDisplayed.Stretch = Stretch.Uniform;
             TextAndImageGrid.Children.Add(ImageDisplayed);
             Grid.SetColumn(ImageDisplayed, 1);
