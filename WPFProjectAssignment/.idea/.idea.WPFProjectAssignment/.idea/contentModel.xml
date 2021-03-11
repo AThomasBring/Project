@@ -13,7 +13,7 @@
     <e p="C:\Users\admin\AppData\Local\JetBrains\Rider2020.3\resharper-host\Local\Transient\Rider\v203\SolutionCaches\_WPFProjectAssignment.565911614.00" t="ExcludeRecursive" />
     <e p="C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment" t="IncludeFlat">
       <e p="packages" t="ExcludeRecursive" />
-      <e p="Utilities" t="IncludeRecursive">
+      <e p="Utilites" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="Images" t="Include">
           <e p="agingPotion.jpg" t="Include" />
@@ -29,13 +29,13 @@
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
-              <e p="Utilities.AssemblyInfo.cs" t="Include" />
+            <e p="netcoreapp3.1-windows" t="Include">
+              <e p="Utilites.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
-        <e p="Shared.cs" t="Include" />
-        <e p="Utilities.csproj" t="IncludeRecursive" />
+        <e p="Utilites.csproj" t="IncludeRecursive" />
+        <e p="Utilities.cs" t="Include" />
       </e>
       <e p="WPFProjectAssignment" t="IncludeRecursive">
         <e p="App.xaml" t="Include" />

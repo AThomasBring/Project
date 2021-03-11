@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "Utilites/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Utilites.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Utilites.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "Utilities/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -15,6 +28,11 @@
     }
   },
   "libraries": {
+    "Utilites/1.0.0": {
+      "type": "project",
+      "path": "../Utilites/Utilites.csproj",
+      "msbuildProject": "../Utilites/Utilites.csproj"
+    },
     "Utilities/1.0.0": {
       "type": "project",
       "path": "../Utilities/Utilities.csproj",
@@ -23,12 +41,13 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Utilites >= 1.0.0",
       "Utilities >= 1.0.0"
     ]
   },
   "packageFolders": {
     "C:\\Users\\admin\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Microsoft\\Xamarin\\NuGet": {}
   },
   "project": {
     "version": "1.0.0",
@@ -40,7 +59,7 @@
       "outputPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Microsoft\\Xamarin\\NuGet"
       ],
       "configFilePaths": [
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -58,6 +77,9 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
+            "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilites\\Utilites.csproj": {
+              "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilites\\Utilites.csproj"
+            },
             "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj": {
               "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj"
             }

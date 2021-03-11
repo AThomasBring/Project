@@ -6,4 +6,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\WPFProjectAssignment\WPFProjectAssignment.csproj" />
+  </ItemGroup>
+
 </Project>

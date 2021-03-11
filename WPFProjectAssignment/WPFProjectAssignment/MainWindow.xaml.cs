@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Utilities;
+using Utilites;
 
 namespace WPFProjectAssignment
 {
@@ -16,13 +16,7 @@ namespace WPFProjectAssignment
 
     public partial class MainWindow : Window
     {
-        public static DiscountCode[] DiscountCodes;
         public static ShoppingCart Cart;
-
-        public const string DiscountFilePath = "DiscountCodes.txt";
-        public const string ProductFilePath = "Products.csv";
-        public const string CartFilePath = @"C:\Windows\Temp\Cart.csv";
-        public const string WelcomeImagePath = "Images/welcome.jpg";
 
         private ListBox ProductBox = new ListBox();
         private static TextBlock ProductDescription = new TextBlock();
@@ -41,7 +35,7 @@ namespace WPFProjectAssignment
 
 
         // We store the most recent selected product here
-        private static Utilities.Product SelectedProduct { get; set; }
+        private static Product SelectedProduct { get; set; }
 
         public MainWindow()
         {
@@ -53,10 +47,10 @@ namespace WPFProjectAssignment
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             
-            Shared.CopyImagesToTempFolder(@"C:\Windows\Temp\PotionShopTempFiles\Images\");
+            Methods.CopyImagesToTempFolder(@"C:\Windows\Temp\PotionShopTempFiles\Images\");
 
-            DiscountCodes = Shared.LoadCodes(DiscountFilePath);
-            Shared.Products = Shared.LoadProducts(ProductFilePath);
+            Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountFilePath);
+            Shared.Products = Methods.LoadProducts(Shared.ProductFilePath);
             Cart = new ShoppingCart();
             
             
@@ -67,24 +61,24 @@ namespace WPFProjectAssignment
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             
             //Our method for creating grids takes the lenght of an int array for number of rows/columns, and the value of integers for their respective height/width. (relative proportions, not pixels)
-            MainGrid = Shared.CreateGrid(rows: new[] { 1, 9 }, new[] { 1, 2 });
+            MainGrid = Utilites.Methods.CreateGrid(rows: new[] { 1, 9 }, new[] { 1, 2 });
             Content = MainGrid;
 
             // This grid is for dividing the left side of the main window to display available products and shopping cart
-            var leftSideGrid = Shared.CreateGrid(rows: new[] { 1, 1 }, columns: null);
-            Shared.AddToGui(leftSideGrid, MainGrid, 1 , 0);
+            var leftSideGrid = Methods.CreateGrid(rows: new[] { 1, 1 }, columns: null);
+            Methods.AddToGui(leftSideGrid, MainGrid, 1 , 0);
 
             // This grid is for item description and image, and gets cleared and updated every product selection change
-            TextAndImageGrid = Shared.CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 1, 1 });
-            Shared.AddToGui(TextAndImageGrid, MainGrid, 1, 1);
+            TextAndImageGrid = Methods.CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 1, 1 });
+            Methods.AddToGui(TextAndImageGrid, MainGrid, 1, 1);
             
             // This grid is where we put the buttons for check out, save/clear cart as well as discount code.
-            ButtonGrid = Shared.CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 2, 2, 3, 1 });
-            Shared.AddToGui(ButtonGrid, MainGrid, 1, 1);
+            ButtonGrid = Methods.CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 2, 2, 3, 1 });
+            Methods.AddToGui(ButtonGrid, MainGrid, 1, 1);
 
             //This grid is to divide the space where we show the discount code so that we can display both a label and a text block.
-            DiscountGrid = Shared.CreateGrid(rows: null, columns: new []{1, 1});
-            Shared.AddToGui(DiscountGrid, ButtonGrid, 1, 2);
+            DiscountGrid = Methods.CreateGrid(rows: null, columns: new []{1, 1});
+            Methods.AddToGui(DiscountGrid, ButtonGrid, 1, 2);
             
             //Setting up Controls
             var heading = new TextBlock
@@ -96,7 +90,7 @@ namespace WPFProjectAssignment
                 TextAlignment = TextAlignment.Center
             };
 
-            Shared.AddToGui(heading, MainGrid);
+            Methods.AddToGui(heading, MainGrid);
             Grid.SetColumnSpan(heading, 2);
             
             ProductBox = new ListBox
@@ -109,7 +103,7 @@ namespace WPFProjectAssignment
                 ProductBox.Items.Add(new ListBoxItem() { Content = product.Name, Tag = product });
             }
             ProductBox.SelectedIndex = -1;
-            Shared.AddToGui(ProductBox, leftSideGrid);
+            Methods.AddToGui(ProductBox, leftSideGrid);
             ProductBox.SelectionChanged += ProductBoxOnSelectionChanged;
 
             CartDisplay = new StackPanel()
@@ -142,30 +136,30 @@ namespace WPFProjectAssignment
 
             //Creating Buttons
             
-            EmptyCartButton = Shared.CreateButton("Empty Cart");
-            Shared.AddToGui(EmptyCartButton, ButtonGrid, 1, 0);
+            EmptyCartButton = Methods.CreateButton("Empty Cart");
+            Methods.AddToGui(EmptyCartButton, ButtonGrid, 1, 0);
             EmptyCartButton.Click += OnEmptyCartButtonClick;
             
-            CheckoutButton = Shared.CreateButton("Check Out");
-            Shared.AddToGui(CheckoutButton, ButtonGrid, 1, 3);
+            CheckoutButton = Methods.CreateButton("Check Out");
+            Methods.AddToGui(CheckoutButton, ButtonGrid, 1, 3);
             CheckoutButton.Click += OnCheckoutClick;
 
-            var saveCartButton = Shared.CreateButton("Save Cart");
-            Shared.AddToGui(saveCartButton, ButtonGrid, 1, 1);
+            var saveCartButton = Methods.CreateButton("Save Cart");
+            Methods.AddToGui(saveCartButton, ButtonGrid, 1, 1);
             saveCartButton.Click += OnSaveCartClick;
             
             //Now, we check if user has a saved cart or not and display a welcome message.
             
-            if (File.Exists(CartFilePath))
+            if (File.Exists(Shared.CartFilePath))
             {
-                Cart.LoadFromFile(CartFilePath);
+                Cart.LoadFromFile(Shared.CartFilePath);
                 UpdateCartGui();
                 ShowWelcomeScreen("Welcome Back!","Thanks for coming back to our store. We have stored the cart from your last visit so you can just carry on shopping!");
             }
             else ShowWelcomeScreen("Welcome!", "Whether you’re a serious wizard, lazy student, or simply looking to have a laugh, all our products are infused with carefully selected magical properties to achieve optimum impact.\n \n" +
                                    "We just stocked a new batch of the highly sought-after Polyjuice Potion. They won´t last long, so make sure to snatch one before they´re gone!");
 
-            Shared.AddToGui(CartDisplay, leftSideGrid, 1);
+            Methods.AddToGui(CartDisplay, leftSideGrid, 1);
         }
 
 
@@ -186,7 +180,7 @@ namespace WPFProjectAssignment
                 Orientation = Orientation.Vertical,
                 Margin = new Thickness(1)
             };
-            Shared.AddToGui(InfoPanel, TextAndImageGrid);
+            Methods.AddToGui(InfoPanel, TextAndImageGrid);
                 
             // The text heading inside the information panel.
             var productName = new TextBlock
@@ -197,7 +191,7 @@ namespace WPFProjectAssignment
                 FontSize = 16,
                 TextAlignment = TextAlignment.Center
             };
-            Shared.AddToGui(productName, InfoPanel);
+            Methods.AddToGui(productName, InfoPanel);
 
             ProductDescription = new TextBlock
             {
@@ -206,7 +200,7 @@ namespace WPFProjectAssignment
                 Margin = new Thickness(5),
                 FontSize = 12
             };
-            Shared.AddToGui(ProductDescription, InfoPanel);
+            Methods.AddToGui(ProductDescription, InfoPanel);
             
             var price = product.Price.ToString(CultureInfo.InvariantCulture);
             ProductPrice = new TextBlock
@@ -218,9 +212,9 @@ namespace WPFProjectAssignment
                 HorizontalAlignment = HorizontalAlignment.Right
             };
             
-            Shared.AddToGui(ProductPrice, InfoPanel);
+            Methods.AddToGui(ProductPrice, InfoPanel);
 
-            var addToCart = Shared.CreateButton("Add to Cart", SelectedProduct);
+            var addToCart = Methods.CreateButton("Add to Cart", SelectedProduct);
             InfoPanel.Children.Add(addToCart);
             addToCart.Click += OnAddClick;
             
@@ -245,8 +239,8 @@ namespace WPFProjectAssignment
                     Text = item.Value + "x " + item.Key.Name + " " + item.Key.Price + "kr." + "\n"
                 };
                 
-                Shared.AddToGui(cartLine, cartGrid);
-                Shared.AddToGui(cartGrid, CartDisplay);
+                Methods.AddToGui(cartLine, cartGrid);
+                Methods.AddToGui(cartGrid, CartDisplay);
                 
 
                 var addButton = new Button
@@ -256,7 +250,7 @@ namespace WPFProjectAssignment
                     Background = Brushes.White,
                     Margin = new Thickness(5)
                 };
-                Shared.AddToGui(addButton, cartGrid, 0, 2);
+                Methods.AddToGui(addButton, cartGrid, 0, 2);
                 addButton.Click += OnAddClick;
 
                 var removeButton = new Button
@@ -266,19 +260,19 @@ namespace WPFProjectAssignment
                     Background = Brushes.White,
                     Margin = new Thickness(5)
                 };
-                Shared.AddToGui(removeButton, cartGrid, 0, 1);
+                Methods.AddToGui(removeButton, cartGrid, 0, 1);
                 removeButton.Click += OnRemoveClick;
             }
 
-            var totalGrid = Shared.CreateGrid(rows: new []{1}, columns: new []{1});
+            var totalGrid = Methods.CreateGrid(rows: new []{1}, columns: new []{1});
             var totalLine = new TextBlock
             {
                 Text = "Total: " + totalSum,
                 HorizontalAlignment = HorizontalAlignment.Right
             };
   
-            Shared.AddToGui(totalLine, totalGrid);
-            Shared.AddToGui(totalGrid, CartDisplay);
+            Methods.AddToGui(totalLine, totalGrid);
+            Methods.AddToGui(totalGrid, CartDisplay);
 
             //This is to make CartDisplay visible again in case customers continues shopping after checking out.
             CartDisplay.Visibility = Visibility.Visible;
@@ -299,7 +293,7 @@ namespace WPFProjectAssignment
             RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
             return image;
         }
-        
+
 
 
         private void ShowWelcomeScreen(string greeting, string message)
@@ -332,10 +326,10 @@ namespace WPFProjectAssignment
                 Margin = new Thickness(5),
                 FontSize = 12
             };
-            Shared.AddToGui(ProductDescription, InfoPanel);
-            ImageDisplayed = CreateImage(WelcomeImagePath);
+            Methods.AddToGui(ProductDescription, InfoPanel);
+            ImageDisplayed = CreateImage(Shared.WelcomeImagePath);
             ImageDisplayed.Stretch = Stretch.Uniform;
-            Shared.AddToGui(ImageDisplayed, TextAndImageGrid, 0, 1);
+            Methods.AddToGui(ImageDisplayed, TextAndImageGrid, 0, 1);
         }
 
         private static void ShowReceipt(Receipt receipt)
@@ -350,7 +344,7 @@ namespace WPFProjectAssignment
                 Content = "Thanks for your order! Here´s your receipt: \n "
             };
 
-            var columnCategories = Shared.CreateGrid(null, columns: new[] {1, 1, 1, 1});
+            var columnCategories = Methods.CreateGrid(null, columns: new[] {1, 1, 1, 1});
 
             Label[] categories =
             {
@@ -382,14 +376,13 @@ namespace WPFProjectAssignment
                 Grid.SetColumn(categories[i], i);
             }
 
-            Shared.AddToGui(receiptPanel, TextAndImageGrid);
+            Methods.AddToGui(receiptPanel, TextAndImageGrid);
             Grid.SetColumnSpan(receiptPanel, 2);
-            Shared.AddToGui(message, receiptPanel);
-            Shared.AddToGui(columnCategories, receiptPanel);
-            
+            Methods.AddToGui(message, receiptPanel);
+            Methods.AddToGui(columnCategories, receiptPanel);
             foreach (var product in receipt.ItemsBreakdown)
             {
-                var productRow = Shared.CreateGrid(null, columns: new []{1, 1, 1, 1});
+                var productRow = Methods.CreateGrid(null, columns: new []{1, 1, 1, 1});
                 Label[] productDetails = new[]
                 {
                     new Label
@@ -426,12 +419,12 @@ namespace WPFProjectAssignment
                 receiptPanel.Children.Add(productRow);
                 colorPicker++;
             }
-            var discountCodeRow = Shared.CreateGrid(null, columns: new []{1, 1, 1, 1});
+            //var discountCodeRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
 
             colorPicker = 0;
             foreach (var row in receipt.SumBreakdown)
             {
-                var summaryRow = Shared.CreateGrid(null, columns: new []{1, 1, 1, 1});
+                var summaryRow = Methods.CreateGrid(null, columns: new []{1, 1, 1, 1});
                 Label[] summaryLabels = new[]
                 {
                     new Label
@@ -470,7 +463,6 @@ namespace WPFProjectAssignment
             UpdateCartGui();
             ButtonGrid.Visibility = Visibility.Hidden;
             CartDisplay.Visibility = Visibility.Hidden;
-            
         }
 
         private static void OnAddClick(object sender, RoutedEventArgs e)
@@ -492,7 +484,7 @@ namespace WPFProjectAssignment
         private static void OnCheckoutClick(object sender, RoutedEventArgs e)
         {
             //We check if a valid discount code is applied to the text box and pass the discount object on to receipt class if they match.
-            foreach (var code in DiscountCodes)
+            foreach (var code in Utilites.Shared.DiscountCodes)
             {
                 if (CustomerDiscount.Text.ToLower() == code.CodeName.ToLower())
                 {
@@ -514,7 +506,7 @@ namespace WPFProjectAssignment
         
         private static void OnSaveCartClick(object sender, RoutedEventArgs e)
         {
-            Cart.SaveToFile(CartFilePath);
+            Cart.SaveToFile(Utilites.Shared.CartFilePath);
         }
         
         private static void OnEmptyCartButtonClick(object sender, RoutedEventArgs e)
