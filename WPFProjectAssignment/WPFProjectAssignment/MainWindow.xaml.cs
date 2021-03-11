@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Utilities;
+using Shared;
 
 namespace WPFProjectAssignment
 {
@@ -49,8 +49,8 @@ namespace WPFProjectAssignment
             
             Methods.CopyImagesToTempFolder(@"C:\Windows\Temp\PotionShopTempFiles\Images\");
 
-            Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountFilePath);
-            Shared.Products = Methods.LoadProducts(Shared.ProductFilePath);
+            Shared.Shared.DiscountCodes = Methods.LoadCodes(Shared.Shared.DiscountFilePath);
+            Shared.Shared.Products = Methods.LoadProducts(Shared.Shared.ProductFilePath);
             Cart = new ShoppingCart();
             
             
@@ -61,7 +61,7 @@ namespace WPFProjectAssignment
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             
             //Our method for creating grids takes the lenght of an int array for number of rows/columns, and the value of integers for their respective height/width. (relative proportions, not pixels)
-            MainGrid = Utilities.Methods.CreateGrid(rows: new[] { 1, 9 }, new[] { 1, 2 });
+            MainGrid = Methods.CreateGrid(rows: new[] { 1, 9 }, new[] { 1, 2 });
             Content = MainGrid;
 
             // This grid is for dividing the left side of the main window to display available products and shopping cart
@@ -98,7 +98,7 @@ namespace WPFProjectAssignment
                 Margin = new Thickness(5)
             };
 
-            foreach (var product in Shared.Products)
+            foreach (var product in Shared.Shared.Products)
             {
                 ProductBox.Items.Add(new ListBoxItem() { Content = product.Name, Tag = product });
             }
@@ -150,9 +150,9 @@ namespace WPFProjectAssignment
             
             //Now, we check if user has a saved cart or not and display a welcome message.
             
-            if (File.Exists(Shared.CartFilePath))
+            if (File.Exists(Shared.Shared.CartFilePath))
             {
-                Cart.LoadFromFile(Shared.CartFilePath);
+                Cart.LoadFromFile(Shared.Shared.CartFilePath);
                 UpdateCartGui();
                 ShowWelcomeScreen("Welcome Back!","Thanks for coming back to our store. We have stored the cart from your last visit so you can just carry on shopping!");
             }
@@ -327,7 +327,7 @@ namespace WPFProjectAssignment
                 FontSize = 12
             };
             Methods.AddToGui(ProductDescription, InfoPanel);
-            ImageDisplayed = CreateImage(Shared.WelcomeImagePath);
+            ImageDisplayed = CreateImage(Shared.Shared.WelcomeImagePath);
             ImageDisplayed.Stretch = Stretch.Uniform;
             Methods.AddToGui(ImageDisplayed, TextAndImageGrid, 0, 1);
         }
@@ -484,7 +484,7 @@ namespace WPFProjectAssignment
         private static void OnCheckoutClick(object sender, RoutedEventArgs e)
         {
             //We check if a valid discount code is applied to the text box and pass the discount object on to receipt class if they match.
-            foreach (var code in Utilities.Shared.DiscountCodes)
+            foreach (var code in Shared.Shared.DiscountCodes)
             {
                 if (CustomerDiscount.Text.ToLower() == code.CodeName.ToLower())
                 {
@@ -506,7 +506,7 @@ namespace WPFProjectAssignment
         
         private static void OnSaveCartClick(object sender, RoutedEventArgs e)
         {
-            Cart.SaveToFile(Utilities.Shared.CartFilePath);
+            Cart.SaveToFile(Shared.Shared.CartFilePath);
         }
         
         private static void OnEmptyCartButtonClick(object sender, RoutedEventArgs e)

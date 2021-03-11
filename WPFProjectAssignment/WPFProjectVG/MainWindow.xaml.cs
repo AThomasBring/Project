@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Utilities;
+using Shared;
 using WPFProjectAssignment;
 
 namespace WPFProjectVG
@@ -37,8 +37,8 @@ namespace WPFProjectVG
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             
             Methods.CopyImagesToTempFolder(@"C:\Windows\Temp\PotionShopTempFiles\Images\");
-            Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountFilePath);
-            Shared.Products = Methods.LoadProducts(Shared.ProductFilePath);
+            Shared.Shared.DiscountCodes = Methods.LoadCodes(Shared.Shared.DiscountFilePath);
+            Shared.Shared.Products = Methods.LoadProducts(Shared.Shared.ProductFilePath);
             
             // Window options
             Title = "Potion Shop";
