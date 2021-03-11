@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WPFProjectAssignment\WPFProjectAssignment.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="TestProducts.csv" />
     <Content Include="TestProducts.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -13,54 +13,21 @@
     <None Remove="Images\strengtheningsolution.jpg" />
     <None Remove="Images\wolfsbanePotion.jpg" />
     <None Remove="Products.csv" />
-    <Content Include="Images\polyjuicepotion.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\shrinkingSolution.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\skeleGroPotion.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\strengtheningsolution.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\wolfsbanePotion.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Products.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Remove="Images\agingPotion.jpg" />
-    <Content Include="Images\agingPotion.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Remove="Images\babblingBeverage.jpg" />
-    <Content Include="Images\babblingBeverage.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Remove="Images\elixirOfLife.jpg" />
-    <Content Include="Images\elixirOfLife.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Remove="Images\welcome.jpg" />
-    <Content Include="Images\welcome.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Images\amortentia.jpg" />
     <None Remove="Images\draughtOfLivingDeath.jpg" />
-    <Content Include="Images\draughtOfLivingDeath.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Product.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <None Remove="DiscountCodes.txt" />
     <Content Include="DiscountCodes.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -69,6 +36,15 @@
 
   <ItemGroup>
     <Folder Include="obj\Debug\netcoreapp3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Utilities\Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ShoppingCart.cs" />
+    <Compile Remove="Receipt.cs" />
   </ItemGroup>
 
 </Project>
