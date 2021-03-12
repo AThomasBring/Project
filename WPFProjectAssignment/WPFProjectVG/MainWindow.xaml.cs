@@ -33,6 +33,7 @@ namespace WPFProjectVG
         public string TempImagePath;
         public Product[] TempProducts;
 
+        private Label DiscountPercentage = new Label();
         private TextBox InsertNewPercentage = new TextBox();
         private Label NewDiscount = new Label();
         private TextBox InsertNewDiscount = new TextBox();
@@ -118,13 +119,46 @@ namespace WPFProjectVG
             Methods.AddToGui(Shared.ProductBox, leftSideGrid);
             Shared.ProductBox.SelectionChanged += ProductBoxOnSelectionChanged;
 
+            ListBox DiscountBox = new ListBox
+            {
+                Margin = new Thickness(5)
+            };
+
+            foreach (var discountCode in Shared.DiscountCodes)
+            {
+                DiscountBox.Items.Add(new ListBoxItem() { Content = discountCode.CodeName }); 
+            }
+            DiscountBox.SelectedIndex = -1;
+            Methods.AddToGui(DiscountBox, DiscountGrid, 0, 0);
+            DiscountBox.SelectionChanged += DiscountBox_SelectionChanged;
+
+            
+
+            Button AddNewDicountCode = new Button
+            {
+                Content = "Add new discount Code"
+            };
+            Methods.AddToGui(AddNewDicountCode, DiscountGrid, 1, 0);
+            Grid.SetColumnSpan(AddNewDicountCode, 2);
+            AddNewDicountCode.Click += AddDiscountButton_Click;
+
+        }
+
+        private void DiscountBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Inte implementerat än.
+            throw new NotImplementedException();
+        }
+
+        private void AddDiscountButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            //Inte implementerade än.
             NewDiscount = new Label
             {
-                Content = ("Enter a new discount: "),
-                
-            };
-            Methods.AddToGui(NewDiscount, DiscountGrid, 0, 0);
+                Content = ("Enter a new discount Code: "),
 
+            };
             InsertNewDiscount = new TextBox
             {
                 Text = "",
@@ -133,15 +167,11 @@ namespace WPFProjectVG
                 BorderThickness = new Thickness(2),
                 Height = 32,
             };
-            Methods.AddToGui(InsertNewDiscount, DiscountGrid, 0, 1);
-
-            Label DiscountPercentage = new Label
+            DiscountPercentage = new Label
             {
                 Content = "Enter the percentage: ",
 
             };
-            Methods.AddToGui(DiscountPercentage, DiscountGrid, 1, 0);
-
             InsertNewPercentage = new TextBox
             {
                 Text = "",
@@ -150,23 +180,7 @@ namespace WPFProjectVG
                 BorderThickness = new Thickness(2),
                 Height = 32,
             };
-            Methods.AddToGui(InsertNewPercentage, DiscountGrid, 1, 1);
-
-
-            Button AddDiscountButton = new Button
-            {
-                Content = "Add discount"
-            };
-            Methods.AddToGui(AddDiscountButton, DiscountGrid, 2, 0);
-            Grid.SetColumnSpan(AddDiscountButton, 2);
-            AddDiscountButton.Click += AddDiscountButton_Click;
-
-        }
-
-        private void AddDiscountButton_Click(object sender, RoutedEventArgs e)
-        {
-            InsertNewDiscount.Text = //New discount code add to file
-            InsertNewPercentage.Text = //New discount percentage add to file
+            
         }
 
         private void OnEditButtonClick(object sender, RoutedEventArgs e)
