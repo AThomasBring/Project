@@ -40,10 +40,11 @@ namespace WPFProjectAssignment
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
-            Methods.CopyImagesToTempFolder(@"C:\Windows\Temp\PotionShopTempFiles\Images\");
+            Methods.CopyImagesToTempFolder(Shared.ImageFolderPath);
+            Methods.CopyProductFileToTempFolder(Shared.ProductFilePath);
 
-            Utilities.Shared.DiscountCodes = Methods.LoadCodes(Utilities.Shared.DiscountFilePath);
-            Utilities.Shared.Products = Methods.LoadProducts(Utilities.Shared.ProductFilePath);
+            Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountFilePath);
+            Shared.Products = Methods.LoadProducts(Shared.ProductFilePath);
             Cart = new ShoppingCart();
 
 
@@ -91,7 +92,7 @@ namespace WPFProjectAssignment
                 Margin = new Thickness(5)
             };
 
-            foreach (var product in Utilities.Shared.Products)
+            foreach (var product in Shared.Products)
             {
                 Shared.ProductBox.Items.Add(new ListBoxItem() {Content = product.Name, Tag = product});
             }
@@ -144,9 +145,9 @@ namespace WPFProjectAssignment
 
             //Now, we check if user has a saved cart or not and display a welcome message.
 
-            if (File.Exists(Utilities.Shared.CartFilePath))
+            if (File.Exists(Shared.CartFilePath))
             {
-                Cart.LoadFromFile(Utilities.Shared.CartFilePath);
+                Cart.LoadFromFile(Shared.CartFilePath);
                 UpdateCartGui();
                 ShowWelcomeScreen("Welcome Back!",
                     "Thanks for coming back to our store. We have stored the cart from your last visit so you can just carry on shopping!");
@@ -452,7 +453,7 @@ namespace WPFProjectAssignment
             //Then, we update texts and image
             Shared.TextAndImageGrid.Children.Clear();
             Methods.UpdateDescriptionText(Shared.SelectedProduct);
-            Methods.UpdateProductImage(Shared.SelectedProduct.Image);
+            Methods.UpdateProductImage(Shared.ImageFolderPath + Shared.SelectedProduct.Image);
             var addToCart = Methods.CreateButton("Add to Cart", Shared.SelectedProduct);
             Shared.InfoPanel.Children.Add(addToCart);
             addToCart.Click += OnAddClick;

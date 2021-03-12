@@ -18,7 +18,11 @@ namespace Utilities
             Grid.SetRow(element, row);
             Grid.SetColumn(element, column);
         }
-        
+
+        public static void CopyProductFileToTempFolder(string path)
+        {
+            File.Copy("Products.csv", path, true);
+        }
         public static void CopyImagesToTempFolder(string path)
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
@@ -34,7 +38,7 @@ namespace Utilities
                 File.Copy(newPath, path + fileName, true);
             }
         }
-        
+
         public static Product[] LoadProducts(string path)
         {
             // If the file doesn't exist, stop the program completely.
@@ -61,7 +65,7 @@ namespace Utilities
                         Name = parts[1],
                         Description = parts[2],
                         Price = decimal.Parse(parts[3]),
-                        Image = @"C:\Windows\Temp\PotionShopTempFiles\Images\" + parts[4]
+                        Image = parts[4]
                     };
                     products.Add(p);
                 }
@@ -73,6 +77,7 @@ namespace Utilities
 
             return products.ToArray();
         }
+
         public static DiscountCode[] LoadCodes(string filePath)
         {
             if (!File.Exists(filePath))
@@ -104,8 +109,7 @@ namespace Utilities
             return codes.ToArray();
         }
 
-        
-        
+
         public static Grid CreateGrid(int[] rows, int[] columns)
         {
             var grid = new Grid
@@ -129,7 +133,7 @@ namespace Utilities
 
             return grid;
         }
-        
+
         //Product parameter is optional, because not all buttons need to be tagged.
         public static Button CreateButton(string content, Product tag = null)
         {
@@ -166,7 +170,7 @@ namespace Utilities
                 Orientation = Orientation.Vertical,
                 Margin = new Thickness(1)
             };
-            Methods.AddToGui(Shared.InfoPanel, Shared.TextAndImageGrid);
+            AddToGui(Shared.InfoPanel, Shared.TextAndImageGrid);
 
             // The text heading inside the information panel.
             var productName = new TextBlock
@@ -186,7 +190,7 @@ namespace Utilities
                 Margin = new Thickness(5),
                 FontSize = 12
             };
-            Methods.AddToGui(Shared.ProductDescription, Shared.InfoPanel);
+            AddToGui(Shared.ProductDescription, Shared.InfoPanel);
 
             var price = product.Price.ToString(CultureInfo.InvariantCulture);
             Shared.ProductPrice = new TextBlock
@@ -198,7 +202,7 @@ namespace Utilities
                 HorizontalAlignment = HorizontalAlignment.Right
             };
 
-            Methods.AddToGui(Shared.ProductPrice, Shared.InfoPanel);
+            AddToGui(Shared.ProductPrice, Shared.InfoPanel);
 
         }
 
@@ -216,11 +220,15 @@ namespace Utilities
             RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
             return image;
         }
-        
     }
     
     public static class Shared
     {
+        public const string DiscountFilePath = "DiscountCodes.txt";
+        public const string CartFilePath = @"C:\Windows\Temp\Cart.csv";
+        public const string WelcomeImagePath = @"C:\Windows\Temp\PotionShopTempFiles\Images\welcome.jpg";
+        public const string ImageFolderPath = @"C:\Windows\Temp\PotionShopTempFiles\Images\";
+        public const string ProductFilePath = @"C:\Windows\Temp\PotionShopTempFiles\Products.csv";
         public static Product[] Products;
         public static DiscountCode[] DiscountCodes;
         public static ListBox ProductBox = new ListBox();
@@ -230,44 +238,27 @@ namespace Utilities
         public static Grid ButtonGrid = new Grid();
         public static StackPanel InfoPanel = new StackPanel();
         public static TextBlock ProductPrice = new TextBlock();
-        
+
         // We store the most recent selected product here
         public static Product SelectedProduct { get; set; }
-        
-        public const string DiscountFilePath = "DiscountCodes.txt";
-        public const string ProductFilePath = "Products.csv";
-        public const string CartFilePath = @"C:\Windows\Temp\Cart.csv";
-        public const string WelcomeImagePath = @"C:\Windows\Temp\PotionShopTempFiles\Images\welcome.jpg";
-
-
-
-
-
-
-
-
-
     }
     public class Product
     {
         public string Code;
-        public string Name;
         public string Description;
-        public decimal Price;
         public string Image;
+        public string Name;
+        public decimal Price;
     }
     
     public class DiscountCode
     {
         public string CodeName;
         public int Percentage;
-        
-        
     }
     
     public class Receipt
     {
-
         public string[][] ItemsBreakdown;
         public string[][] SumBreakdown;
 
@@ -363,7 +354,7 @@ namespace Utilities
                 Products[product] = number;
             }
         }
-        
+
         public void Remove(Product product, int number)
         {
 
@@ -379,12 +370,12 @@ namespace Utilities
                 }
             }
         }
-        
+
         public void Clear()
         {
             Products.Clear();
         }
-        
+
         public void LoadFromFile(string CartFilePath)
         {
             if (!File.Exists(CartFilePath))
