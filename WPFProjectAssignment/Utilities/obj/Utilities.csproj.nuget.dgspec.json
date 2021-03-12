@@ -1,28 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj": {}
+    "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj": {
+    "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj",
+        "projectUniqueName": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj",
         "projectName": "Utilities",
-        "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\obj\\",
+        "projectPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj",
+        "packagesPath": "C:\\Users\\anton\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet"
-        ],
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\anton\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1-windows"
+          "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -61,7 +57,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -27,12 +27,15 @@ namespace WPFProjectVG
         Grid MainGrid = new Grid();
         private Grid ButtonGrid = new Grid();
         public Button EditButton = new Button();
-
+        private Grid DiscountGrid = new Grid();
 
         public Product TempProduct;
         public string TempImagePath;
         public Product[] TempProducts;
-        
+
+        private TextBox InsertNewPercentage = new TextBox();
+        private Label NewDiscount = new Label();
+        private TextBox InsertNewDiscount = new TextBox();
 
         private TextBox editCode = new TextBox();
 
@@ -68,9 +71,14 @@ namespace WPFProjectVG
             MainGrid = Methods.CreateGrid(rows: new[] { 1, 9 }, new[] { 1, 2 });
             Content = MainGrid;
 
+
             // This grid is for dividing the left side of the main window to display available products and shopping cart
             var leftSideGrid = Methods.CreateGrid(rows: new[] { 1, 1 }, columns: null);
             Methods.AddToGui(leftSideGrid, MainGrid, 1 , 0);
+
+            //This gird is for adding new discountcodes 
+            DiscountGrid = Methods.CreateGrid(rows: new[] { 1, 1, 1 }, new[] { 1, 1 });
+            Methods.AddToGui(DiscountGrid, leftSideGrid, 1, 0);
 
             // This grid is for item description and image, and gets cleared and updated every product selection change
             Shared.TextAndImageGrid = Methods.CreateGrid(rows: new[] {5, 1}, columns: new[] {1, 1});
@@ -109,10 +117,56 @@ namespace WPFProjectVG
             Shared.ProductBox.SelectedIndex = -1;
             Methods.AddToGui(Shared.ProductBox, leftSideGrid);
             Shared.ProductBox.SelectionChanged += ProductBoxOnSelectionChanged;
-            
+
+            NewDiscount = new Label
+            {
+                Content = ("Enter a new discount: "),
+                
+            };
+            Methods.AddToGui(NewDiscount, DiscountGrid, 0, 0);
+
+            InsertNewDiscount = new TextBox
+            {
+                Text = "",
+                Margin = new Thickness(5),
+                FontSize = 12,
+                BorderThickness = new Thickness(2),
+                Height = 32,
+            };
+            Methods.AddToGui(InsertNewDiscount, DiscountGrid, 0, 1);
+
+            Label DiscountPercentage = new Label
+            {
+                Content = "Enter the percentage: ",
+
+            };
+            Methods.AddToGui(DiscountPercentage, DiscountGrid, 1, 0);
+
+            InsertNewPercentage = new TextBox
+            {
+                Text = "",
+                Margin = new Thickness(5),
+                FontSize = 12,
+                BorderThickness = new Thickness(2),
+                Height = 32,
+            };
+            Methods.AddToGui(InsertNewPercentage, DiscountGrid, 1, 1);
 
 
+            Button AddDiscountButton = new Button
+            {
+                Content = "Add discount"
+            };
+            Methods.AddToGui(AddDiscountButton, DiscountGrid, 2, 0);
+            Grid.SetColumnSpan(AddDiscountButton, 2);
+            AddDiscountButton.Click += AddDiscountButton_Click;
 
+        }
+
+        private void AddDiscountButton_Click(object sender, RoutedEventArgs e)
+        {
+            InsertNewDiscount.Text = //New discount code add to file
+            InsertNewPercentage.Text = //New discount percentage add to file
         }
 
         private void OnEditButtonClick(object sender, RoutedEventArgs e)

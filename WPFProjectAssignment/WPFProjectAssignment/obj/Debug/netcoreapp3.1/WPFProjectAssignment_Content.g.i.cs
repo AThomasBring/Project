@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("products.csv")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("discountcodes.txt")]
 
 
