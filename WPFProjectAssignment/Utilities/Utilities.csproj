@@ -7,6 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Content Include="DiscountCodes.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
       <Content Include="Images\agingPotion.jpg" />
       <Content Include="Images\babblingBeverage.jpg" />
       <Content Include="Images\draughtOfLivingDeath.jpg" />

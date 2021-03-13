@@ -19,9 +19,9 @@ namespace Utilities
             Grid.SetColumn(element, column);
         }
 
-        public static void CopyProductFileToTempFolder(string path)
+        public static void CopyToTempFolder(string source, string destination)
         {
-            File.Copy("Products.csv", path, true);
+            File.Copy(source, destination, true);
         }
         public static void CopyImagesToTempFolder(string path)
         {
@@ -91,7 +91,7 @@ namespace Utilities
             {
                 try
                 {
-                    var word = discountline.Split(',');
+                    var word = discountline.Split('\\');
                     var c = new DiscountCode 
                     { 
                         CodeName = word[0],
@@ -135,7 +135,7 @@ namespace Utilities
         }
 
         //Product parameter is optional, because not all buttons need to be tagged.
-        public static Button CreateButton(string content, Product tag = null)
+        public static Button CreateButton(string content, object tag = null)
         {
             var newButton = new Button
             {
@@ -205,6 +205,40 @@ namespace Utilities
             AddToGui(Shared.ProductPrice, Shared.InfoPanel);
 
         }
+        
+        public static void UpdateDescriptionText(DiscountCode discountCode)
+        {
+            Shared.InfoPanel = new StackPanel
+
+            {
+                Orientation = Orientation.Vertical,
+                Margin = new Thickness(1)
+            };
+            AddToGui(Shared.InfoPanel, Shared.TextAndImageGrid);
+
+            // The text heading inside the information panel.
+            var discountName = new TextBlock
+            {
+                Text = discountCode.CodeName,
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 16,
+                TextAlignment = TextAlignment.Center
+            };
+            AddToGui(discountName, Shared.InfoPanel);
+
+            Shared.ProductDescription = new TextBlock
+            {
+                Text = discountCode.Percentage + "\n",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 12
+            };
+            AddToGui(Shared.ProductDescription, Shared.InfoPanel);
+
+        }
+        
+        
 
         public static Image CreateImage(string filePath)
         {
@@ -224,8 +258,8 @@ namespace Utilities
     
     public static class Shared
     {
-        public const string DiscountFilePath = "DiscountCodes.txt";
-        public const string CartFilePath = @"C:\Windows\Temp\Cart.csv";
+        public const string DiscountFilePath = @"C:\Windows\Temp\PotionShopTempFiles\DiscountCodes.csv";
+        public const string CartFilePath = @"C:\Windows\Temp\PotionShopTempFiles\Cart.csv";
         public const string WelcomeImagePath = @"C:\Windows\Temp\PotionShopTempFiles\Images\welcome.jpg";
         public const string ImageFolderPath = @"C:\Windows\Temp\PotionShopTempFiles\Images\";
         public const string ProductFilePath = @"C:\Windows\Temp\PotionShopTempFiles\Products.csv";
@@ -402,7 +436,7 @@ namespace Utilities
                 }
 
                 // Save to Items dictionary
-                this.Products[current] = amount;
+                Products[current] = amount;
             }
         }
 

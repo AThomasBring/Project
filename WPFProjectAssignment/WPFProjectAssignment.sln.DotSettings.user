@@ -1,10 +1,11 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\admin\AppData\Local\JetBrains\Rider2020.3\resharper-host\temp\Rider\vAny\CoverageData\_WPFProjectAssignment.565911614\Snapshot\snapshot.utdcvr</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=425bafcc_002D276f_002D4b2f_002D8482_002Dd7112f4e12d1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CheckReceipt" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=45f4aac5_002D36bf_002D430d_002Dadd3_002Dae93e0bc24ac/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="LoadCart #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=45f4aac5_002D36bf_002D430d_002Dadd3_002Dae93e0bc24ac/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="LoadCart #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckFile&lt;/TestId&gt;&#xD;
@@ -63,7 +64,7 @@
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckReceipt.CheckLargeNumbers&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f007be84_002D1480_002D418c_002Db36d_002D5cbdc630499c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="LoadCart" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f007be84_002D1480_002D418c_002Db36d_002D5cbdc630499c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="LoadCart" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;MSTest::3D8CB230-D5A2-48DE-B7F2-B7AED621D2DF::.NETCoreApp,Version=v3.1::WPFProjectAssignmentTests1.CheckFile.LoadCart&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;

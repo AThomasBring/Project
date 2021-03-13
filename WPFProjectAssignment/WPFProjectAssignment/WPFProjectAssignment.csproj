@@ -26,9 +26,6 @@
 
   <ItemGroup>
     <None Remove="DiscountCodes.txt" />
-    <Content Include="DiscountCodes.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>

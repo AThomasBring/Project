@@ -1,4 +1,0 @@
-﻿Hello15, 15
-CSharp20, 20
-Hogwarts30, 30
-MagicPotion50, 50

@@ -41,7 +41,10 @@ namespace WPFProjectAssignment
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
             Methods.CopyImagesToTempFolder(Shared.ImageFolderPath);
-            Methods.CopyProductFileToTempFolder(Shared.ProductFilePath);
+            if (!File.Exists(Shared.ProductFilePath))
+                Methods.CopyToTempFolder("Products.csv", Shared.ProductFilePath);
+            if (!File.Exists(Shared.DiscountFilePath))
+                Methods.CopyToTempFolder("DiscountCodes.csv", Shared.DiscountFilePath);
 
             Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountFilePath);
             Shared.Products = Methods.LoadProducts(Shared.ProductFilePath);
