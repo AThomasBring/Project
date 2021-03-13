@@ -9,7 +9,7 @@ namespace WPFProjectAssignmentTests1
     public class CheckFile
     {
         [TestMethod]
-        public void SaveAndLoadCart()
+        public static void SaveAndLoadCart()
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             
@@ -37,7 +37,7 @@ namespace WPFProjectAssignmentTests1
         }
         
         [TestMethod]
-        public void LoadWithNoSavedCart()
+        public static void LoadWithNoSavedCart()
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             

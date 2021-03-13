@@ -10,3 +10,15 @@ C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\Utilities\obj\Debug
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\Utilities\obj\Debug\netcoreapp3.1-windows\Utilities.dll
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\Utilities\obj\Debug\netcoreapp3.1-windows\Utilities.pdb
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\Utilities\bin\Debug\netcoreapp3.1-windows\DiscountCodes.csv
+C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\Utilities\bin\Debug\netcoreapp3.1-windows\DiscountCodes.csv
+C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\Utilities\bin\Debug\netcoreapp3.1-windows\Images\welcome.jpg
+C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\Utilities\bin\Debug\netcoreapp3.1-windows\Products.csv
+C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\Utilities\bin\Debug\netcoreapp3.1-windows\Utilities.deps.json
+C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\Utilities\bin\Debug\netcoreapp3.1-windows\Utilities.dll
+C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\Utilities\bin\Debug\netcoreapp3.1-windows\Utilities.pdb
+C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\Utilities\obj\Debug\netcoreapp3.1-windows\Utilities.csprojAssemblyReference.cache
+C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\Utilities\obj\Debug\netcoreapp3.1-windows\Utilities.AssemblyInfoInputs.cache
+C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\Utilities\obj\Debug\netcoreapp3.1-windows\Utilities.AssemblyInfo.cs
+C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\Utilities\obj\Debug\netcoreapp3.1-windows\Utilities.csproj.CoreCompileInputs.cache
+C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\Utilities\obj\Debug\netcoreapp3.1-windows\Utilities.dll
+C:\Users\anton\OneDrive\Dokument\GitHub\Project\WPFProjectAssignment\Utilities\obj\Debug\netcoreapp3.1-windows\Utilities.pdb

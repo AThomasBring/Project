@@ -11,13 +11,9 @@ using Utilities;
 
 namespace WPFProjectAssignment
 {
-
-
-
     public partial class MainWindow : Window
     {
         public static ShoppingCart Cart;
-
 
         private static StackPanel CartDisplay = new StackPanel();
         private Button CheckoutButton = new Button();
@@ -26,9 +22,6 @@ namespace WPFProjectAssignment
         private static Label DiscountLabel = new Label();
         private static Grid MainGrid = new Grid();
         private static Grid DiscountGrid = new Grid();
-
-
-
 
         public MainWindow()
         {
@@ -49,7 +42,6 @@ namespace WPFProjectAssignment
             Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountFilePath);
             Shared.Products = Methods.LoadProducts(Shared.ProductFilePath);
             Cart = new ShoppingCart();
-
 
             // Window options
             Title = "Potion Shop";
@@ -86,7 +78,7 @@ namespace WPFProjectAssignment
                 FontSize = 20,
                 TextAlignment = TextAlignment.Center
             };
-
+            
             Methods.AddToGui(heading, MainGrid);
             Grid.SetColumnSpan(heading, 2);
 
@@ -108,7 +100,6 @@ namespace WPFProjectAssignment
             {
                 Margin = new Thickness(2),
                 Orientation = Orientation.Vertical,
-
             };
 
             //This is where the user can enter their discount code.
@@ -163,10 +154,6 @@ namespace WPFProjectAssignment
             Methods.AddToGui(CartDisplay, leftSideGrid, 1);
         }
 
-
-
-
-
         private static void UpdateCartGui()
         {
             var totalSum = Math.Round(Cart.Products.Sum(product => product.Key.Price * product.Value), 2);
@@ -186,7 +173,6 @@ namespace WPFProjectAssignment
 
                 Methods.AddToGui(cartLine, cartGrid);
                 Methods.AddToGui(cartGrid, CartDisplay);
-
 
                 var addButton = new Button
                 {
@@ -223,12 +209,10 @@ namespace WPFProjectAssignment
             CartDisplay.Visibility = Visibility.Visible;
         }
 
-
-
         private void ShowWelcomeScreen(string greeting, string message)
         {
+            //The InfoPanel is the container that changes pending on the product selected
             Shared.InfoPanel = new StackPanel
-
             {
                 Orientation = Orientation.Vertical,
                 Margin = new Thickness(1)
@@ -237,7 +221,7 @@ namespace WPFProjectAssignment
             Grid.SetColumn(Shared.InfoPanel, 0);
             Grid.SetRow(Shared.InfoPanel, 0);
 
-            // The text heading inside the information panel.
+            // The text heading inside the Infopanel.
             var infoHeading = new TextBlock
             {
                 Text = greeting,
@@ -248,6 +232,7 @@ namespace WPFProjectAssignment
             };
             Shared.InfoPanel.Children.Add(infoHeading);
 
+            //Product description inside the InfoPanel
             Shared.ProductDescription = new TextBlock
             {
                 Text = message,
@@ -272,9 +257,8 @@ namespace WPFProjectAssignment
             {
                 Content = "Thanks for your order! Here´s your receipt: \n "
             };
-
+            //ColumnCategories is the top "banner" for the part of the reciept showing the products
             var columnCategories = Methods.CreateGrid(null, columns: new[] {1, 1, 1, 1});
-
             Label[] categories =
             {
                 new Label
@@ -304,11 +288,12 @@ namespace WPFProjectAssignment
                 columnCategories.Children.Add(categories[i]);
                 Grid.SetColumn(categories[i], i);
             }
-
             Methods.AddToGui(receiptPanel, Shared.TextAndImageGrid);
             Grid.SetColumnSpan(receiptPanel, 2);
             Methods.AddToGui(message, receiptPanel);
             Methods.AddToGui(columnCategories, receiptPanel);
+
+            //Adding each product to the reciept
             foreach (var product in receipt.ItemsBreakdown)
             {
                 var productRow = Methods.CreateGrid(null, columns: new[] {1, 1, 1, 1});
@@ -349,8 +334,8 @@ namespace WPFProjectAssignment
                 receiptPanel.Children.Add(productRow);
                 colorPicker++;
             }
-            //var discountCodeRow = CreateGrid(null, columns: new []{1, 1, 1, 1});
 
+            //Adding the bottom bit of the reciept showing discount code used (if used) and sums to pay
             colorPicker = 0;
             foreach (var row in receipt.SumBreakdown)
             {
@@ -379,7 +364,6 @@ namespace WPFProjectAssignment
                 {
                     summaryLabels[3].FontWeight = FontWeights.Bold;
                 }
-
                 colorPicker++;
 
                 for (int i = 0; i < summaryLabels.Length; i++)
@@ -387,10 +371,8 @@ namespace WPFProjectAssignment
                     summaryRow.Children.Add(summaryLabels[i]);
                     Grid.SetColumn(summaryLabels[i], i);
                 }
-
                 receiptPanel.Children.Add(summaryRow);
             }
-
             Cart.Clear();
             UpdateCartGui();
             Shared.ButtonGrid.Visibility = Visibility.Hidden;
@@ -429,11 +411,9 @@ namespace WPFProjectAssignment
             {
                 ShowReceipt(new Receipt(Cart));
             }
-
             //if none of the above were true, it means the user entered an incorrect code and is notified by the discount label turning red.
             DiscountLabel.Content = "Enter Discount Code*";
             DiscountLabel.Foreground = Brushes.Crimson;
-
         }
 
         private static void OnSaveCartClick(object sender, RoutedEventArgs e)
@@ -449,7 +429,6 @@ namespace WPFProjectAssignment
 
         private void ProductBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             //First, we store the selected product in our SelectedProduct variable so that other objects can know about it.
             Shared.SelectedProduct = (Product) ((ListBoxItem) Shared.ProductBox.SelectedItem).Tag;
 
