@@ -26,6 +26,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\WPFProjectAssignment\WPFProjectAssignment.csproj" />
+    <ProjectReference Include="..\WPFProjectVG\WPFProjectVG.csproj" />
   </ItemGroup>
 
 </Project>

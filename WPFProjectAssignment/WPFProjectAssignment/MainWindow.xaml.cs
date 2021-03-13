@@ -134,6 +134,7 @@ namespace WPFProjectAssignment
             CheckoutButton.Click += OnCheckoutClick;
 
             var saveCartButton = Methods.CreateButton("Save Cart");
+            saveCartButton.Tag = Cart;
             Methods.AddToGui(saveCartButton, Shared.ButtonGrid, 1, 1);
             saveCartButton.Click += OnSaveCartClick;
 
@@ -418,7 +419,10 @@ namespace WPFProjectAssignment
 
         private static void OnSaveCartClick(object sender, RoutedEventArgs e)
         {
-            Cart.SaveToFile(Shared.CartFilePath);
+            var s = (Button) sender;
+            var cart = (ShoppingCart) s.Tag;
+            cart.SaveToFile(Shared.CartFilePath);
+            MessageBox.Show("Saved shopping cart.");
         }
 
         private static void OnEmptyCartButtonClick(object sender, RoutedEventArgs e)

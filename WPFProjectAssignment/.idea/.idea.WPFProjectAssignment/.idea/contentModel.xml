@@ -52,7 +52,6 @@
               <e p="App.g.cs" t="Include" />
               <e p="MainWindow.g.cs" t="Include" />
               <e p="WPFProjectAssignment.AssemblyInfo.cs" t="Include" />
-              <e p="WPFProjectAssignment_Content.g.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -61,8 +60,6 @@
       <e p="WPFProjectAssignment.sln" t="IncludeFlat" />
       <e p="WPFProjectAssignmentTests1" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
-        <e p="CheckFile.cs" t="Include" />
-        <e p="CheckReceipt.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -72,6 +69,7 @@
         </e>
         <e p="TestCart.csv" t="Include" />
         <e p="TestProducts.csv" t="Include" />
+        <e p="Tests.cs" t="Include" />
         <e p="WPFProjectAssignmentTests1.csproj" t="IncludeRecursive" />
       </e>
       <e p="WPFProjectVG" t="IncludeRecursive">

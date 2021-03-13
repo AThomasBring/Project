@@ -450,7 +450,6 @@ namespace Utilities
                 {
                     File.Delete(path);
                 }
-                MessageBox.Show("Your shopping cart is empty");
                 return;
             }
             List<string> lines = new List<string>();
@@ -464,7 +463,6 @@ namespace Utilities
                 lines.Add(p.Code + "," + amount);
             }
             File.WriteAllLines(path, lines);
-            MessageBox.Show("Saved shopping cart.");
         }
     }
     
