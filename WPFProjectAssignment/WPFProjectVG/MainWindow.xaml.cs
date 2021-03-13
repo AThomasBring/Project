@@ -31,9 +31,18 @@ namespace WPFProjectVG
         public Button EditButton = new Button();
         StackPanel EditPanel = new StackPanel();
 
+        private Grid DiscountGrid = new Grid();
+
+        public Product TempProduct;
         public string TempImagePath;
         public string TempImageFileName;
 
+        public Product[] TempProducts;
+
+        private Label DiscountPercentage = new Label();
+        private TextBox InsertNewPercentage = new TextBox();
+        private Label NewDiscount = new Label();
+        private TextBox InsertNewDiscount = new TextBox();
 
         private TextBox editCode = new TextBox();
 
@@ -118,6 +127,68 @@ namespace WPFProjectVG
             Methods.AddToGui(Shared.ProductBox, leftSideGrid);
             Shared.ProductBox.SelectionChanged += ProductBoxOnSelectionChanged;
 
+            ListBox DiscountBox = new ListBox
+            {
+                Margin = new Thickness(5)
+            };
+
+            foreach (var discountCode in Shared.DiscountCodes)
+            {
+                DiscountBox.Items.Add(new ListBoxItem() { Content = discountCode.CodeName }); 
+            }
+            DiscountBox.SelectedIndex = -1;
+            Methods.AddToGui(DiscountBox, DiscountGrid, 0, 0);
+            DiscountBox.SelectionChanged += DiscountBox_SelectionChanged;
+
+            
+
+            Button AddNewDicountCode = new Button
+            {
+                Content = "Add new discount Code"
+            };
+            Methods.AddToGui(AddNewDicountCode, DiscountGrid, 1, 0);
+            Grid.SetColumnSpan(AddNewDicountCode, 2);
+            AddNewDicountCode.Click += AddDiscountButton_Click;
+
+        }
+
+        private void DiscountBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Inte implementerat än.
+            throw new NotImplementedException();
+        }
+
+        private void AddDiscountButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            //Inte implementerade än.
+            NewDiscount = new Label
+            {
+                Content = ("Enter a new discount Code: "),
+
+            };
+            InsertNewDiscount = new TextBox
+            {
+                Text = "",
+                Margin = new Thickness(5),
+                FontSize = 12,
+                BorderThickness = new Thickness(2),
+                Height = 32,
+            };
+            DiscountPercentage = new Label
+            {
+                Content = "Enter the percentage: ",
+
+            };
+            InsertNewPercentage = new TextBox
+            {
+                Text = "",
+                Margin = new Thickness(5),
+                FontSize = 12,
+                BorderThickness = new Thickness(2),
+                Height = 32,
+            };
+            
         }
 
         private void OnEditButtonClick(object sender, RoutedEventArgs e)
