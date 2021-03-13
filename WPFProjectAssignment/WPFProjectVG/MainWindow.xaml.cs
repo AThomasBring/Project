@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.DirectoryServices.ActiveDirectory;
 using System.Globalization;
@@ -23,16 +24,16 @@ namespace WPFProjectVG
 {
     public partial class MainWindow : Window
     {
+        private Product[] TempProducts;
 
         Grid MainGrid = new Grid();
         private Grid ButtonGrid = new Grid();
         public Button EditButton = new Button();
+        StackPanel EditPanel = new StackPanel();
 
-
-        public Product TempProduct;
         public string TempImagePath;
-        public Product[] TempProducts;
-        
+        public string TempImageFileName;
+
 
         private TextBox editCode = new TextBox();
 
@@ -42,9 +43,15 @@ namespace WPFProjectVG
 
         private TextBox editPrice = new TextBox();
 
-        
+        private Label priceLabel = new Label();
+        private Label codeLabel = new Label();
+        private Label descriptionLabel = new Label();
+        private Label nameLabel = new Label();
+        private Label Message = new Label();
+
+
         public MainWindow()
-        
+
         {
             InitializeComponent();
             Start();
@@ -53,37 +60,37 @@ namespace WPFProjectVG
         private void Start()
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
-            
+
             Methods.CopyImagesToTempFolder(@"C:\Windows\Temp\PotionShopTempFiles\Images\");
             Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountFilePath);
             Shared.Products = Methods.LoadProducts(Shared.ProductFilePath);
-            
+
             // Window options
             Title = "Behind the magic curtain";
             Width = 1080;
             Height = 720;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            
+
             //Our method for creating grids takes the lenght of an int array for number of rows/columns, and the value of integers for their respective height/width. (relative proportions, not pixels)
-            MainGrid = Methods.CreateGrid(rows: new[] { 1, 9 }, new[] { 1, 2 });
+            MainGrid = Methods.CreateGrid(rows: new[] {1, 9}, new[] {1, 2});
             Content = MainGrid;
 
             // This grid is for dividing the left side of the main window to display available products and shopping cart
-            var leftSideGrid = Methods.CreateGrid(rows: new[] { 1, 1 }, columns: null);
-            Methods.AddToGui(leftSideGrid, MainGrid, 1 , 0);
+            var leftSideGrid = Methods.CreateGrid(rows: new[] {1, 1}, columns: null);
+            Methods.AddToGui(leftSideGrid, MainGrid, 1, 0);
 
             // This grid is for item description and image, and gets cleared and updated every product selection change
             Shared.TextAndImageGrid = Methods.CreateGrid(rows: new[] {5, 1}, columns: new[] {1, 1});
             Methods.AddToGui(Shared.TextAndImageGrid, MainGrid, 1, 1);
-            
+
             // This grid is where we put the buttons for check out, save/clear cart as well as discount code.
-            ButtonGrid = Methods.CreateGrid(rows: new[] { 5, 1 }, columns: new[] { 2, 2, 3, 1 });
+            ButtonGrid = Methods.CreateGrid(rows: new[] {5, 1}, columns: new[] {2, 2, 3, 1});
             Methods.AddToGui(ButtonGrid, MainGrid, 1, 1);
 
             MainGrid.ShowGridLines = true;
-            
-            
-                        
+
+
+
             //Setting up Controls
             var heading = new TextBlock
             {
@@ -96,7 +103,7 @@ namespace WPFProjectVG
 
             Methods.AddToGui(heading, MainGrid);
             Grid.SetColumnSpan(heading, 2);
-            
+
             Shared.ProductBox = new ListBox
             {
                 Margin = new Thickness(5)
@@ -104,14 +111,12 @@ namespace WPFProjectVG
 
             foreach (var product in Shared.Products)
             {
-                Shared.ProductBox.Items.Add(new ListBoxItem() { Content = product.Name, Tag = product });
+                Shared.ProductBox.Items.Add(new ListBoxItem() {Content = product.Name, Tag = product});
             }
+
             Shared.ProductBox.SelectedIndex = -1;
             Methods.AddToGui(Shared.ProductBox, leftSideGrid);
             Shared.ProductBox.SelectionChanged += ProductBoxOnSelectionChanged;
-            
-
-
 
         }
 
@@ -119,141 +124,195 @@ namespace WPFProjectVG
         {
             var s = (Button) sender;
             Product product = (Product) s.Tag;
-            Shared.TextAndImageGrid.Children.Clear();
+
             UpdateEditDisplay(product);
         }
 
         private void UpdateEditDisplay(Product product)
         {
-
+            Shared.TextAndImageGrid.Children.Clear();
+            ButtonGrid.Children.Clear();
             Methods.UpdateProductImage(Shared.ImageFolderPath + Shared.SelectedProduct.Image);
-            StackPanel editPanel = new StackPanel();
-            Label codeLabel = new Label
+            
+            codeLabel = new Label
             {
-                Content = "Product Code:"
+                Content = "Product Code",
+                Foreground = Brushes.Black,
+                FontWeight = FontWeights.Regular,
             };
 
             editCode.Text = product.Code;
+            editCode.Tag = codeLabel;
 
-            Label nameLabel = new Label
+            nameLabel = new Label
             {
-                Content = "Product Name:"
+                Content = "Product Name",
+                Foreground = Brushes.Black,
+                FontWeight = FontWeights.Regular
             };
 
             editName.Text = product.Name;
 
-            Label descriptionLabel = new Label
+            descriptionLabel = new Label
             {
-                Content = "Product Description:"
+                Content = "Product Description",
+                Foreground = Brushes.Black,
+                FontWeight = FontWeights.Regular
             };
 
             editDescription.Text = product.Description;
-           
             
-            Label priceLabel = new Label
-            {
-                Content = "Product Price:"
-            };
 
+
+            priceLabel = new Label
+            {
+                Content = "Product Price",
+                Foreground = Brushes.Black,
+                FontWeight = FontWeights.Regular
+            };
+            
             editPrice.Text = product.Price.ToString();
 
             Label imageLabel = new Label
             {
-                Content = "Upload Image:"
+                Content = "Upload Image"
             };
 
             Button saveChangesButton = Methods.CreateButton("Save Changes", Shared.SelectedProduct);
             saveChangesButton.Click += OnSaveChangesClick;
-            
+
             Button uploadImageButton = Methods.CreateButton("Select File", Shared.SelectedProduct);
             uploadImageButton.Click += OnUploadButtonClick;
 
-            Methods.AddToGui(editPanel, Shared.TextAndImageGrid, 0, 0 );
-            Methods.AddToGui(codeLabel, editPanel);
-            Methods.AddToGui(editCode, editPanel);
-            Methods.AddToGui(descriptionLabel, editPanel);
-            Methods.AddToGui(editDescription, editPanel);
-            Methods.AddToGui(nameLabel, editPanel);
-            Methods.AddToGui(editName, editPanel);
-            Methods.AddToGui(priceLabel, editPanel);
-            Methods.AddToGui(editPrice, editPanel);
-            Methods.AddToGui(imageLabel, editPanel);
-            Methods.AddToGui(uploadImageButton, editPanel);
+            EditPanel.Children.Clear();
+            Methods.AddToGui(EditPanel, Shared.TextAndImageGrid, 0, 0);
+            Methods.AddToGui(codeLabel, EditPanel);
+            Methods.AddToGui(editCode, EditPanel);
+            Methods.AddToGui(descriptionLabel, EditPanel);
+            Methods.AddToGui(editDescription, EditPanel);
+            Methods.AddToGui(nameLabel, EditPanel);
+            Methods.AddToGui(editName, EditPanel);
+            Methods.AddToGui(priceLabel, EditPanel);
+            Methods.AddToGui(editPrice, EditPanel);
+            Methods.AddToGui(imageLabel, EditPanel);
+            Methods.AddToGui(uploadImageButton, EditPanel);
             Methods.AddToGui(saveChangesButton, ButtonGrid, 1, 1);
-            
+            Methods.AddToGui(Message, EditPanel);
         }
-
+        
+        
         private void OnSaveChangesClick(object sender, RoutedEventArgs e)
         {
             var s = (Button) sender;
-            var productTag = (Product)s.Tag;
-
-            List<Product> checkDuplicateCodes = new List<Product>();
-            foreach (var product in Shared.Products)
+            var productTag = (Product) s.Tag;
+            
+            //First we make sure that the price can be stored as a decimal
+            editPrice.Text = editPrice.Text.Replace(',', '.');
+            editPrice.Text = editPrice.Text.Trim();
+            decimal price;
+            if (!decimal.TryParse(editPrice.Text, out price))
             {
-                if (productTag.Code != product.Code)
-                {
-                    checkDuplicateCodes.Add(product);
-                }
-                else checkDuplicateCodes.Add(TempProduct);
-            }
-
-            var duplicates = checkDuplicateCodes.GroupBy(p => p.Code).Any(p => p.Count() > 1);
-            MessageBox.Show(duplicates.ToString());
-
-            if (duplicates)
-            {
-                MessageBox.Show("Please enter a unique code for each product.");
+                priceLabel.Foreground = Brushes.Crimson;
+                priceLabel.FontWeight = FontWeights.Bold;
+                Message.Content = "The price is not a valid number.";
+                
                 return;
             }
             
-                        
-            //Copy Image
-            File.Copy(TempImagePath, Shared.ImageFolderPath + TempProduct.Image, true);
-
-
-
-            TempProduct.Code = editCode.Text;
-            TempProduct.Name = editName.Text;
-            TempProduct.Description = editDescription.Text;
-            try
+            //We make sure the texboxes have no '\' characters, because we use them as separators in the text files.
+            if (CheckInvalidCharacter(editCode, codeLabel, '\\'))
             {
-                TempProduct.Price = Convert.ToDecimal(editPrice.Text);
+                return;
             }
-            catch (Exception exception)
+            if (CheckInvalidCharacter(editName, nameLabel, '\\'))
             {
-                MessageBox.Show("Not a valid price");
+                return;
+            }
+            if (CheckInvalidCharacter(editDescription, descriptionLabel, '\\'))
+            {
+                return;
+            }
+
+
+
+            var tempProduct = new Product();
+            tempProduct.Code = editCode.Text;
+            tempProduct.Name = editName.Name;
+            tempProduct.Description = editDescription.Text;
+            tempProduct.Price = price;
+            tempProduct.Image = TempImageFileName;
+            
+            //Check if product code duplicates and update Temp Products
+            if (CheckProductCodeDuplicates(tempProduct))
+            {
+                Message.Content = "Every product code needs to be unique";
+                return;
             }
             
-
-
-            SaveToFile(productTag);
         }
 
-        private void SaveToFile(Product editedProduct)
+        private static bool CheckProductCodeDuplicates(Product tempProduct)
         {
-            TempProducts = new Product[Shared.Products.Length];
+            //We make a temporary list to run some tests on
+            List<Product> productList = new List<Product>();
+
             for (int i = 0; i < Shared.Products.Length; i++)
             {
-                if (Shared.Products[i].Code == editedProduct.Code)
+                if (Shared.Products[i].Code != Shared.SelectedProduct.Code)
                 {
-                    TempProducts[i] = TempProduct;
+                    //all un-edited products gets added first
+                    productList.Add(Shared.Products[i]);
                 }
                 else
-                    TempProducts[i] = Shared.Products[i];
+                {
+                    //If the selected product is a match, we add the temp product since this is the one the user have edited.
+                    productList.Add(tempProduct);
+                }
             }
-
-            string[] products = new string[TempProducts.Length];
-            for (int i = 0; i < TempProducts.Length; i++)
+            
+            // if there are duplicates
+            if (productList.Count() != productList.Select(p => p.Code).Distinct().Count())
             {
-                products[i] = TempProducts[i].Code + @"\";
-                products[i] += TempProducts[i].Name + @"\";
-                products[i] += TempProducts[i].Description + @"\";
-                products[i] += TempProducts[i].Price + @"\";
-                products[i] += TempProducts[i].Image;
+                return true;
             }
+            
+            //all codes are unique
+            return false;
 
-            File.WriteAllLines(Shared.ProductFilePath, products);
+        }
+
+        private bool CheckInvalidCharacter(TextBox textbox, Label label, char c)
+        {
+            if (!textbox.Text.Contains(c)) return false;
+            label.Foreground = Brushes.Crimson;
+            label.FontWeight = FontWeights.Bold;
+            Message.Content = label.Content + " can not include any " + "c" + "characters.";
+            return true;
+        }
+
+        private void SaveToFile(Product product, string path)
+        {
+            var products = Shared.Products.ToList();
+            var selectedCode = Shared.SelectedProduct.Code;
+            
+            /*
+            var productsString = new []{Shared.Products.Length}
+            for (int i = 0; i < Shared.Products.Length; i++)
+            {
+                productsString[i] = products[i].Code + @"\";
+                productsString[i] += products[i].Name + @"\";
+                productsString[i] += products[i].Description + @"\";
+                productsString[i] += products[i].Price + @"\";
+                productsString[i] += products[i].Image;
+            }
+            */
+
+            //File.WriteAllLines(path);
+            if (TempImagePath != Shared.ImageFolderPath + Shared.SelectedProduct.Image)
+            {
+                //Copy Image if changed.
+                File.Copy(TempImagePath, Shared.ImageFolderPath + product.Image, true);
+            }
         }
 
         private void OnUploadButtonClick(object sender, RoutedEventArgs e)
@@ -274,7 +333,7 @@ namespace WPFProjectVG
             //We only make changes to the temp product until user chooses to save changes.
             int fileNameIndex = dialog.FileName.LastIndexOf('\\');
             string fileName = dialog.FileName.Substring(fileNameIndex + 1);
-            TempProduct.Image = fileName;
+            TempImageFileName = fileName;
             TempImagePath = dialog.FileName;
         }
 
@@ -282,12 +341,12 @@ namespace WPFProjectVG
         {
             //We reload products to update any saved data to the csv file
             Shared.Products = Methods.LoadProducts(Shared.ProductFilePath);
+            
 
             //We store the selected product in our SelectedProduct variable so that other parts of the program know about it.
             Shared.SelectedProduct = (Product) ((ListBoxItem) Shared.ProductBox.SelectedItem).Tag;
             
-            //We set the temp product and path to a copy of the selected product
-            TempProduct = Shared.SelectedProduct;
+            //We copy the selected product to temporary placeholders until customer save.
             TempImagePath = Shared.ImageFolderPath + Shared.SelectedProduct.Image;
 
             //Then, we update texts and image
