@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
+using System.Net;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Utilities;
@@ -9,6 +11,7 @@ namespace WPFProjectAssignmentTests1
     [TestClass]
     public class Tests
     {
+        private const string TestPath = @"C:\Windows\Temp\PotionShopTempFiles\";
         [TestMethod]
         public void ShopAndCheckReceipt()
         {
@@ -140,44 +143,66 @@ namespace WPFProjectAssignmentTests1
         }
 
         [TestMethod]
-        public void SaveAndLoadCart()
+        public void SaveCart()
         {
+            Methods.CopyToTempFolder("TestProducts.csv", TestPath+"TestProducts.csv");
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             
             var shoppingCart = new ShoppingCart();
-            Product[] products = Methods.LoadProducts("TestProducts.csv");
-            
-            shoppingCart.Add(products[0], 2);
-            shoppingCart.Add(products[1], 3);
-            shoppingCart.SaveToFile("TestCart.csv");
+            Product[] testProducts = Methods.LoadProducts(TestPath + "TestProducts.csv");
 
-            var newCart = new ShoppingCart();
-            newCart.LoadFromFile("TestCart.csv");
+            shoppingCart.Add(testProducts[0], 2);
+            shoppingCart.Add(testProducts[1], 3);
+            shoppingCart.SaveToFile(TestPath+"TestCart.csv");
 
             string expected = "";
             foreach (var item in shoppingCart.Products)
             {
-                expected += item.Key.Code + " " + item.Value;
+                expected += item.Key.Code +@"\" +item.Value;
             }
+          
+        
+            string[] readFromFile = File.ReadAllLines(TestPath + "TestCart.csv");
             string actual = "";
-            foreach (var item in newCart.Products)
+          
+            foreach (var s in readFromFile)
             {
-                actual += item.Key.Code + " " + item.Value;
+                actual += s;
             }
             Assert.AreEqual(expected, actual);
         }
-        
+
+        [TestMethod]
+        public void LoadCart()
+        {
+            Methods.CopyToTempFolder("TestProducts.csv", TestPath + "TestProducts.csv");
+            Methods.CopyToTempFolder("TestCart.csv", TestPath + "TestCart.csv");
+            
+            
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+
+            var shoppingCart = new ShoppingCart();
+            Product[] testProducts = Methods.LoadProducts(TestPath + "TestProducts.csv");
+            shoppingCart.LoadFromFile(TestPath + "TestCart.csv", testProducts);
+
+            string expected = @"001\5002\2";
+            string actual = "";
+            foreach (var item in shoppingCart.Products)
+            {
+                actual += item.Key.Code + @"\" + item.Value;
+            }
+            Assert.AreEqual(expected, actual);
+        }
+
         [TestMethod]
         public void LoadWithNoSavedCart()
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             
             var shoppingCart = new ShoppingCart();
-            Product[] products = Methods.LoadProducts("TestProducts.csv");
-            
-            shoppingCart.SaveToFile("TestCart.csv");
-            shoppingCart.LoadFromFile("TestCart.csv");
-            
+            Product[] testProducts = Methods.LoadProducts(TestPath + "TestProducts.csv");
+            shoppingCart.LoadFromFile(TestPath+"NoSuchFile.csv", testProducts);
+
             Assert.AreEqual(0, shoppingCart.Products.Count);
         }
 

@@ -58,7 +58,7 @@ namespace WPFProjectAssignment
             Methods.AddToGui(leftSideGrid, MainGrid, 1, 0);
 
             // This grid is for item description and image, and gets cleared and updated every product selection change
-            Utilities.Shared.TextAndImageGrid = Methods.CreateGrid(rows: new[] {5, 1}, columns: new[] {1, 1});
+            Shared.TextAndImageGrid = Methods.CreateGrid(rows: new[] {5, 1}, columns: new[] {1, 1});
             Methods.AddToGui(Shared.TextAndImageGrid, MainGrid, 1, 1);
 
             // This grid is where we put the buttons for check out, save/clear cart as well as discount code.
@@ -142,8 +142,8 @@ namespace WPFProjectAssignment
 
             if (File.Exists(Shared.CartFilePath))
             {
-                Cart.LoadFromFile(Shared.CartFilePath);
-                UpdateCartGui();
+                Cart.LoadFromFile(Shared.CartFilePath, Shared.Products);
+                UpdateCartGui(Cart);
                 ShowWelcomeScreen("Welcome Back!",
                     "Thanks for coming back to our store. We have stored the cart from your last visit so you can just carry on shopping!");
             }
@@ -155,12 +155,12 @@ namespace WPFProjectAssignment
             Methods.AddToGui(CartDisplay, leftSideGrid, 1);
         }
 
-        private static void UpdateCartGui()
+        private static void UpdateCartGui(ShoppingCart shoppingCart)
         {
-            var totalSum = Math.Round(Cart.Products.Sum(product => product.Key.Price * product.Value), 2);
+            var totalSum = Math.Round(shoppingCart.Products.Sum(product => product.Key.Price * product.Value), 2);
 
             CartDisplay.Children.Clear();
-            foreach (var item in Cart.Products)
+            foreach (var item in shoppingCart.Products)
             {
                 var cartGrid = new Grid();
                 cartGrid.RowDefinitions.Add(new RowDefinition {Height = new GridLength(1, GridUnitType.Auto)});
@@ -375,7 +375,7 @@ namespace WPFProjectAssignment
                 receiptPanel.Children.Add(summaryRow);
             }
             Cart.Clear();
-            UpdateCartGui();
+            UpdateCartGui(Cart);
             Shared.ButtonGrid.Visibility = Visibility.Hidden;
             CartDisplay.Visibility = Visibility.Hidden;
         }
@@ -385,7 +385,7 @@ namespace WPFProjectAssignment
             var s = (Button) sender;
             Product product = (Product) s.Tag;
             Cart.Add(product, 1);
-            UpdateCartGui();
+            UpdateCartGui(Cart);
         }
 
         private static void OnRemoveClick(object sender, RoutedEventArgs e)
@@ -393,7 +393,7 @@ namespace WPFProjectAssignment
             var s = (Button) sender;
             var product = (Product) s.Tag;
             Cart.Remove(product, 1);
-            UpdateCartGui();
+            UpdateCartGui(Cart);
         }
 
         private static void OnCheckoutClick(object sender, RoutedEventArgs e)
@@ -428,7 +428,7 @@ namespace WPFProjectAssignment
         private static void OnEmptyCartButtonClick(object sender, RoutedEventArgs e)
         {
             Cart.Clear();
-            UpdateCartGui();
+            UpdateCartGui(Cart);
         }
 
         private void ProductBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -10,18 +10,36 @@
       <Content Include="DiscountCodes.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Images\agingPotion.jpg" />
-      <Content Include="Images\babblingBeverage.jpg" />
-      <Content Include="Images\draughtOfLivingDeath.jpg" />
-      <Content Include="Images\elixirOfLife.jpg" />
-      <Content Include="Images\polyjuicepotion.jpg" />
-      <Content Include="Images\shrinkingSolution.png" />
-      <Content Include="Images\skeleGroPotion.jpg" />
-      <Content Include="Images\strengtheningsolution.jpg" />
+      <Content Include="Images\agingPotion.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Images\babblingBeverage.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Images\draughtOfLivingDeath.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Images\elixirOfLife.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Images\polyjuicepotion.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Images\shrinkingSolution.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Images\skeleGroPotion.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Images\strengtheningsolution.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
       <Content Include="Images\welcome.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Images\wolfsbanePotion.jpg" />
+      <Content Include="Images\wolfsbanePotion.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
       <Content Include="Products.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>

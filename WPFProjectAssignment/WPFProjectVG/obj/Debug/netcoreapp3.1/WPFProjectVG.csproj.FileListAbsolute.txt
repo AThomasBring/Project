@@ -57,3 +57,12 @@ C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\obj\De
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\obj\Debug\netcoreapp3.1\WPFProjectVG.dll
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\obj\Debug\netcoreapp3.1\WPFProjectVG.pdb
 C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\obj\Debug\netcoreapp3.1\WPFProjectVG.genruntimeconfig.cache
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Images\agingPotion.jpg
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Images\babblingBeverage.jpg
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Images\draughtOfLivingDeath.jpg
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Images\elixirOfLife.jpg
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Images\polyjuicepotion.jpg
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Images\shrinkingSolution.png
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Images\skeleGroPotion.jpg
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Images\strengtheningsolution.jpg
+C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\bin\Debug\netcoreapp3.1\Images\wolfsbanePotion.jpg

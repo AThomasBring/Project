@@ -53,7 +53,7 @@
   },
   "packageFolders": {
     "C:\\Users\\admin\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet": {}
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -65,7 +65,7 @@
       "outputPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectVG\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet"
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

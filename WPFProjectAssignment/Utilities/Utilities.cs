@@ -25,8 +25,7 @@ namespace Utilities
         }
         public static void CopyImagesToTempFolder(string path)
         {
-            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
-            
+
             //Copy images to temp folder
             Directory.CreateDirectory(path);
             foreach (string newPath in Directory.GetFiles(@"Images\"))
@@ -410,33 +409,37 @@ namespace Utilities
             Products.Clear();
         }
 
-        public void LoadFromFile(string CartFilePath)
+        public void LoadFromFile(string path, Product[] products)
         {
-            if (!File.Exists(CartFilePath))
+            if (!File.Exists(path))
             {
                 return;
             }
+
+            Products = new Dictionary<Product, int>();
+            
             // Go through each line and split it on commas, as in `LoadProducts`.
-            string[] lines = File.ReadAllLines(CartFilePath);
+            string[] lines = File.ReadAllLines(path);
             foreach (string line in lines)
             {
-                string[] parts = line.Split(',');
+                string[] parts = line.Split(@"\");
                 string code = parts[0];
                 int amount = int.Parse(parts[1]);
 
                 // We only store the product's code in the CSV file, but we need to find the actual product object with that code.
                 // To do this, we access the static `products` variable and find the one with the matching code, then grab that product object.
                 Product current = null;
-                foreach (Product p in Shared.Products)
+                foreach (Product p in products)
                 {
                     if (p.Code == code)
                     {
                         current = p;
+                        // Save to Items dictionary
+                        Products[current] = amount;
                     }
                 }
-
-                // Save to Items dictionary
-                Products[current] = amount;
+                
+                
             }
         }
 
@@ -460,7 +463,7 @@ namespace Utilities
 
                 // For each product, we only save the code and the amount.
                 // The other info (name, price, description) is already in "Products.csv" and we can look it up when we load the cart.
-                lines.Add(p.Code + "," + amount);
+                lines.Add(p.Code + @"\" + amount);
             }
             File.WriteAllLines(path, lines);
         }
