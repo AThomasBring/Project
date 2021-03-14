@@ -31,6 +31,9 @@ namespace WPFProjectVG
         Grid MainGrid = new Grid();
         private Grid ButtonGrid = new Grid();
         public Button EditButton = new Button();
+        public Button DeleteProductButton = new Button();
+        public Button DeleteDiscountButton = new Button();
+        public Button SaveChangesButton = new Button();
         StackPanel EditPanel = new StackPanel();
 
         private Grid DiscountGrid = new Grid();
@@ -191,7 +194,6 @@ namespace WPFProjectVG
             var newProduct = new Product();
             hasImage = false;
             UpdateEditDisplay(newProduct);
-            
         }
 
         private void AddDiscountButton_Click(object sender, RoutedEventArgs e)
@@ -209,6 +211,45 @@ namespace WPFProjectVG
             Product product = (Product) s.Tag;
 
             UpdateEditDisplay(product, Shared.ImageFolderPath + Shared.SelectedProduct.Image);
+
+            ButtonGrid.Children.Remove(EditButton);
+            DeleteProductButton = Methods.CreateButton("Delete", Shared.SelectedProduct);
+
+            Methods.AddToGui(DeleteProductButton, ButtonGrid, 1);
+            DeleteProductButton.Click += OnDeleteProductButton_Click;
+        }
+
+        private void OnDeleteProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            int counter = 0;
+            Product[] newProducts = new Product[Shared.Products.Length -1];
+            foreach(Product p in Shared.Products)
+            {
+                if (p != Shared.SelectedProduct)
+                {
+                    newProducts[counter] = p;
+                    counter++;
+                }
+            }
+            Shared.Products = newProducts;
+
+            String[] newProductArray = new string[newProducts.Length];
+
+            for (int i = 0; i < newProducts.Length; i++)
+            {
+                newProductArray[i] = newProducts[i].Code + @"\";
+                newProductArray[i] += newProducts[i].Name + @"\";
+                newProductArray[i] += newProducts[i].Description + @"\";
+                newProductArray[i] += newProducts[i].Price + @"\";
+                newProductArray[i] += newProducts[i].Image;
+            }
+
+            File.WriteAllLines(Shared.ProductsPath, newProductArray);
+            //Update GUI
+            Shared.Products = Methods.LoadProducts(Shared.ProductsPath);
+            Shared.TextAndImageGrid.Children.Clear();
+            MessageBox.Show("Product Deleted!");
+            Shared.ProductBox = CreateProductBox();
         }
 
         private void UpdateEditDisplay(Product product, string imagePath = null)
@@ -338,8 +379,8 @@ namespace WPFProjectVG
             EditDiscountPercent.SelectionChanged += OnEditBoxSelectionChange;
             
 
-            Button saveChangesButton = Methods.CreateButton("Save Changes", SelectedDiscountCode);
-            saveChangesButton.Click += OnSaveChangesClick;
+            SaveChangesButton = Methods.CreateButton("Save Changes", SelectedDiscountCode);
+            SaveChangesButton.Click += OnSaveChangesClick;
 
             EditPanel.Children.Clear();
             Methods.AddToGui(EditPanel, Shared.TextAndImageGrid, 0, 0);
@@ -347,7 +388,7 @@ namespace WPFProjectVG
             Methods.AddToGui(EditDiscountCodeName, EditPanel);
             Methods.AddToGui(DiscountPercentLabel, EditPanel);
             Methods.AddToGui(EditDiscountPercent, EditPanel);
-            Methods.AddToGui(saveChangesButton, ButtonGrid, 1, 1);
+            Methods.AddToGui(SaveChangesButton, ButtonGrid, 1, 1);
             Methods.AddToGui(Message, EditPanel);
         }
         
@@ -700,6 +741,7 @@ namespace WPFProjectVG
 
         private void ProductBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ButtonGrid.Children.Remove(SaveChangesButton);
             isNew = false;
             //We reload products to update any saved data to the csv file
             //Shared.Products = Methods.LoadProducts(Shared.ProductFilePath);
@@ -725,25 +767,56 @@ namespace WPFProjectVG
         
         private void DiscountBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             isNew = false;
             //We reload codes to update any saved data to the csv file
-            //Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountFilePath);
 
-            var s = (ListBox) sender;
-            var tag = (DiscountCode) s.Tag;
-            
-
-            //We store the selected code in our SelectedProduct variable so that other parts of the program know about it.
+            //We store the selected code in our SelectedDiscount variable so that other parts of the program know about it.
             SelectedDiscountCode = (DiscountCode) ((ListBoxItem) DiscountBox.SelectedItem).Tag;
-            
 
             //Then, we update texts and image
             Shared.TextAndImageGrid.Children.Clear();
             Methods.UpdateDescriptionText(SelectedDiscountCode);
             UpdateEditDisplay(SelectedDiscountCode);
             Methods.UpdateProductImage(Shared.WelcomeImagePath);
+
+            //Create a Button for Removing Discount codes
+            ButtonGrid.Children.Remove(DeleteProductButton);
+            DeleteDiscountButton = Methods.CreateButton("Delete", SelectedDiscountCode);
+
+            Methods.AddToGui(DeleteDiscountButton, ButtonGrid, 1);
+            DeleteDiscountButton.Click += OnDeleteDiscountButton_Click;
         }
 
-        
+        private void OnDeleteDiscountButton_Click(object sender, RoutedEventArgs e)
+        {
+            int counter = 0;
+            DiscountCode[] newDiscounts = new DiscountCode[Shared.DiscountCodes.Length - 1];
+            foreach (DiscountCode p in Shared.DiscountCodes)
+            {
+                if (p != SelectedDiscountCode)
+                {
+                    newDiscounts[counter] = p;
+                    counter++;
+                }
+            }
+            Shared.DiscountCodes = newDiscounts;
+
+            String[] newDiscountArray = new string[newDiscounts.Length];
+
+            for (int i = 0; i < newDiscounts.Length; i++)
+            {
+                newDiscountArray[i] = newDiscounts[i].CodeName + @"\";
+                newDiscountArray[i] += newDiscounts[i].Percentage;
+                
+            }
+
+            File.WriteAllLines(Shared.DiscountCodesPath, newDiscountArray);
+            //Update GUI
+            Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountCodesPath);
+            Shared.TextAndImageGrid.Children.Clear();
+            MessageBox.Show("Discount Deleted!");
+            DiscountBox = CreateDiscountBox();
+        }
     }
 }
