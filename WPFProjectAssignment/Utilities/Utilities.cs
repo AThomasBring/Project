@@ -10,250 +10,6 @@ using System.Windows.Media.Imaging;
 
 namespace Utilities
 {
-    public class Methods
-    {
-        public static void AddToGui(UIElement element, Panel panel, int row = 0, int column = 0)
-        {
-            panel.Children.Add(element);
-            Grid.SetRow(element, row);
-            Grid.SetColumn(element, column);
-        }
-
-        public static void CopyToTempFolder(string source, string destination)
-        {
-            File.Copy(source, destination, true);
-        }
-        public static void CopyImagesToTempFolder(string path)
-        {
-
-            //Copy images to temp folder
-            Directory.CreateDirectory(path);
-            foreach (string newPath in Directory.GetFiles(@"Images\"))
-                //We need to extract the filename from the path
-            {
-                int fileNameIndex = newPath.LastIndexOf('\\');
-                string fileName = newPath.Substring(fileNameIndex + 1);
-
-                File.Copy(newPath, path + fileName, true);
-            }
-        }
-
-        public static Product[] LoadProducts(string path)
-        {
-            // If the file doesn't exist, stop the program completely.
-            if (!File.Exists(path))
-            {
-                MessageBox.Show("Could not read product file.");
-            }
-
-            // Create an empty list of products, then go through each line of the file to fill it.
-            List<Product> products = new List<Product>();
-            string[] lines = File.ReadAllLines(path);
-
-            foreach (string line in lines)
-            {
-                try
-                {
-                    //We are using \ as separator because we use commas in the text file.
-                    var parts = line.Split('\\');
-
-                    // Then create a product with its values set to the different parts of the line.
-                    var p = new Product
-                    {
-                        Code = parts[0],
-                        Name = parts[1],
-                        Description = parts[2],
-                        Price = decimal.Parse(parts[3]),
-                        Image = parts[4]
-                    };
-                    products.Add(p);
-                }
-                catch
-                {
-                    MessageBox.Show("Error when reading product");
-                }
-            }
-
-            return products.ToArray();
-        }
-
-        public static DiscountCode[] LoadCodes(string filePath)
-        {
-            if (!File.Exists(filePath))
-            {
-                //MessageBox.Show("Could not read discount file.");
-            }
-            List<DiscountCode> codes = new List<DiscountCode>();
-            string[] words = File.ReadAllLines(filePath);
-
-            foreach (string discountline in words)
-            {
-                try
-                {
-                    var word = discountline.Split('\\');
-                    var c = new DiscountCode 
-                    { 
-                        CodeName = word[0],
-                        Percentage = int.Parse(word[1]),
-                    };
-                    
-                    codes.Add(c);
-                }
-                catch
-                {
-                    MessageBox.Show("Error when reading discountcodes");
-                }
-            }
-        
-            return codes.ToArray();
-        }
-
-
-        public static Grid CreateGrid(int[] rows, int[] columns)
-        {
-            var grid = new Grid
-            {
-                Margin = new Thickness(5)
-            };
-
-            if (rows != null)
-            {
-                foreach (var height in rows)
-                {
-                    grid.RowDefinitions.Add(new RowDefinition {Height = new GridLength(height, GridUnitType.Star)});
-                }
-            }
-
-            if (columns == null) return grid;
-            foreach (var width in columns)
-            {
-                grid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(width, GridUnitType.Star)});
-            }
-
-            return grid;
-        }
-
-        //Product parameter is optional, because not all buttons need to be tagged.
-        public static Button CreateButton(string content, object tag = null)
-        {
-            var newButton = new Button
-            {
-                Content = content,
-                FontSize = 12,
-                BorderThickness = new Thickness(1),
-                Height = 26,
-                Width = 80,
-                Background = Brushes.White,
-                HorizontalAlignment = HorizontalAlignment.Right
-            };
-            if (tag != null)
-            {
-                newButton.Tag = tag;
-            }
-            return newButton;
-        }
-
-        public static void UpdateProductImage(string imagePath)
-        {
-            Shared.ImageDisplayed = CreateImage(imagePath);
-            Shared.ImageDisplayed.Stretch = Stretch.Uniform;
-            Shared.TextAndImageGrid.Children.Add(Shared.ImageDisplayed);
-            Grid.SetColumn(Shared.ImageDisplayed, 1);
-        }
-
-        public static void UpdateDescriptionText(Product product)
-        {
-            Shared.InfoPanel = new StackPanel
-
-            {
-                Orientation = Orientation.Vertical,
-                Margin = new Thickness(1)
-            };
-            AddToGui(Shared.InfoPanel, Shared.TextAndImageGrid);
-
-            // The text heading inside the information panel.
-            var productName = new TextBlock
-            {
-                Text = product.Name,
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(5),
-                FontSize = 16,
-                TextAlignment = TextAlignment.Center
-            };
-            Methods.AddToGui(productName, Shared.InfoPanel);
-
-            Shared.ProductDescription = new TextBlock
-            {
-                Text = product.Description + "\n",
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(5),
-                FontSize = 12
-            };
-            AddToGui(Shared.ProductDescription, Shared.InfoPanel);
-
-            var price = product.Price.ToString(CultureInfo.InvariantCulture);
-            Shared.ProductPrice = new TextBlock
-            {
-                Text = price + "kr",
-                FontSize = 12,
-                Margin = new Thickness(10),
-                Padding = new Thickness(5),
-                HorizontalAlignment = HorizontalAlignment.Right
-            };
-
-            AddToGui(Shared.ProductPrice, Shared.InfoPanel);
-
-        }
-        
-        public static void UpdateDescriptionText(DiscountCode discountCode)
-        {
-            Shared.InfoPanel = new StackPanel
-
-            {
-                Orientation = Orientation.Vertical,
-                Margin = new Thickness(1)
-            };
-            AddToGui(Shared.InfoPanel, Shared.TextAndImageGrid);
-
-            // The text heading inside the information panel.
-            var discountName = new TextBlock
-            {
-                Text = discountCode.CodeName,
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(5),
-                FontSize = 16,
-                TextAlignment = TextAlignment.Center
-            };
-            AddToGui(discountName, Shared.InfoPanel);
-
-            Shared.ProductDescription = new TextBlock
-            {
-                Text = discountCode.Percentage + "\n",
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(5),
-                FontSize = 12
-            };
-            AddToGui(Shared.ProductDescription, Shared.InfoPanel);
-
-        }
-        
-        
-
-        public static Image CreateImage(string filePath)
-        {
-            ImageSource source = new BitmapImage(new Uri(filePath, UriKind.RelativeOrAbsolute));
-            Image image = new Image
-            {
-                Source = source,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(5)
-            };
-            // A small rendering tweak to ensure maximum visual appeal.
-            RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
-            return image;
-        }
-    }
     
     public static class Shared
     {
@@ -467,5 +223,251 @@ namespace Utilities
             File.WriteAllLines(path, lines);
         }
     }
+    
+        public class Methods
+    {
+        public static void AddToGui(UIElement element, Panel panel, int row = 0, int column = 0)
+        {
+            panel.Children.Add(element);
+            Grid.SetRow(element, row);
+            Grid.SetColumn(element, column);
+        }
+
+        public static void CopyToTempFolder(string source, string destination)
+        {
+            File.Copy(source, destination, true);
+        }
+        public static void CopyImagesToTempFolder(string path)
+        {
+
+            //Copy images to temp folder
+            Directory.CreateDirectory(path);
+            foreach (string newPath in Directory.GetFiles(@"Images\"))
+                //We need to extract the filename from the path
+            {
+                int fileNameIndex = newPath.LastIndexOf('\\');
+                string fileName = newPath.Substring(fileNameIndex + 1);
+
+                File.Copy(newPath, path + fileName, true);
+            }
+        }
+
+        public static Product[] LoadProducts(string path)
+        {
+            // If the file doesn't exist, stop the program completely.
+            if (!File.Exists(path))
+            {
+                MessageBox.Show("Could not read product file.");
+            }
+
+            // Create an empty list of products, then go through each line of the file to fill it.
+            List<Product> products = new List<Product>();
+            string[] lines = File.ReadAllLines(path);
+
+            foreach (string line in lines)
+            {
+                try
+                {
+                    //We are using \ as separator because we use commas in the text file.
+                    var parts = line.Split('\\');
+
+                    // Then create a product with its values set to the different parts of the line.
+                    var p = new Product
+                    {
+                        Code = parts[0],
+                        Name = parts[1],
+                        Description = parts[2],
+                        Price = decimal.Parse(parts[3]),
+                        Image = parts[4]
+                    };
+                    products.Add(p);
+                }
+                catch
+                {
+                    MessageBox.Show("Error when reading product");
+                }
+            }
+
+            return products.ToArray();
+        }
+
+        public static DiscountCode[] LoadCodes(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("Could not read discount file.");
+            }
+            List<DiscountCode> codes = new List<DiscountCode>();
+            string[] words = File.ReadAllLines(filePath);
+
+            foreach (string discountline in words)
+            {
+                try
+                {
+                    var word = discountline.Split('\\');
+                    var c = new DiscountCode 
+                    { 
+                        CodeName = word[0],
+                        Percentage = int.Parse(word[1]),
+                    };
+                    
+                    codes.Add(c);
+                }
+                catch
+                {
+                    MessageBox.Show("Error when reading discountcodes");
+                }
+            }
+        
+            return codes.ToArray();
+        }
+
+
+        public static Grid CreateGrid(int[] rows, int[] columns)
+        {
+            var grid = new Grid
+            {
+                Margin = new Thickness(5)
+            };
+
+            if (rows != null)
+            {
+                foreach (var height in rows)
+                {
+                    grid.RowDefinitions.Add(new RowDefinition {Height = new GridLength(height, GridUnitType.Star)});
+                }
+            }
+
+            if (columns == null) return grid;
+            foreach (var width in columns)
+            {
+                grid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(width, GridUnitType.Star)});
+            }
+
+            return grid;
+        }
+
+        //Product parameter is optional, because not all buttons need to be tagged.
+        public static Button CreateButton(string content, object tag = null)
+        {
+            var newButton = new Button
+            {
+                Content = content,
+                FontSize = 12,
+                BorderThickness = new Thickness(1),
+                Height = 26,
+                Width = 80,
+                Background = Brushes.White,
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
+            if (tag != null)
+            {
+                newButton.Tag = tag;
+            }
+            return newButton;
+        }
+
+        public static void UpdateProductImage(string imagePath)
+        {
+            Shared.ImageDisplayed = CreateImage(imagePath);
+            Shared.ImageDisplayed.Stretch = Stretch.Uniform;
+            Shared.TextAndImageGrid.Children.Add(Shared.ImageDisplayed);
+            Grid.SetColumn(Shared.ImageDisplayed, 1);
+        }
+
+        public static void UpdateDescriptionText(Product product)
+        {
+            Shared.InfoPanel = new StackPanel
+
+            {
+                Orientation = Orientation.Vertical,
+                Margin = new Thickness(1)
+            };
+            AddToGui(Shared.InfoPanel, Shared.TextAndImageGrid);
+
+            // The text heading inside the information panel.
+            var productName = new TextBlock
+            {
+                Text = product.Name,
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 16,
+                TextAlignment = TextAlignment.Center
+            };
+            AddToGui(productName, Shared.InfoPanel);
+
+            Shared.ProductDescription = new TextBlock
+            {
+                Text = product.Description + "\n",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 12
+            };
+            AddToGui(Shared.ProductDescription, Shared.InfoPanel);
+
+            var price = product.Price.ToString(CultureInfo.InvariantCulture);
+            Shared.ProductPrice = new TextBlock
+            {
+                Text = price + "kr",
+                FontSize = 12,
+                Margin = new Thickness(10),
+                Padding = new Thickness(5),
+                HorizontalAlignment = HorizontalAlignment.Right
+            };
+
+            AddToGui(Shared.ProductPrice, Shared.InfoPanel);
+
+        }
+        
+        public static void UpdateDescriptionText(DiscountCode discountCode)
+        {
+            Shared.InfoPanel = new StackPanel
+
+            {
+                Orientation = Orientation.Vertical,
+                Margin = new Thickness(1)
+            };
+            AddToGui(Shared.InfoPanel, Shared.TextAndImageGrid);
+
+            // The text heading inside the information panel.
+            var discountName = new TextBlock
+            {
+                Text = discountCode.CodeName,
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 16,
+                TextAlignment = TextAlignment.Center
+            };
+            AddToGui(discountName, Shared.InfoPanel);
+
+            Shared.ProductDescription = new TextBlock
+            {
+                Text = discountCode.Percentage + "\n",
+                TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(5),
+                FontSize = 12
+            };
+            AddToGui(Shared.ProductDescription, Shared.InfoPanel);
+
+        }
+        
+        
+
+        public static Image CreateImage(string filePath)
+        {
+            ImageSource source = new BitmapImage(new Uri(filePath, UriKind.RelativeOrAbsolute));
+            Image image = new Image
+            {
+                Source = source,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(5)
+            };
+            // A small rendering tweak to ensure maximum visual appeal.
+            RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
+            return image;
+        }
+    }
+
     
 }

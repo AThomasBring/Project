@@ -24,55 +24,43 @@ namespace WPFProjectVG
 {
     public partial class MainWindow : Window
     {
-        //private Product[] TempProducts;
-        private bool hasImage = false;
+        
+        private bool hasImage;
         public static bool isNew = true;
+        
+        public string TempImagePath;
+        public string TempImageFileName;
+        public static DiscountCode SelectedDiscountCode;
 
-        Grid MainGrid = new Grid();
-        private Grid ButtonGrid = new Grid();
+        public Grid MainGrid = new Grid();
+        public Grid ButtonGrid = new Grid();
+        private Grid DiscountGrid = new Grid();
+        private Grid leftSideGrid = new Grid();
+        
         public Button EditButton = new Button();
         public Button DeleteProductButton = new Button();
         public Button DeleteDiscountButton = new Button();
         public Button SaveChangesButton = new Button();
-        StackPanel EditPanel = new StackPanel();
-
-        private Grid DiscountGrid = new Grid();
-        private Grid leftSideGrid = new Grid();
-        
-        public string TempImagePath;
-        public string TempImageFileName;
-
-        public static DiscountCode SelectedDiscountCode;
 
         private TextBox EditProductCode = new TextBox();
         private TextBox EditDiscountCodeName = new TextBox();
         private TextBox EditDiscountPercent = new TextBox();
+        private TextBox EditProductName = new TextBox();
+        private TextBox EditProductDescription = new TextBox();
+        private TextBox EditProductPrice = new TextBox();
+        
         private Label DiscountCodeNameLabel = new Label();
         private Label DiscountPercentLabel = new Label();
-
-        private TextBox EditProductName = new TextBox();
-
-        private TextBox EditProductDescription = new TextBox();
-
-        private TextBox EditProductPrice = new TextBox();
-
         private Label ProductPriceLabel = new Label();
         private Label ProductCodeLabel = new Label();
         private Label ProductDescriptionLabel = new Label();
         private Label ProductNameLabel = new Label();
-
-        private List<TextBox> TextBoxes = new List<TextBox>();
-        private List<Label> Labels = new List<Label>();
-        
         private Label Message = new Label();
+        
         private ListBox DiscountBox = new ListBox();
+        StackPanel EditPanel = new StackPanel();
 
-        private Label DiscountPercentage = new Label();
-        private TextBox InsertNewPercentage = new TextBox();
-        private Label NewDiscount = new Label();
-        private TextBox InsertNewDiscount = new TextBox();
-
-
+        
         public MainWindow()
 
         {
@@ -83,7 +71,8 @@ namespace WPFProjectVG
         private void Start()
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
-
+            
+            //Copy files and Load Product and Discounts
             Methods.CopyImagesToTempFolder(@"C:\Windows\Temp\PotionShopTempFiles\Images\");
             Methods.CopyToTempFolder("DiscountCodes.csv", Shared.DiscountCodesPath);
             Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountCodesPath);
@@ -245,6 +234,7 @@ namespace WPFProjectVG
             }
 
             File.WriteAllLines(Shared.ProductsPath, newProductArray);
+            
             //Update GUI
             Shared.Products = Methods.LoadProducts(Shared.ProductsPath);
             Shared.TextAndImageGrid.Children.Clear();
@@ -340,6 +330,7 @@ namespace WPFProjectVG
             var editBox = (TextBox) sender;
             var label = (Label) editBox.Tag;
 
+            //We check for invalid character every boxselection change
             if (!CheckInvalidCharacter(editBox, label, '\\'))
             {
                 label.Foreground = Brushes.Black;
@@ -399,11 +390,9 @@ namespace WPFProjectVG
             
             var s = (Button) sender;
             
+            //We check the tag to see if we are saving a product or a discount code
             if (s.Tag == Shared.SelectedProduct)
             {
-                
-                //Product productTag;
-                //productTag = (Product) s.Tag;
 
                 if (string.IsNullOrEmpty(EditProductCode.Text))
                 {
@@ -480,7 +469,7 @@ namespace WPFProjectVG
                 tempProduct.Image = TempImageFileName;
             
                 //Check if product code duplicates and update Temp Products
-                if (CheckProductCodeDuplicates(tempProduct) == true)
+                if (CheckProductCodeDuplicates(tempProduct))
                 {
                     Message.Content = "Every product code needs to be unique";
                     return;
@@ -729,8 +718,7 @@ namespace WPFProjectVG
 
         private void OnUploadButtonClick(object sender, RoutedEventArgs e)
         {
-            var s = (Button) sender;
-            var product = (Product) s.Tag;
+            
             var dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.Filter =  "Image files (*.jpg, *.jpeg, *.jpe, *.png) | *.jpg; *.jpeg; *.jpe; *.png";
             bool? result = dialog.ShowDialog();
@@ -754,9 +742,6 @@ namespace WPFProjectVG
         {
             ButtonGrid.Children.Remove(SaveChangesButton);
             isNew = false;
-            //We reload products to update any saved data to the csv file
-            //Shared.Products = Methods.LoadProducts(Shared.ProductFilePath);
-            
 
             //We store the selected product in our SelectedProduct variable so that other parts of the program know about it.
             Shared.SelectedProduct = (Product) ((ListBoxItem) Shared.ProductBox.SelectedItem).Tag;
@@ -778,9 +763,8 @@ namespace WPFProjectVG
         
         private void DiscountBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            //A discount is chosen from the listbox, so it´s not a new code.
             isNew = false;
-            //We reload codes to update any saved data to the csv file
 
             //We store the selected code in our SelectedDiscount variable so that other parts of the program know about it.
             SelectedDiscountCode = (DiscountCode) ((ListBoxItem) DiscountBox.SelectedItem).Tag;
