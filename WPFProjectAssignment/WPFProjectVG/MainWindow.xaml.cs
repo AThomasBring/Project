@@ -24,9 +24,9 @@ namespace WPFProjectVG
 {
     public partial class MainWindow : Window
     {
-        private Product[] TempProducts;
+        //private Product[] TempProducts;
         private bool hasImage = false;
-        private bool isNew = false;
+        private bool isNew = true;
 
         Grid MainGrid = new Grid();
         private Grid ButtonGrid = new Grid();
@@ -82,8 +82,9 @@ namespace WPFProjectVG
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
             Methods.CopyImagesToTempFolder(@"C:\Windows\Temp\PotionShopTempFiles\Images\");
-            Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountFilePath);
-            Shared.Products = Methods.LoadProducts(Shared.ProductFilePath);
+            Methods.CopyToTempFolder("DiscountCodes.csv", Shared.DiscountCodesPath);
+            Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountCodesPath);
+            Shared.Products = Methods.LoadProducts(Shared.ProductsPath);
 
             // Window options
             Title = "Behind the magic curtain";
@@ -110,7 +111,7 @@ namespace WPFProjectVG
             ButtonGrid = Methods.CreateGrid(rows: new[] {5, 1}, columns: new[] {2, 2, 3, 1});
             Methods.AddToGui(ButtonGrid, MainGrid, 1, 1);
 
-            MainGrid.ShowGridLines = true;
+            //MainGrid.ShowGridLines = true;
 
 
 
@@ -353,13 +354,48 @@ namespace WPFProjectVG
         
         private void OnSaveChangesClick(object sender, RoutedEventArgs e)
         {
+            Message.Content = "";
+            
             var s = (Button) sender;
             
-            if (s.Tag.Equals(Shared.SelectedProduct))
+            if (s.Tag == Shared.SelectedProduct)
             {
                 
-                Product productTag;
-                productTag = (Product) s.Tag;
+                //Product productTag;
+                //productTag = (Product) s.Tag;
+
+                if (string.IsNullOrEmpty(EditProductCode.Text))
+                {
+                    Message.Content += ProductCodeLabel.Content + " can´t be empty.\n";
+                    ProductCodeLabel.Foreground = Brushes.Crimson;
+                    ProductCodeLabel.FontWeight = FontWeights.Bold;
+                    
+                    return;
+                }
+                if (string.IsNullOrEmpty(EditProductName.Text))
+                {
+                    Message.Content += ProductNameLabel.Content + " can´t be empty.\n";;
+                    ProductNameLabel.Foreground = Brushes.Crimson;
+                    ProductNameLabel.FontWeight = FontWeights.Bold;
+                    
+                    return;
+                }
+                if (string.IsNullOrEmpty(EditProductDescription.Text))
+                {
+                    Message.Content += ProductDescriptionLabel.Content + " can´t be empty.\n";;
+                    ProductDescriptionLabel.Foreground = Brushes.Crimson;
+                    ProductDescriptionLabel.FontWeight = FontWeights.Bold;
+                    
+                    return;
+                }
+                if (string.IsNullOrEmpty(EditProductPrice.Text))
+                {
+                    Message.Content += ProductPriceLabel.Content + "can´t be empty.\n";
+                    ProductPriceLabel.Foreground = Brushes.Crimson;
+                    ProductPriceLabel.FontWeight = FontWeights.Bold;
+                    
+                    return;
+                }
                 
                 //First we make sure that the price can be stored as a decimal
                 EditProductPrice.Text = EditProductPrice.Text.Replace(',', '.');
@@ -369,12 +405,13 @@ namespace WPFProjectVG
                 {
                     ProductPriceLabel.Foreground = Brushes.Crimson;
                     ProductPriceLabel.FontWeight = FontWeights.Bold;
-                    Message.Content = "The price is not a valid number.";
+                    Message.Content = "The price is not a valid number. \n";
                 
                     return;
                 }
-            
-                //We make sure the texboxes have no '\' characters, because we use them as separators in the text files.
+
+
+                //We make sure the textboxes have no '\' characters, because we use them as separators in the text files.
                 if (CheckInvalidCharacter(EditProductCode, ProductCodeLabel, '\\'))
                 {
                     return;
@@ -388,7 +425,7 @@ namespace WPFProjectVG
                     return;
                 }
 
-                if (hasImage == false)
+                if (hasImage == false && isNew)
                 {
                     Message.Content = "You need to upload a picture in order to save.";
                     return;
@@ -408,8 +445,19 @@ namespace WPFProjectVG
                     return;
                 }
                 
-                SaveProductToFile(tempProduct, Shared.ProductFilePath);
+                SaveProductToFile(tempProduct, Shared.Products, Shared.SelectedProduct, Shared.ProductsPath);
+                //Copy Image to image folder if changed.
+                if (TempImagePath != Shared.ImageFolderPath + Shared.SelectedProduct.Image)
+                {
+                    File.Copy(TempImagePath, Shared.ImageFolderPath+tempProduct.Image, true);
+                }
                 
+                //Update GUI
+                Shared.Products = Methods.LoadProducts(Shared.ProductsPath);
+                Shared.TextAndImageGrid.Children.Clear();
+                MessageBox.Show("Product Saved!");
+                Shared.ProductBox = CreateProductBox();
+
 
             }
             
@@ -418,6 +466,23 @@ namespace WPFProjectVG
                 
                 //DiscountCode discountTag;
                 //discountTag = (DiscountCode) s.Tag;
+                if (string.IsNullOrEmpty(EditDiscountCodeName.Text))
+                {
+                    Message.Content += DiscountCodeNameLabel.Content + "can´t be empty.\n";
+                    DiscountCodeNameLabel.Foreground = Brushes.Crimson;
+                    DiscountCodeNameLabel.FontWeight = FontWeights.Bold;
+                    
+                    return;
+                }
+                
+                if (string.IsNullOrEmpty(EditDiscountPercent.Text))
+                {
+                    Message.Content += DiscountPercentLabel.Content + "can´t be empty.\n";
+                    DiscountPercentLabel.Foreground = Brushes.Crimson;
+                    DiscountPercentLabel.FontWeight = FontWeights.Bold;
+                    
+                    return;
+                }
                 
                 int percent;
                 if (!int.TryParse(EditDiscountPercent.Text, out percent))
@@ -453,16 +518,17 @@ namespace WPFProjectVG
                 }
                 
                 //SaveToFile();
-                SaveDiscountToFile(tempDiscountCode, Shared.DiscountFilePath, isNew);
+                SaveDiscountToFile(tempDiscountCode, Shared.DiscountCodesPath, isNew);
             }
 
         }
 
-        private void SaveDiscountToFile(DiscountCode tempDiscountCode, string path, bool isNew)
+
+        private void SaveDiscountToFile(DiscountCode tempDiscountCode, string path, bool isProductNew)
         {
             List<DiscountCode> discounts = new List<DiscountCode>();
             
-            if(isNew == false)
+            if(isProductNew == false)
             {
                 foreach (var d in Shared.DiscountCodes)
                 {
@@ -494,7 +560,7 @@ namespace WPFProjectVG
             
             Shared.TextAndImageGrid.Children.Clear();
             MessageBox.Show("Discount Code Saved!");
-            Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountFilePath);
+            Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountCodesPath);
             DiscountBox = CreateDiscountBox();
             
 
@@ -505,21 +571,21 @@ namespace WPFProjectVG
             //We make a temporary list to run some tests on
             List<Product> productList = new List<Product>();
 
-            for (int i = 0; i < Shared.Products.Length; i++)
+            foreach (var p in Shared.Products)
             {
-                if (Shared.Products[i].Code != Shared.SelectedProduct.Code)
+                if (p.Code != Shared.SelectedProduct.Code)
                 {
-                    //all un-edited products gets added first
-                    productList.Add(Shared.Products[i]);
+                    //all products except the (before-edited)selected product gets added from product array
+                    productList.Add(p);
                 }
                 else
                 {
-                    //If the selected product is a match, we add the temp product since this is the one the user have edited.
+                    //then we add the temp product since this is the one the user have edited.
                     productList.Add(tempProduct);
                 }
             }
             
-            // if there are duplicates
+            // now we check if there are duplicates
             if (productList.Count() != productList.Select(p => p.Code).Distinct().Count())
             {
                 return true;
@@ -569,58 +635,44 @@ namespace WPFProjectVG
             return true;
         }
 
-        private void SaveProductToFile(Product tempProduct, string path)
+        private void SaveProductToFile(Product newProduct, Product[] products, Product selectedProduct, string path)
         {
-            List<Product> products = new List<Product>();
+            List<Product> tempProducts = new List<Product>();
 
             if (!isNew)
             {
-                foreach (var p in Shared.Products)
+                foreach (var p in products)
                 {
-                    if (p.Code != Shared.SelectedProduct.Code)
+                    if (p.Code != selectedProduct.Code)
                     {
-                        products.Add(p);
+                        tempProducts.Add(p);
                     }
                     else
                     {
-                        products.Add(tempProduct);
+                        tempProducts.Add(newProduct);
                     }
                 }
             }
             else
             {
-                products = Shared.Products.ToList();
-                products.Add(tempProduct);
+                tempProducts = products.ToList();
+                tempProducts.Add(newProduct);
             }
 
 
-            String[] newProductArray = new string[products.Count];
+            String[] newProductArray = new string[tempProducts.Count];
 
-            for (int i = 0; i < products.Count; i++)
+            for (int i = 0; i < tempProducts.Count; i++)
             {
-                newProductArray[i] = products[i].Code + @"\";
-                newProductArray[i] += products[i].Name + @"\";
-                newProductArray[i] += products[i].Description + @"\";
-                newProductArray[i] += products[i].Price + @"\";
-                newProductArray[i] += products[i].Image;
+                newProductArray[i] = tempProducts[i].Code + @"\";
+                newProductArray[i] += tempProducts[i].Name + @"\";
+                newProductArray[i] += tempProducts[i].Description + @"\";
+                newProductArray[i] += tempProducts[i].Price + @"\";
+                newProductArray[i] += tempProducts[i].Image;
             }
             
             File.WriteAllLines(path, newProductArray);
-            
-            Shared.Products = Methods.LoadProducts(Shared.ProductFilePath);
-            
-            Shared.TextAndImageGrid.Children.Clear();
-            MessageBox.Show("Product Saved!");
 
-            Shared.ProductBox = CreateProductBox();
-
-
-            //File.WriteAllLines(path);
-            if (TempImagePath != Shared.ImageFolderPath + Shared.SelectedProduct.Image)
-            {
-                //Copy Image if changed.
-                File.Copy(TempImagePath, Shared.ImageFolderPath + tempProduct.Image, true);
-            }
         }
 
         private void OnUploadButtonClick(object sender, RoutedEventArgs e)

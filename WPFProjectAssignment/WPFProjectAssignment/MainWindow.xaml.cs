@@ -34,13 +34,13 @@ namespace WPFProjectAssignment
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
             Methods.CopyImagesToTempFolder(Shared.ImageFolderPath);
-            if (!File.Exists(Shared.ProductFilePath))
-                Methods.CopyToTempFolder("Products.csv", Shared.ProductFilePath);
-            if (!File.Exists(Shared.DiscountFilePath))
-                Methods.CopyToTempFolder("DiscountCodes.csv", Shared.DiscountFilePath);
+            if (!File.Exists(Shared.ProductsPath))
+                Methods.CopyToTempFolder("Products.csv", Shared.ProductsPath);
+            if (!File.Exists(Shared.DiscountCodesPath))
+                Methods.CopyToTempFolder("DiscountCodes.csv", Shared.DiscountCodesPath);
 
-            Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountFilePath);
-            Shared.Products = Methods.LoadProducts(Shared.ProductFilePath);
+            Shared.DiscountCodes = Methods.LoadCodes(Shared.DiscountCodesPath);
+            Shared.Products = Methods.LoadProducts(Shared.ProductsPath);
             Cart = new ShoppingCart();
 
             // Window options
@@ -140,9 +140,9 @@ namespace WPFProjectAssignment
 
             //Now, we check if user has a saved cart or not and display a welcome message.
 
-            if (File.Exists(Shared.CartFilePath))
+            if (File.Exists(Shared.CartPath))
             {
-                Cart.LoadFromFile(Shared.CartFilePath, Shared.Products);
+                Cart.LoadFromFile(Shared.CartPath, Shared.Products);
                 UpdateCartGui(Cart);
                 ShowWelcomeScreen("Welcome Back!",
                     "Thanks for coming back to our store. We have stored the cart from your last visit so you can just carry on shopping!");
@@ -421,7 +421,7 @@ namespace WPFProjectAssignment
         {
             var s = (Button) sender;
             var cart = (ShoppingCart) s.Tag;
-            cart.SaveToFile(Shared.CartFilePath);
+            cart.SaveToFile(Shared.CartPath);
             MessageBox.Show("Saved shopping cart.");
         }
 

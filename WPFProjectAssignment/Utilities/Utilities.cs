@@ -257,11 +257,11 @@ namespace Utilities
     
     public static class Shared
     {
-        public const string DiscountFilePath = @"C:\Windows\Temp\PotionShopTempFiles\DiscountCodes.csv";
-        public const string CartFilePath = @"C:\Windows\Temp\PotionShopTempFiles\Cart.csv";
+        public const string DiscountCodesPath = @"C:\Windows\Temp\PotionShopTempFiles\DiscountCodes.csv";
+        public const string CartPath = @"C:\Windows\Temp\PotionShopTempFiles\Cart.csv";
         public const string WelcomeImagePath = @"C:\Windows\Temp\PotionShopTempFiles\Images\welcome.jpg";
         public const string ImageFolderPath = @"C:\Windows\Temp\PotionShopTempFiles\Images\";
-        public const string ProductFilePath = @"C:\Windows\Temp\PotionShopTempFiles\Products.csv";
+        public const string ProductsPath = @"C:\Windows\Temp\PotionShopTempFiles\Products.csv";
         public static Product[] Products;
         public static DiscountCode[] DiscountCodes;
         public static ListBox ProductBox = new ListBox();
@@ -438,8 +438,7 @@ namespace Utilities
                         Products[current] = amount;
                     }
                 }
-                
-                
+              
             }
         }
 

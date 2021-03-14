@@ -7,55 +7,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b64e7a94-9873-49da-9da8-a468d762395c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Images/agingPotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Images/babblingBeverage.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Images/draughtOfLivingDeath.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Images/elixirOfLife.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Images/polyjuicepotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Images/shrinkingSolution.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Images/skeleGroPotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Images/strengtheningsolution.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Images/wolfsbanePotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Images/agingPotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Images/babblingBeverage.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Images/draughtOfLivingDeath.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Images/elixirOfLife.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Images/polyjuicepotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Images/shrinkingSolution.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Images/skeleGroPotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Images/strengtheningsolution.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Images/wolfsbanePotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/Images/agingPotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/Images/babblingBeverage.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/Images/draughtOfLivingDeath.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/Images/elixirOfLife.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/Images/polyjuicepotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/Images/shrinkingSolution.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/Images/skeleGroPotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/Images/strengtheningsolution.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/Images/wolfsbanePotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/TestCart.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/Images/agingPotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/Images/babblingBeverage.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/Images/draughtOfLivingDeath.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/Images/elixirOfLife.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/Images/polyjuicepotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/Images/shrinkingSolution.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/Images/skeleGroPotion.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/Images/strengtheningsolution.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/Images/wolfsbanePotion.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WPFProjectAssignment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WPFProjectAssignment/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/WPFProjectAssignment/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/WPFProjectAssignment/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/WPFProjectAssignment/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/WPFProjectAssignment/v16/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/WPFProjectAssignment/v16/TestStore/0/000.testlog" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/WPFProjectAssignment/v16/TestStore/0/000.testlog" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utilities/Utilities.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/Utilities.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utilities/Utilities.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/Utilities.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Utilities.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Utilities.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Utilities.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Utilities.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utilities/obj/Debug/netcoreapp3.1-windows/Utilities.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/Debug/netcoreapp3.1-windows/Utilities.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities/obj/Debug/netcoreapp3.1-windows/Utilities.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/Debug/netcoreapp3.1-windows/Utilities.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utilities/obj/Debug/netcoreapp3.1-windows/Utilities.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/Debug/netcoreapp3.1-windows/Utilities.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utilities/obj/Debug/netcoreapp3.1-windows/Utilities.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/Debug/netcoreapp3.1-windows/Utilities.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utilities/obj/Debug/netcoreapp3.1-windows/Utilities.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/Debug/netcoreapp3.1-windows/Utilities.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities/obj/Utilities.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/Utilities.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities/obj/Utilities.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/Utilities.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utilities/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utilities/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/MainWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Utilities.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Utilities.dll" afterDir="false" />
@@ -65,28 +28,24 @@
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/App.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/App.g.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.baml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.baml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.g.i.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.g.i.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.g.resources" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.g.resources" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/WPFProjectAssignment.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/WPFProjectAssignment.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/WPFProjectAssignment.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/WPFProjectAssignment.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/TestCart.csv" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/TestCart.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/Tests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/Tests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/Utilities.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/Utilities.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/Utilities.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/Utilities.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/WPFProjectAssignment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/WPFProjectAssignment.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/WPFProjectVG.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/WPFProjectVG.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/WPFProjectVG.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/bin/Debug/netcoreapp3.1/WPFProjectVG.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.csprojAssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/Debug/netcoreapp3.1/WPFProjectAssignmentTests1.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/WPFProjectAssignmentTests1.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/WPFProjectAssignmentTests1.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/WPFProjectAssignmentTests1.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/WPFProjectAssignmentTests1.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignmentTests1/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectVG/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/MainWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/Utilities.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/Utilities.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/Utilities.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/Utilities.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/WPFProjectAssignment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/WPFProjectAssignment.dll" afterDir="false" />
@@ -96,12 +55,15 @@
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/App.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/App.g.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/MainWindow.baml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/MainWindow.baml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/MainWindow.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/MainWindow.g.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/MainWindow.g.i.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/MainWindow.g.i.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.g.resources" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.g.resources" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/WPFProjectVG.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/WPFProjectVG.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/WPFProjectVG.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/WPFProjectVG.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -151,13 +113,13 @@
       <option value="$PROJECT_DIR$/Shared/Utilities.cs" />
       <option value="$PROJECT_DIR$/Utilites/Utilities.cs" />
       <option value="$PROJECT_DIR$/WPFProjectAssignment/DiscountCodes.txt" />
-      <option value="$PROJECT_DIR$/WPFProjectVG/MainWindow.xaml.cs" />
       <option value="$PROJECT_DIR$/WPFProjectAssignmentTests1/CheckFile.cs" />
       <option value="$PROJECT_DIR$/WPFProjectAssignmentTests1/CheckReceipt.cs" />
       <option value="$PROJECT_DIR$/WPFProjectAssignmentTests1/TestCart.csv" />
       <option value="$PROJECT_DIR$/WPFProjectAssignment/MainWindow.xaml.cs" />
       <option value="$PROJECT_DIR$/WPFProjectAssignmentTests1/Tests.cs" />
       <option value="$PROJECT_DIR$/Utilities/Utilities.cs" />
+      <option value="$PROJECT_DIR$/WPFProjectVG/MainWindow.xaml.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1oha6Y6is5fAvgzJ6Hae2eLlRQN" />
@@ -170,7 +132,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.15145229" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.15134762" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -184,7 +146,7 @@
     <property name="settings.editor.selected.configurable" value="project.propDebugger" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Project.WPFProjectAssignment">
+  <component name="RunManager" selected=".NET Project.WPFProjectVG">
     <configuration name="WPFProjectAssignment" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -260,6 +222,8 @@
       <workItem from="1615669378526" duration="800000" />
       <workItem from="1615670473896" duration="320000" />
       <workItem from="1615670900407" duration="149000" />
+      <workItem from="1615671865874" duration="2385000" />
+      <workItem from="1615674320537" duration="3803000" />
     </task>
     <servers />
   </component>
@@ -316,10 +280,10 @@
           <line>423</line>
           <properties documentPath="C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\MainWindow.xaml.cs" initialLine="423" containingFunctionPresentation="method 'OnSaveCartClick'">
             <startOffsets>
-              <option value="16756" />
+              <option value="16742" />
             </startOffsets>
             <endOffsets>
-              <option value="16793" />
+              <option value="16775" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="3" />
@@ -329,10 +293,10 @@
           <line>424</line>
           <properties documentPath="C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\MainWindow.xaml.cs" initialLine="424" containingFunctionPresentation="method 'OnSaveCartClick'">
             <startOffsets>
-              <option value="16806" />
+              <option value="16788" />
             </startOffsets>
             <endOffsets>
-              <option value="16846" />
+              <option value="16828" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="4" />
@@ -342,10 +306,10 @@
           <line>144</line>
           <properties documentPath="C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\MainWindow.xaml.cs" initialLine="144" containingFunctionPresentation="method 'Start'">
             <startOffsets>
-              <option value="5814" />
+              <option value="5804" />
             </startOffsets>
             <endOffsets>
-              <option value="5870" />
+              <option value="5856" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />
@@ -355,10 +319,10 @@
           <line>145</line>
           <properties documentPath="C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\MainWindow.xaml.cs" initialLine="145" containingFunctionPresentation="method 'Start'">
             <startOffsets>
-              <option value="5887" />
+              <option value="5873" />
             </startOffsets>
             <endOffsets>
-              <option value="5907" />
+              <option value="5893" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="6" />
@@ -368,10 +332,10 @@
           <line>146</line>
           <properties documentPath="C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectAssignment\MainWindow.xaml.cs" initialLine="146" containingFunctionPresentation="method 'Start'">
             <startOffsets>
-              <option value="5924" />
+              <option value="5910" />
             </startOffsets>
             <endOffsets>
-              <option value="6099" />
+              <option value="6085" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="7" />
