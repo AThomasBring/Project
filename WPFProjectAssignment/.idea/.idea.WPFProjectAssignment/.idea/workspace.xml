@@ -8,7 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b64e7a94-9873-49da-9da8-a468d762395c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WPFProjectAssignment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WPFProjectAssignment/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utilities/Utilities.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/Utilities.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Utilities.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Utilities.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Utilities.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/bin/Debug/netcoreapp3.1-windows/Utilities.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utilities/obj/Debug/netcoreapp3.1-windows/Utilities.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/Debug/netcoreapp3.1-windows/Utilities.assets.cache" afterDir="false" />
@@ -20,19 +19,23 @@
       <change beforePath="$PROJECT_DIR$/Utilities/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/project.assets.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utilities/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Utilities/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Utilities/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/MainWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Utilities.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Utilities.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Utilities.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/Utilities.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/bin/Debug/netcoreapp3.1/WPFProjectAssignment.runtimeconfig.dev.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/App.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/App.g.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.baml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.baml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/MainWindow.g.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.g.resources" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.g.resources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.genruntimeconfig.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment_MarkupCompile.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment_MarkupCompile.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment_MarkupCompile.lref" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/Debug/netcoreapp3.1/WPFProjectAssignment_MarkupCompile.lref" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/WPFProjectAssignment.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/WPFProjectAssignment.csproj.nuget.dgspec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/WPFProjectAssignment.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/WPFProjectAssignment.csproj.nuget.g.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectAssignment/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectAssignment/obj/project.assets.json" afterDir="false" />
@@ -52,14 +55,19 @@
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/WPFProjectAssignment.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/WPFProjectVG.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/WPFProjectVG.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/WPFProjectVG.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/WPFProjectVG.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/WPFProjectVG.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/bin/Debug/netcoreapp3.1/WPFProjectVG.runtimeconfig.dev.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/App.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/App.g.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/MainWindow.baml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/MainWindow.baml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/MainWindow.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/MainWindow.g.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.dll" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.g.resources" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.g.resources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.genruntimeconfig.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG_MarkupCompile.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG_MarkupCompile.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG_MarkupCompile.lref" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/Debug/netcoreapp3.1/WPFProjectVG_MarkupCompile.lref" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/WPFProjectVG.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/WPFProjectVG.csproj.nuget.dgspec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/WPFProjectVG.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/WPFProjectVG.csproj.nuget.g.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFProjectVG/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/WPFProjectVG/obj/project.assets.json" afterDir="false" />
@@ -132,7 +140,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.15134762" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.14129692" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -224,6 +232,8 @@
       <workItem from="1615670900407" duration="149000" />
       <workItem from="1615671865874" duration="2385000" />
       <workItem from="1615674320537" duration="3803000" />
+      <workItem from="1615719966249" duration="80000" />
+      <workItem from="1615720089776" duration="3202000" />
     </task>
     <servers />
   </component>
@@ -340,10 +350,50 @@
           </properties>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/WPFProjectVG/MainWindow.xaml.cs</url>
+          <line>498</line>
+          <properties documentPath="C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\MainWindow.xaml.cs" initialLine="498" containingFunctionPresentation="method 'OnSaveChangesClick'">
+            <startOffsets>
+              <option value="19456" />
+            </startOffsets>
+            <endOffsets>
+              <option value="19490" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/WPFProjectVG/MainWindow.xaml.cs</url>
+          <line>643</line>
+          <properties documentPath="C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\MainWindow.xaml.cs" initialLine="643" containingFunctionPresentation="method 'CheckProductCodeDuplicates'">
+            <startOffsets>
+              <option value="24886" />
+            </startOffsets>
+            <endOffsets>
+              <option value="24964" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/WPFProjectVG/MainWindow.xaml.cs</url>
+          <line>646</line>
+          <properties documentPath="C:\Users\admin\Documents\GitHub\Project\WPFProjectAssignment\WPFProjectVG\MainWindow.xaml.cs" initialLine="646" containingFunctionPresentation="method 'CheckProductCodeDuplicates'">
+            <startOffsets>
+              <option value="25020" />
+            </startOffsets>
+            <endOffsets>
+              <option value="25021" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="Frame#WPFProjectVG.MainWindow.CheckProductCodeDuplicates" memberName="productList" />
         <PinnedItemInfo parentTag="Frame#WPFProjectAssignmentTests1.CheckReceipt.CheckTotalSumNoDiscount" memberName="this" />
         <PinnedItemInfo parentTag="Frame#WPFProjectAssignmentTests1.CheckReceipt.CheckLargeNumbers" memberName="expected" />
       </pinned-members>

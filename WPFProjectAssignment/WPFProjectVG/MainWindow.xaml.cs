@@ -26,7 +26,7 @@ namespace WPFProjectVG
     {
         //private Product[] TempProducts;
         private bool hasImage = false;
-        private bool isNew = true;
+        public static bool isNew = true;
 
         Grid MainGrid = new Grid();
         private Grid ButtonGrid = new Grid();
@@ -480,7 +480,7 @@ namespace WPFProjectVG
                 tempProduct.Image = TempImageFileName;
             
                 //Check if product code duplicates and update Temp Products
-                if (CheckProductCodeDuplicates(tempProduct))
+                if (CheckProductCodeDuplicates(tempProduct) == true)
                 {
                     Message.Content = "Every product code needs to be unique";
                     return;
@@ -611,20 +611,31 @@ namespace WPFProjectVG
         {
             //We make a temporary list to run some tests on
             List<Product> productList = new List<Product>();
+            //We make a temporary list to run some tests on
 
-            foreach (var p in Shared.Products)
+            if (!isNew)
             {
-                if (p.Code != Shared.SelectedProduct.Code)
+                foreach (var product in Shared.Products)
                 {
-                    //all products except the (before-edited)selected product gets added from product array
-                    productList.Add(p);
-                }
-                else
-                {
-                    //then we add the temp product since this is the one the user have edited.
-                    productList.Add(tempProduct);
+                    if (product.Code != Shared.SelectedProduct.Code)
+                    {
+                        //all un-edited codes gets added first
+                        productList.Add(product);
+                        
+                    }
+                    else
+                    {
+                        //If the selected product is a match, we add the temp product since this is the one the user have edited.
+                        productList.Add(tempProduct);
+                    }
                 }
             }
+            else
+            {
+                productList = Shared.Products.ToList();
+                productList.Add(tempProduct);
+            }
+            
             
             // now we check if there are duplicates
             if (productList.Count() != productList.Select(p => p.Code).Distinct().Count())

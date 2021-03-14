@@ -1,24 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignmentTests1\\WPFProjectAssignmentTests1.csproj": {}
+    "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignmentTests1\\WPFProjectAssignmentTests1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj": {
+    "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj",
         "projectName": "Utilities",
-        "projectPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj",
-        "packagesPath": "C:\\Users\\anton\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet"
+        ],
         "configFilePaths": [
-          "C:\\Users\\anton\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "netcoreapp3.1-windows"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -57,22 +61,26 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignmentTests1\\WPFProjectAssignmentTests1.csproj": {
+    "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignmentTests1\\WPFProjectAssignmentTests1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignmentTests1\\WPFProjectAssignmentTests1.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignmentTests1\\WPFProjectAssignmentTests1.csproj",
         "projectName": "WPFProjectAssignmentTests1",
-        "projectPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignmentTests1\\WPFProjectAssignmentTests1.csproj",
-        "packagesPath": "C:\\Users\\anton\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignmentTests1\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignmentTests1\\WPFProjectAssignmentTests1.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignmentTests1\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet"
+        ],
         "configFilePaths": [
-          "C:\\Users\\anton\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -85,14 +93,14 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj": {
-                "projectPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj"
+              "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj": {
+                "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj"
               },
-              "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj": {
-                "projectPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj"
+              "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj": {
+                "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj"
               },
-              "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectVG\\WPFProjectVG.csproj": {
-                "projectPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectVG\\WPFProjectVG.csproj"
+              "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectVG\\WPFProjectVG.csproj": {
+                "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectVG\\WPFProjectVG.csproj"
               }
             }
           }
@@ -137,24 +145,31 @@
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj": {
+    "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj",
         "projectName": "WPFProjectAssignment",
-        "projectPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj",
-        "packagesPath": "C:\\Users\\anton\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet"
+        ],
         "configFilePaths": [
-          "C:\\Users\\anton\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -167,8 +182,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj": {
-                "projectPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj"
+              "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj": {
+                "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj"
               }
             }
           }
@@ -200,22 +215,26 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectVG\\WPFProjectVG.csproj": {
+    "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectVG\\WPFProjectVG.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectVG\\WPFProjectVG.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectVG\\WPFProjectVG.csproj",
         "projectName": "WPFProjectVG",
-        "projectPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectVG\\WPFProjectVG.csproj",
-        "packagesPath": "C:\\Users\\anton\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectVG\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectVG\\WPFProjectVG.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectVG\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet"
+        ],
         "configFilePaths": [
-          "C:\\Users\\anton\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -228,11 +247,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj": {
-                "projectPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj"
+              "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj": {
+                "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\Utilities\\Utilities.csproj"
               },
-              "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj": {
-                "projectPath": "C:\\Users\\anton\\OneDrive\\Dokument\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj"
+              "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj": {
+                "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\Project\\WPFProjectAssignment\\WPFProjectAssignment\\WPFProjectAssignment.csproj"
               }
             }
           }
@@ -264,7 +283,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     }
